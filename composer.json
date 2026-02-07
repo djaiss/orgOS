@@ -16,6 +16,7 @@
     },
     "require-dev": {
         "brianium/paratest": "^7.8.5",
+        "driftingly/rector-laravel": "^2.1",
         "fakerphp/faker": "^1.24.1",
         "laravel/boost": "^2.1.1",
         "larastan/larastan": "^3.9.2",
@@ -24,7 +25,8 @@
         "laravel/sail": "^1.52",
         "mockery/mockery": "^1.6.12",
         "nunomaduro/collision": "^8.8.3",
-        "phpunit/phpunit": "^11.5.51"
+        "phpunit/phpunit": "^11.5.51",
+        "rector/rector": "^2.0"
     },
     "autoload": {
         "psr-4": {
@@ -75,6 +77,8 @@
         "pre-package-uninstall": [
             "Illuminate\\Foundation\\ComposerScripts::prePackageUninstall"
         ],
+        "orgos:format": "mago fmt",
+        "orgos:lint": "mago lint --fix",
         "orgos:update": [
             "composer bump",
             "bun update"
