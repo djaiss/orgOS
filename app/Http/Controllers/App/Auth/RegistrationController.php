@@ -5,9 +5,7 @@ declare(strict_types = 1);
 namespace App\Http\Controllers\App\Auth;
 
 use App\Actions\CreateAccount;
-
 use App\Http\Controllers\Controller;
-
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
