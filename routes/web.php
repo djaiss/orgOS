@@ -5,3 +5,5 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', fn(): Factory|View => view('welcome'));
+
+require __DIR__ . '/auth.php';
