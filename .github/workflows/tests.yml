@@ -127,16 +127,16 @@ jobs:
         if: matrix.connection == 'mysql'
         run: |
           sudo systemctl start mysql.service
-          mysql --protocol=tcp -u root -proot -e "CREATE DATABASE IF NOT EXISTS orgOS CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
+          mysql --protocol=tcp -u root -proot -e "CREATE DATABASE IF NOT EXISTS orgos CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
 
       - name: Create pgsql database
         if: matrix.connection == 'pgsql'
         run: |
           sudo systemctl start postgresql.service
-          sudo -u postgres psql --command="CREATE USER orgOS PASSWORD 'secret'" --command="\du"
-          sudo -u postgres psql --command="ALTER USER orgOS CREATEDB"
-          sudo -u postgres createdb --owner=orgOS orgOS
-          PGPASSWORD=secret psql --username=orgOS --host=localhost --list orgOS
+          sudo -u postgres psql --command="CREATE USER orgos PASSWORD 'secret'" --command="\du"
+          sudo -u postgres psql --command="ALTER USER orgos CREATEDB"
+          sudo -u postgres createdb --owner=orgos orgos
+          PGPASSWORD=secret psql --username=orgos --host=localhost --list orgos
 
       - name: Generate key
         run: php artisan key:generate
