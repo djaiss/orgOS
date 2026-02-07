@@ -11,12 +11,25 @@ This application is a Laravel application and its main Laravel ecosystems packag
 
 - php - 8.4.16
 - laravel/framework (LARAVEL) - v12
+- laravel/nightwatch (NIGHTWATCH) - v1
+- laravel/octane (OCTANE) - v2
+- laravel/pint (PINT) - v1
 - laravel/prompts (PROMPTS) - v0
+- laravel/sanctum (SANCTUM) - v4
 - larastan/larastan (LARASTAN) - v3
 - laravel/mcp (MCP) - v0
-- laravel/pint (PINT) - v1
 - laravel/sail (SAIL) - v1
 - phpunit/phpunit (PHPUNIT) - v11
+- rector/rector (RECTOR) - v2
+- alpinejs (ALPINEJS) - v3
+- prettier (PRETTIER) - v3
+- tailwindcss (TAILWINDCSS) - v4
+
+## Skills Activation
+
+This project has domain-specific skills available. You MUST activate the relevant skill whenever you work in that domain—don't wait until you're stuck.
+
+- `tailwindcss-development` — Styles applications using Tailwind CSS v4 utilities. Activates when adding styles, restyling components, working with gradients, spacing, layout, flex, grid, responsive design, dark mode, colors, typography, or borders; or when the user mentions CSS, styling, classes, Tailwind, restyle, hero section, cards, buttons, or any visual/UI changes.
 
 ## Conventions
 
@@ -35,7 +48,7 @@ This application is a Laravel application and its main Laravel ecosystems packag
 
 ## Frontend Bundling
 
-- If the user doesn't see a frontend change reflected in the UI, it could mean they need to run `npm run build`, `npm run dev`, or `composer run dev`. Ask them.
+- If the user doesn't see a frontend change reflected in the UI, it could mean they need to run `bun run build`, `bun run dev`, or `composer run dev`. Ask them.
 
 ## Documentation Files
 
@@ -127,6 +140,13 @@ protected function isAccessible(User $user, ?string $path = null): bool
 - The application is served by Laravel Herd and will be available at: `https?://[kebab-case-project-dir].test`. Use the `get-absolute-url` tool to generate valid URLs for the user.
 - You must not run any commands to make the site available via HTTP(S). It is always available through Laravel Herd.
 
+=== tests rules ===
+
+# Test Enforcement
+
+- Every change must be programmatically tested. Write a new test or update an existing test, then run the affected tests to make sure they pass.
+- Run the minimum number of tests needed to ensure code quality and speed. Use `php artisan test --compact` with a specific filename or filter.
+
 === laravel/core rules ===
 
 # Do Things the Laravel Way
@@ -180,7 +200,7 @@ protected function isAccessible(User $user, ?string $path = null): bool
 
 ## Vite Error
 
-- If you receive an "Illuminate\Foundation\ViteException: Unable to locate file in Vite manifest" error, you can run `npm run build` or ask the user to run `npm run dev` or `composer run dev`.
+- If you receive an "Illuminate\Foundation\ViteException: Unable to locate file in Vite manifest" error, you can run `bun run build` or ask the user to run `bun run dev` or `composer run dev`.
 
 === laravel/v12 rules ===
 
@@ -211,8 +231,8 @@ protected function isAccessible(User $user, ?string $path = null): bool
 
 # Laravel Pint Code Formatter
 
-- You must run `vendor/bin/pint --dirty --format agent` before finalizing changes to ensure your code matches the project's expected style.
-- Do not run `vendor/bin/pint --test --format agent`, simply run `vendor/bin/pint --format agent` to fix any formatting issues.
+- You must run `vendor/bin/pint --dirty` before finalizing changes to ensure your code matches the project's expected style.
+- Do not run `vendor/bin/pint --test`, simply run `vendor/bin/pint` to fix any formatting issues.
 
 === phpunit/core rules ===
 
@@ -231,4 +251,60 @@ protected function isAccessible(User $user, ?string $path = null): bool
 - To run all tests: `php artisan test --compact`.
 - To run all tests in a file: `php artisan test --compact tests/Feature/ExampleTest.php`.
 - To filter on a particular test name: `php artisan test --compact --filter=testName` (recommended after making a change to a related file).
+
+=== tailwindcss/core rules ===
+
+# Tailwind CSS
+
+- Always use existing Tailwind conventions; check project patterns before adding new ones.
+- IMPORTANT: Always use `search-docs` tool for version-specific Tailwind CSS documentation and updated code examples. Never rely on training data.
+- IMPORTANT: Activate `tailwindcss-development` every time you're working with a Tailwind CSS or styling-related task.
 </laravel-boost-guidelines>
+
+## Guidelines
+
+- Start: say hi + 1 motivating line. Work style: telegraph; noun-phrases ok; drop grammar; min tokens.
+- Commits: Conventional Commits (feat|fix|refactor|build|ci|chore|docs|style|perf|test).
+- Style: telegraph. Drop filler/grammar. Min tokens (global AGENTS + replies).
+
+## Overview of the project
+
+JournalOS is a personal diary. Users can have journals. A journal is made of journal entries. We provide a web application, an API and a marketing documentation. The marketing website is part of the codebase as well - although everything on the marketing website will be cached by Cloudflare for performance reasons.
+
+## General information
+
+- No Javascript framework. We only use Laravel, Blade, Alpine Ajax and AlpineJS.
+- Avoid external dependencies if possible.
+- Never use form requests. Use inline validation within controllers.
+
+## Overall structure
+
+- Every action a user can do (ie: LogWork) is an Action in the project. Actions are stored in /app/Actions.
+- We use Presenters to prepare data for the views.
+- Most jobs are queued on the `low` priority queue.
+
+## Tests
+
+- Everything should be tested thoroughly. Use PHPUnit.
+- Tests for controllers are stored in /tests/Features/Controllers. All the other tests should be stored in /tests/Unit/ and match the original structure of the files.
+- NEVER use the `for()` method like in `Journal::factory()->for($user)->create();`. Write `$journal = Journal::factory()->create(['user_id' => $user->id,])` instead, with proper line breaks and indentation.
+- Once tests are working, run `composer journalos:unit` to make sure everything works.
+
+## Mindset & Process
+
+- THINK A LOT PLEASE.
+- **No breadcrumbs**. If you delete or move code, do not leave a comment in the old place. No "// moved to X", no "relocated". Just remove it.
+- **Think hard, do not lose the plot**.
+- Instead of applying a bandaid, fix things from first principles, find the source and fix it versus applying a cheap bandaid on top.
+- When taking on new work, follow this order:
+  1. Think about the architecture.
+  1. Research official docs, blogs, or papers on the best architecture.
+  1. Review the existing codebase.
+  1. Compare the research with the codebase to choose the best fit.
+  1. Implement the fix or ask about the tradeoffs the user is willing to make.
+- Write idiomatic, simple, maintainable code. Always ask yourself if this is the most simple intuitive solution to the problem.
+- Leave each repo better than how you found it. If something is giving a code smell, fix it for the next person.
+- Clean up unused code ruthlessly. If a function no longer needs a parameter or a helper is dead, delete it and update the callers instead of letting the junk linger.
+- If code is very confusing or hard to understand:
+  1. Try to simplify it.
+  1. Add an ASCII art diagram in a code comment if it would help.
