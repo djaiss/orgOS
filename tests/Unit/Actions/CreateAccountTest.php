@@ -4,14 +4,11 @@ declare(strict_types = 1);
 
 namespace Tests\Unit\Actions;
 
-use Illuminate\Support\Facades\Date;
 use App\Actions\CreateAccount;
-
-
 use App\Models\User;
 use Illuminate\Database\UniqueConstraintViolationException;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-
+use Illuminate\Support\Facades\Date;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
