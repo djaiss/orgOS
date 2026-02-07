@@ -5,9 +5,9 @@ declare(strict_types = 1);
 namespace App\Http\Controllers\App\Auth;
 
 use App\Actions\CreateAccount;
-use App\Helpers\TextSanitizer;
+
 use App\Http\Controllers\Controller;
-use App\Jobs\CheckLastLogin;
+
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
@@ -33,12 +33,20 @@ class RegistrationController extends Controller
         $validated = $request->validate([
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class, 'disposable_email'],
-            'password' => ['required', 'string', 'max:255', 'confirmed', Password::min(8)->uncompromised(),],
+            'email' => [
+                'required',
+                'string',
+                'lowercase',
+                'email',
+                'max:255',
+                'unique:' . User::class,
+                'disposable_email',
+            ],
+            'password' => ['required', 'string', 'max:255', 'confirmed', Password::min(8)->uncompromised()],
         ]);
 
         $user = new CreateAccount(
-            email: mb_strtolower($validated['email']),
+            email: mb_strtolower((string) $validated['email']),
             password: $validated['password'],
             firstName: $validated['first_name'],
             lastName: $validated['last_name'],
@@ -47,6 +55,7 @@ class RegistrationController extends Controller
         event(new Registered($user));
 
         Auth::login($user);
+
         return redirect(route('register', absolute: false));
     }
 }

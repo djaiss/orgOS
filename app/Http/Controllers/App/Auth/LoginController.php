@@ -119,8 +119,6 @@ final class LoginController extends Controller
 
     /**
      * Display the 2FA challenge form if required.
-     *
-     * @return View
      */
     public function show2faForm(): View
     {
@@ -135,8 +133,6 @@ final class LoginController extends Controller
 
     /**
      * Verify the 2FA code and complete login.
-     *
-     * @return RedirectResponse
      */
     public function verify2fa(Request $request): RedirectResponse
     {

@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-use App\Http\Controllers\App\Auth;
+use App\Http\Controllers\App\Auth\RegistrationController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function (): void {
-    Route::get('register', [Auth\RegistrationController::class, 'create'])->name('register');
-    Route::post('register', [Auth\RegistrationController::class, 'store']);
+    Route::get('register', [RegistrationController::class, 'create'])->name('register');
+    Route::post('register', [RegistrationController::class, 'store']);
 
     // Route::get('login', [LoginController::class, 'create'])->name('login');
     // Route::post('login', [LoginController::class, 'store']);

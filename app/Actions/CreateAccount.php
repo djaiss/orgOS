@@ -1,11 +1,11 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace App\Actions;
 
-use App\Jobs\LogUserAction;
-use App\Jobs\UpdateUserLastActivityDate;
+
+
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
@@ -17,10 +17,10 @@ class CreateAccount
     private User $user;
 
     public function __construct(
-        private string $email,
-        private string $password,
-        private string $firstName,
-        private string $lastName,
+        private readonly string $email,
+        private readonly string $password,
+        private readonly string $firstName,
+        private readonly string $lastName,
     ) {}
 
     public function execute(): User

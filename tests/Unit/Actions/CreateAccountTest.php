@@ -4,14 +4,14 @@ declare(strict_types = 1);
 
 namespace Tests\Unit\Actions;
 
+use Illuminate\Support\Facades\Date;
 use App\Actions\CreateAccount;
-use App\Jobs\LogUserAction;
-use App\Jobs\UpdateUserLastActivityDate;
+
+
 use App\Models\User;
-use Carbon\Carbon;
 use Illuminate\Database\UniqueConstraintViolationException;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\Queue;
+
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
@@ -22,7 +22,7 @@ final class CreateAccountTest extends TestCase
     #[Test]
     public function it_creates_an_account(): void
     {
-        Carbon::setTestNow(Carbon::create(2018, 1, 1));
+        Date::setTestNow(Date::create(2018, 1, 1));
 
         $user = new CreateAccount(
             email: 'michael.scott@dundermifflin.com',
@@ -33,7 +33,7 @@ final class CreateAccountTest extends TestCase
 
         $this->assertInstanceOf(
             User::class,
-            $user
+            $user,
         );
 
         $this->assertDatabaseHas('users', [

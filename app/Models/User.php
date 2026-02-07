@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Carbon\CarbonInterface;
+
 use Database\Factories\UserFactory;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
