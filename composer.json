@@ -2,7 +2,7 @@
   "$schema": "https://getcomposer.org/schema.json",
   "name": "djaiss/orgos",
   "type": "project",
-  "description": "The organizational backbone for remote companies",
+  "description": "TThe operating system for remote organizations",
   "keywords": [
     "laravel",
     "framework",
@@ -11,6 +11,8 @@
   "license": "MIT",
   "require": {
     "php": "^8.4.0",
+    "codeat3/blade-phosphor-icons": "^2.3",
+    "erag/laravel-disposable-email": "^3.8",
     "laravel/framework": "^12.50",
     "laravel/tinker": "^2.11.0"
   },
@@ -86,12 +88,14 @@
       "composer bump",
       "bun update"
     ],
+    "orgos:update-blacklist-domains": "php artisan erag:sync-disposable-email-list",
     "precommit": [
       "@orgos:format",
       "@orgos:lint",
       "@orgos:rector",
       "@orgos:unit",
-      "@orgos:update"
+      "@orgos:update",
+      "@orgos:update-blacklist-domains"
     ]
   },
   "extra": {
