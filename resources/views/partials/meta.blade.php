@@ -1,10 +1,3 @@
-<?php
-
-/**
- * @var string|null $title
- */
-?>
-
 <title>{{ $title ?? config('app.name') }}</title>
 
 <meta charset="utf-8" />
