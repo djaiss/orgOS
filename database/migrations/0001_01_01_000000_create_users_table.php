@@ -19,6 +19,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->datetime('trial_ends_at')->nullable();
+            $table->string('last_used_ip')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

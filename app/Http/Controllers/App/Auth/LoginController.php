@@ -6,6 +6,7 @@ namespace App\Http\Controllers\App\Auth;
 
 use App\Enums\EmailType;
 use App\Http\Controllers\Controller;
+use App\Jobs\CheckLastLogin;
 use App\Jobs\SendEmail;
 use App\Mail\LoginFailed;
 use App\Models\User;
@@ -45,11 +46,11 @@ class LoginController extends Controller
             $user = User::query()->where('email', $request->input('email'))->first();
 
             if ($user) {
-                dispatch(new SendEmail(
+                SendEmail::dispatch(
                     mailable: new LoginFailed,
                     user: $user,
                     emailType: EmailType::LOGIN_FAILED,
-                ))->onQueue('high');
+                )->onQueue('high');
             }
 
             throw ValidationException::withMessages([
@@ -58,6 +59,11 @@ class LoginController extends Controller
         }
 
         RateLimiter::clear($this->throttleKey($request));
+
+        CheckLastLogin::dispatch(
+            user: Auth::user(),
+            ip: $request->ip(),
+        )->onQueue('low');
 
         $request->session()->regenerate();
 

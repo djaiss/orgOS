@@ -53,6 +53,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'password',
         'email_verified_at',
         'trial_ends_at',
+        'last_used_ip',
     ];
 
     /**
