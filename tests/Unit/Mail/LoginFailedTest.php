@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Config;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
-final class LoginFailedTest extends TestCase
+class LoginFailedTest extends TestCase
 {
     #[Test]
     public function it_should_have_correct_envelope_subject(): void

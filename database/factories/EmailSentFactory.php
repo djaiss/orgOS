@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 /**
  * @extends Factory<EmailSent>
  */
-final class EmailSentFactory extends Factory
+class EmailSentFactory extends Factory
 {
     protected $model = EmailSent::class;
 
