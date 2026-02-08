@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-use App\Http\Controllers\App\Auth\RegistrationController;
 use App\Http\Controllers\App\Auth\EmailVerificationController;
-use App\Http\Controllers\App\Auth\VerifyEmailController;
 use App\Http\Controllers\App\Auth\LoginController;
+use App\Http\Controllers\App\Auth\RegistrationController;
+use App\Http\Controllers\App\Auth\VerifyEmailController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function (): void {
@@ -41,8 +41,8 @@ Route::middleware('auth')->group(function (): void {
     Route::post('verify-email', [EmailVerificationController::class, 'store'])->middleware('throttle:6,1')->name('verification.store');
     Route::get('verify-email/{id}/{hash}', [VerifyEmailController::class, 'index'])->middleware(['signed', 'throttle:6,1'])->name('verification.verify');
 
-//     Route::get('confirm-password', [ConfirmationController::class, 'create'])->name('password.confirm');
-//     Route::post('confirm-password', [ConfirmationController::class, 'store'])->name('confirmation.store');
+    //     Route::get('confirm-password', [ConfirmationController::class, 'create'])->name('password.confirm');
+    //     Route::post('confirm-password', [ConfirmationController::class, 'store'])->name('confirmation.store');
 });
 
 Route::post('logout', [LoginController::class, 'destroy'])->name('logout');

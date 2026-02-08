@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace App\Http\Controllers\App\Auth;
 
@@ -15,7 +15,7 @@ class VerifyEmailController extends Controller
     public function index(EmailVerificationRequest $request): RedirectResponse
     {
         if ($request->user()->hasVerifiedEmail()) {
-            return redirect()->intended(route('dashboard.index', absolute: false) . '?verified=1');
+            return redirect()->intended(route('dashboard.index', absolute: false).'?verified=1');
         }
 
         if ($request->user()->markEmailAsVerified()) {
@@ -25,6 +25,6 @@ class VerifyEmailController extends Controller
             event(new Verified($user));
         }
 
-        return redirect()->intended(route('dashboard.index', absolute: false) . '?verified=1');
+        return redirect()->intended(route('dashboard.index', absolute: false).'?verified=1');
     }
 }
