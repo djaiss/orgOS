@@ -4,8 +4,11 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Controllers\App\Auth;
 
+use App\Enums\EmailType;
+use App\Jobs\SendEmail;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Queue;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
@@ -34,6 +37,25 @@ class LoginControllerTest extends TestCase
 
         $this->assertAuthenticated();
         $response->assertRedirect(route('dashboard.index', absolute: false));
+    }
+
+    #[Test]
+    public function it_sends_an_email_on_failed_login(): void
+    {
+        Queue::fake();
+        config(['app.show_marketing_site' => false]);
+
+        $user = User::factory()->create();
+
+        $this->post('/login', [
+            'email' => $user->email,
+            'password' => 'wrong-password',
+        ]);
+
+        Queue::assertPushed(
+            SendEmail::class,
+            fn (SendEmail $job): bool => $job->emailType === EmailType::LOGIN_FAILED && $job->user->id === $user->id,
+        );
     }
 
     #[Test]

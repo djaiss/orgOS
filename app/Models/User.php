@@ -6,7 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 use Database\Factories\UserFactory;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\DatabaseNotification;
 use Illuminate\Notifications\DatabaseNotificationCollection;
@@ -24,6 +26,7 @@ use Illuminate\Support\Carbon;
  * @property string|null $remember_token
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
+ * @property-read Collection<int, EmailSent> $emailsSent
  * @property-read DatabaseNotificationCollection<int, DatabaseNotification> $notifications
  *
  * @method static UserFactory factory($count = null, $state = [])
@@ -74,5 +77,15 @@ class User extends Authenticatable implements MustVerifyEmail
             'trial_ends_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    /**
+     * Get the emailsSent associated with the user.
+     *
+     * @return HasMany<EmailSent, $this>
+     */
+    public function emailsSent(): HasMany
+    {
+        return $this->hasMany(EmailSent::class);
     }
 }

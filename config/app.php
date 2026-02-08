@@ -123,4 +123,17 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Use Resend to send transactional emails
+    |--------------------------------------------------------------------------
+    |
+    | This value enables the use of Resend to send transactional emails.
+    | If you self host the application, you probably want to disable this
+    | since you don't need to send transactional emails.
+    |
+    */
+
+    'use_resend' => env('USE_RESEND', false),
+
 ];

@@ -1,0 +1,94 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Tests\Unit\Actions;
+
+use App\Actions\CreateEmailSent;
+use App\Models\EmailSent;
+use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Date;
+use Illuminate\Support\Str;
+use PHPUnit\Framework\Attributes\Test;
+use Tests\TestCase;
+
+class CreateEmailSentTest extends TestCase
+{
+    use RefreshDatabase;
+
+    #[Test]
+    public function it_creates_an_email_sent(): void
+    {
+        Date::setTestNow(Date::create(2018, 1, 1));
+        $user = User::factory()->create();
+
+        $emailSent = new CreateEmailSent(
+            user: $user,
+            uuid: 'd27cee22-b10f-46c4-a7dc-af3b46820d80',
+            emailType: 'birthday_wishes',
+            emailAddress: 'dwight.schrute@dundermifflin.com',
+            subject: 'Happy Birthday!',
+            body: 'Hope you have a great day!',
+        )->execute();
+
+        $this->assertDatabaseHas('emails_sent', [
+            'id' => $emailSent->id,
+            'user_id' => $user->id,
+            'uuid' => 'd27cee22-b10f-46c4-a7dc-af3b46820d80',
+            'email_type' => 'birthday_wishes',
+            'email_address' => 'dwight.schrute@dundermifflin.com',
+            'subject' => 'Happy Birthday!',
+            'body' => 'Hope you have a great day!',
+            'sent_at' => '2018-01-01 00:00:00',
+        ]);
+
+        $this->assertEquals(36, mb_strlen((string) $emailSent->uuid));
+
+        $this->assertInstanceOf(
+            EmailSent::class,
+            $emailSent,
+        );
+    }
+
+    #[Test]
+    public function it_sanitizes_the_body_and_strips_any_links(): void
+    {
+        $user = User::factory()->create();
+
+        $emailSent = new CreateEmailSent(
+            user: $user,
+            uuid: null,
+            emailType: 'birthday_wishes',
+            emailAddress: 'dwight.schrute@dundermifflin.com',
+            subject: 'Happy Birthday!',
+            body: 'Hope you <a href="https://example.com">have a great day!</a>',
+        )->execute();
+
+        $this->assertDatabaseHas('emails_sent', [
+            'id' => $emailSent->id,
+            'body' => 'Hope you have a great day!',
+        ]);
+    }
+
+    #[Test]
+    public function it_creates_an_email_sent_with_a_uuid(): void
+    {
+        $user = User::factory()->create();
+        $uuid = Str::uuid();
+
+        $emailSent = new CreateEmailSent(
+            user: $user,
+            uuid: $uuid->toString(),
+            emailType: 'birthday_wishes',
+            emailAddress: 'dwight.schrute@dundermifflin.com',
+            subject: 'Happy Birthday!',
+            body: 'Hope you have a great day!',
+        )->execute();
+
+        $this->assertDatabaseHas('emails_sent', [
+            'id' => $emailSent->id,
+            'uuid' => $uuid->toString(),
+        ]);
+    }
+}
