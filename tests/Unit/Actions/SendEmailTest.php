@@ -25,6 +25,7 @@ class SendEmailTest extends TestCase
     public function it_sends_email_the_traditional_way(): void
     {
         Config::set('app.use_resend', false);
+        Config::set('app.app_name', 'orgOS');
         Config::set('mail.from.address', 'noreply@example.com');
         Mail::fake();
 
@@ -55,6 +56,7 @@ class SendEmailTest extends TestCase
     public function it_sends_email_with_resend_facade(): void
     {
         Config::set('app.use_resend', true);
+        Config::set('app.app_name', 'orgOS');
         Config::set('mail.from.address', 'noreply@example.com');
 
         $resendMock = Mockery::mock();
