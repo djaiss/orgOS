@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 use App\Http\Controllers\App\Auth\EmailVerificationController;
 use App\Http\Controllers\App\Auth\LoginController;
+use App\Http\Controllers\App\Auth\NewPasswordController;
+use App\Http\Controllers\App\Auth\PasswordResetLinkController;
 use App\Http\Controllers\App\Auth\RegistrationController;
 use App\Http\Controllers\App\Auth\VerifyEmailController;
 use Illuminate\Support\Facades\Route;
@@ -23,11 +25,11 @@ Route::middleware('guest')->group(function (): void {
     //     ->middleware(['throttle:6,1'])
     //     ->name('magic.link.store');
 
-    // Route::get('forgot-password', [PasswordResetLinkController::class, 'create'])->name('password.request');
-    // Route::post('forgot-password', [PasswordResetLinkController::class, 'store'])->name('password.email');
+    Route::get('forgot-password', [PasswordResetLinkController::class, 'create'])->name('password.request');
+    Route::post('forgot-password', [PasswordResetLinkController::class, 'store'])->name('password.email');
 
-    // Route::get('reset-password/{token}', [NewPasswordController::class, 'create'])->name('password.reset');
-    // Route::post('reset-password', [NewPasswordController::class, 'store'])->name('password.store');
+    Route::get('reset-password/{token}', [NewPasswordController::class, 'create'])->name('password.reset');
+    Route::post('reset-password', [NewPasswordController::class, 'store'])->name('password.store');
 
     // Route::get('/2fa-challenge', [LoginController::class, 'show2faForm'])
     //     ->name('2fa.challenge');
