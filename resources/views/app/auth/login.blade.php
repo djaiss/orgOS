@@ -54,9 +54,9 @@
             @endif --}}
 
             <div class="flex items-center justify-between">
-              {{-- <x-link href="{{ route('password.request') }}" class="text-sm text-gray-600">
+              <x-link href="{{ route('password.request') }}" class="text-sm text-gray-600">
                 {{ __('Forgot your password?') }}
-              </x-link> --}}
+              </x-link>
 
               <x-button>{{ __('Continue') }}</x-button>
             </div>

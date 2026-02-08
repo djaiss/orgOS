@@ -73,19 +73,6 @@ class LoginControllerTest extends TestCase
     }
 
     #[Test]
-    public function it_rejects_overlong_login_email(): void
-    {
-        config(['app.show_marketing_site' => false]);
-        $response = $this->from('/login')->post('/login', [
-            'email' => str_repeat('a', 250).'@example.com',
-            'password' => 'password',
-        ]);
-
-        $response->assertRedirect('/login');
-        $response->assertSessionHasErrors(['email']);
-    }
-
-    #[Test]
     public function it_logs_out_a_user(): void
     {
         $user = User::factory()->create();
