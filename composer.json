@@ -14,7 +14,9 @@
     "codeat3/blade-phosphor-icons": "^2.3",
     "erag/laravel-disposable-email": "^3.8",
     "laravel/framework": "^12.50",
-    "laravel/tinker": "^2.11.0"
+    "laravel/tinker": "^2.11.0",
+    "resend/resend-laravel": "^1.1",
+    "stevebauman/purify": "^6.3.1"
   },
   "require-dev": {
     "barryvdh/laravel-ide-helper": ">=3.6.1",

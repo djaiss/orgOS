@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Date;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
-final class CreateAccountTest extends TestCase
+class CreateAccountTest extends TestCase
 {
     use RefreshDatabase;
 
