@@ -19,8 +19,8 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->timestamp('joined_at');
             $table->timestamps();
-            $table->foreign('organization_id')->references('id')->on('organizations')->onDelete('cascade');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('organization_id')->references('id')->on('organizations')->nullOnDelete();
+            $table->foreign('user_id')->references('id')->on('users')->nullOnDelete();
 
             $table->unique(['organization_id', 'user_id']);
         });
