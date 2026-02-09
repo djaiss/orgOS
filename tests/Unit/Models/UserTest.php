@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Unit\Models;
 
 use App\Models\EmailSent;
+use App\Models\Organization;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use PHPUnit\Framework\Attributes\Test;
@@ -23,5 +24,18 @@ class UserTest extends TestCase
         ]);
 
         $this->assertTrue($user->emailsSent()->exists());
+    }
+
+    #[Test]
+    public function it_belongs_to_many_organizations(): void
+    {
+        $user = User::factory()->create();
+        $organization = Organization::factory()->create();
+
+        $user->organizations()->attach($organization->id, [
+            'joined_at' => now(),
+        ]);
+
+        $this->assertTrue($user->organizations()->exists());
     }
 }

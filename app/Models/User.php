@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Database\Factories\UserFactory;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -79,5 +80,17 @@ class User extends Authenticatable implements MustVerifyEmail
     public function emailsSent(): HasMany
     {
         return $this->hasMany(EmailSent::class);
+    }
+
+    /**
+     * Get the organizations associated with the user.
+     *
+     * @return BelongsToMany<Organization, $this>
+     */
+    public function organizations(): BelongsToMany
+    {
+        return $this->belongsToMany(Organization::class)
+            ->withPivot(['joined_at'])
+            ->withTimestamps();
     }
 }
