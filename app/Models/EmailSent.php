@@ -9,6 +9,22 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+/**
+ * Class EmailSent
+ *
+ * Represents an email that has been sent in the system.
+ *
+ * @property int $id
+ * @property int|null $user_id
+ * @property string|null $uuid
+ * @property string $email_type
+ * @property string $email_address
+ * @property string $subject
+ * @property string $body
+ * @property \Illuminate\Support\Carbon|null $sent_at
+ * @property \Illuminate\Support\Carbon|null $delivered_at
+ * @property \Illuminate\Support\Carbon|null $bounced_at
+ */
 class EmailSent extends Model
 {
     /** @use HasFactory<EmailSentFactory> */
