@@ -38,4 +38,26 @@ class UserTest extends TestCase
 
         $this->assertTrue($user->organizations()->exists());
     }
+
+    #[Test]
+    public function it_gets_the_initials(): void
+    {
+        $dwight = User::factory()->create([
+            'first_name' => 'Dwight',
+            'last_name' => 'Schrute',
+        ]);
+
+        $this->assertEquals('DS', $dwight->initials());
+    }
+
+    #[Test]
+    public function it_gets_the_full_name(): void
+    {
+        $user = User::factory()->create([
+            'first_name' => 'Dwight',
+            'last_name' => 'Schrute',
+        ]);
+
+        $this->assertEquals('Dwight Schrute', $user->getFullName());
+    }
 }
