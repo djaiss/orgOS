@@ -5,33 +5,25 @@ declare(strict_types=1);
 namespace App\Models;
 
 use Database\Factories\EmailSentFactory;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Support\Carbon;
 
 /**
+ * Class EmailSent
+ *
+ * Represents an email that has been sent in the system.
+ *
  * @property int $id
  * @property int|null $user_id
  * @property string|null $uuid
  * @property string $email_type
  * @property string $email_address
- * @property string|null $subject
- * @property string|null $body
- * @property Carbon|null $sent_at
- * @property Carbon|null $delivered_at
- * @property Carbon|null $bounced_at
- * @property Carbon|null $created_at
- * @property Carbon|null $updated_at
- * @property-read User|null $user
- *
- * @method static EmailSentFactory factory($count = null, $state = [])
- * @method static Builder<static>|EmailSent newModelQuery()
- * @method static Builder<static>|EmailSent newQuery()
- * @method static Builder<static>|EmailSent query()
- *
- * @mixin Model
+ * @property string $subject
+ * @property string $body
+ * @property \Illuminate\Support\Carbon|null $sent_at
+ * @property \Illuminate\Support\Carbon|null $delivered_at
+ * @property \Illuminate\Support\Carbon|null $bounced_at
  */
 class EmailSent extends Model
 {
