@@ -71,12 +71,12 @@
         @endenv --}}
 
         <!-- magic link -->
-        {{-- <x-box class="mb-8 text-center text-sm">
+        <x-box class="text-center text-sm">
           {{ __('Wanna skip the password?') }}
           <x-link :href="route('magic.link')" data-test="magic-link-link" class="ml-1">
             {{ __('Send me a link instead') }}
           </x-link>
-        </x-box> --}}
+        </x-box>
 
         <!-- Register link -->
         <x-box class="text-center text-sm">
