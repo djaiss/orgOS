@@ -11,6 +11,7 @@
   "license": "MIT",
   "require": {
     "php": "^8.4.0",
+    "cesargb/laravel-magiclink": "^2.25",
     "codeat3/blade-phosphor-icons": "^2.3",
     "erag/laravel-disposable-email": "^3.8",
     "laravel/framework": "^12.50",

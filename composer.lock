@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "198ec66bbd0f9a49a70f3cf2a7026eb1",
+    "content-hash": "28d4eede5bb3e3e3bbeb3872964dbd37",
     "packages": [
         {
             "name": "blade-ui-kit/blade-icons",
@@ -215,6 +215,74 @@
                 }
             ],
             "time": "2024-02-09T16:56:22+00:00"
+        },
+        {
+            "name": "cesargb/laravel-magiclink",
+            "version": "v2.25.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/cesargb/laravel-magiclink.git",
+                "reference": "52fb337eba9041bdf5f3cbd2933c794b8ed7ff4c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/cesargb/laravel-magiclink/zipball/52fb337eba9041bdf5f3cbd2933c794b8ed7ff4c",
+                "reference": "52fb337eba9041bdf5f3cbd2933c794b8ed7ff4c",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/auth": "^11.0|^12.0",
+                "illuminate/container": "^11.0|^12.0",
+                "illuminate/contracts": "^11.0|^12.0",
+                "illuminate/database": "^11.0|^12.0",
+                "laravel/serializable-closure": "^1.0|^2.0",
+                "php": "^8.2"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^3.9",
+                "orchestra/testbench": "^9.0|^10.0",
+                "phpunit/phpunit": "^10.5|^11.5"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "MagicLink\\MagicLinkServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "MagicLink\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Cesar Garcia",
+                    "email": "cesargb@gmail.com",
+                    "homepage": "https://github.com/cesargb",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Create secure link for access to private data or login in Laravel without password",
+            "homepage": "https://github.com/cesargb/laravel-magiclink",
+            "keywords": [
+                "auth",
+                "download",
+                "file",
+                "laravel",
+                "link",
+                "login"
+            ],
+            "support": {
+                "issues": "https://github.com/cesargb/laravel-magiclink/issues",
+                "source": "https://github.com/cesargb/laravel-magiclink/tree/v2.25.0"
+            },
+            "time": "2026-02-04T17:44:26+00:00"
         },
         {
             "name": "codeat3/blade-phosphor-icons",
