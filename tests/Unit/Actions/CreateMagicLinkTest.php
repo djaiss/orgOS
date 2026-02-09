@@ -5,9 +5,11 @@ declare(strict_types=1);
 namespace Tests\Unit\Actions;
 
 use App\Actions\CreateMagicLink;
+use App\Jobs\UpdateUserLastActivityDate;
 use App\Models\User;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Queue;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
@@ -18,6 +20,8 @@ class CreateMagicLinkTest extends TestCase
     #[Test]
     public function it_returns_a_string(): void
     {
+        Queue::fake();
+
         $user = User::factory()->create([
             'email' => 'test@example.com',
         ]);
@@ -27,6 +31,12 @@ class CreateMagicLinkTest extends TestCase
         )->execute();
 
         $this->assertIsString($magicLinkUrl);
+
+        Queue::assertPushedOn(
+            queue: 'low',
+            job: UpdateUserLastActivityDate::class,
+            callback: fn (UpdateUserLastActivityDate $job): bool => $job->user->id === $user->id,
+        );
     }
 
     #[Test]
