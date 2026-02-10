@@ -36,7 +36,6 @@ class LogTest extends TestCase
         $user = User::factory()->create([
             'first_name' => 'Dwight',
             'last_name' => 'Schrute',
-            'nickname' => null,
         ]);
         $log = Log::factory()->create([
             'user_id' => $user->id,

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Actions;
 
-use App\Jobs\UpdateUserLastActivityDate;
+use App\Jobs\LogUserAction;
 use App\Models\User;
 use MagicLink\Actions\LoginAction;
 use MagicLink\MagicLink;
@@ -27,7 +27,7 @@ class CreateMagicLink
     {
         $this->validate();
         $this->create();
-        $this->updateUserLastActivityDate();
+        $this->log();
 
         return $this->magicLinkUrl;
     }
@@ -45,8 +45,13 @@ class CreateMagicLink
         $this->magicLinkUrl = MagicLink::create($action, 5)->url;
     }
 
-    private function updateUserLastActivityDate(): void
+    private function log(): void
     {
-        UpdateUserLastActivityDate::dispatch($this->user)->onQueue('low');
+        LogUserAction::dispatch(
+            organization: null,
+            user: $this->user,
+            action: 'magic_link_created',
+            description: 'Sent a magic link',
+        )->onQueue('low');
     }
 }

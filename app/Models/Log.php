@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use Carbon\Carbon;
+use Database\Factories\LogFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Carbon\Carbon;
 
 /**
  * Class Log
@@ -25,7 +26,7 @@ use Carbon\Carbon;
  */
 class Log extends Model
 {
-    /** @use HasFactory<\Database\Factories\LogFactory> */
+    /** @use HasFactory<LogFactory> */
     use HasFactory;
 
     /**
@@ -73,8 +74,6 @@ class Log extends Model
      * If the user object exists, return the name from the user object.
      * If the user object does not exist, return the user name that was set in
      * the log at the time of creation.
-     *
-     * @return string
      */
     public function getUserName(): string
     {

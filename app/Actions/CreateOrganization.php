@@ -46,14 +46,14 @@ class CreateOrganization
 
     private function create(): void
     {
-        $this->organization = Organization::create([
+        $this->organization = Organization::query()->create([
             'name' => $this->organizationName,
         ]);
     }
 
     private function generateSlug(): void
     {
-        $slug = $this->organization->id . '-' . Str::of($this->organizationName)->slug('-');
+        $slug = $this->organization->id.'-'.Str::of($this->organizationName)->slug('-');
 
         $this->organization->slug = $slug;
         $this->organization->save();
