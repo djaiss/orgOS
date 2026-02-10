@@ -21,6 +21,7 @@ return new class extends Migration
             $table->datetime('trial_ends_at')->nullable();
             $table->string('last_used_ip')->nullable();
             $table->datetime('last_activity_at')->nullable();
+            $table->string('locale')->default('en');
             $table->rememberToken();
             $table->timestamps();
         });
