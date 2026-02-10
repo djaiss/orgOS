@@ -8,7 +8,7 @@ use App\Models\Organization;
 use Illuminate\View\Component;
 use Illuminate\View\View;
 
-final class AppLayout extends Component
+class AppLayout extends Component
 {
     public function __construct(
         public string $title = '',

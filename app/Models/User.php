@@ -48,6 +48,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'trial_ends_at',
         'last_used_ip',
         'last_activity_at',
+        'locale',
     ];
 
     /**

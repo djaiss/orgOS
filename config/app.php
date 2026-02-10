@@ -136,4 +136,15 @@ return [
 
     'use_resend' => env('USE_RESEND', false),
 
+    /*
+    |--------------------------------------------------------------------------
+    | Supported locales
+    |--------------------------------------------------------------------------
+    |
+    | This value enables the supported locales of the application.
+    |
+    */
+
+    'supported_locales' => ['en', 'fr'],
+
 ];

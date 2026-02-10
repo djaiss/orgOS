@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Symfony\Component\HttpFoundation\Response;
 
-final class CheckOrganization
+class CheckOrganization
 {
     /**
      * Check if the user is a member of the organization.
