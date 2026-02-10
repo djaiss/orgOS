@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace App\Models;
 
@@ -66,8 +66,6 @@ class Organization extends Model
 
     /**
      * Gets the avatar of the organization.
-     *
-     * @return string
      */
     public function getAvatar(): string
     {

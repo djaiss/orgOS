@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace Tests\Feature\Controllers\App\Auth;
 
@@ -36,7 +36,7 @@ class LoginControllerTest extends TestCase
         ]);
 
         $this->assertAuthenticated();
-        $response->assertRedirect(route('dashboard.index', absolute: false));
+        $response->assertRedirect(route('organization.index', absolute: false));
     }
 
     #[Test]

@@ -17,7 +17,7 @@
     "laravel/framework": "^12.50",
     "laravel/tinker": "^2.11.0",
     "resend/resend-laravel": "^1.1",
-    "spatie/laravel-login-link": "^1.6",
+    "spatie/laravel-login-link": "^1.6.3",
     "stevebauman/purify": "^6.3.1"
   },
   "require-dev": {
@@ -84,8 +84,8 @@
       "Illuminate\\Foundation\\ComposerScripts::prePackageUninstall"
     ],
     "orgos:format": "mago fmt",
-    "orgos:lint": "mago lint --fix && vendor/bin/pint",
-    "orgos:rector": "./vendor/bin/rector",
+    "orgos:prettier": "npx prettier --write resources/",
+    "orgos:lint": "mago lint --fix",
     "orgos:unit": "rm -f database/test.sqlite_test* && php artisan migrate:fresh --database=testing && php artisan test --parallel",
     "orgos:update": [
       "composer bump",
@@ -94,8 +94,8 @@
     "orgos:update-blacklist-domains": "php artisan erag:sync-disposable-email-list",
     "precommit": [
       "@orgos:format",
+      "@orgos:prettier",
       "@orgos:lint",
-      "@orgos:rector",
       "@orgos:unit",
       "@orgos:update",
       "@orgos:update-blacklist-domains"

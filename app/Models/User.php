@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace App\Models;
 
 use Carbon\Carbon;
@@ -100,7 +102,7 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     public function initials(): string
     {
-        return Str::of($this->first_name.' '.$this->last_name)
+        return Str::of($this->first_name . ' ' . $this->last_name)
             ->explode(' ')
             ->map(fn (string $name) => Str::of($name)->substr(0, 1))
             ->implode('');
@@ -115,6 +117,14 @@ class User extends Authenticatable implements MustVerifyEmail
         $lastName = $this->last_name;
         $separator = $firstName && $lastName ? ' ' : '';
 
-        return $firstName.$separator.$lastName;
+        return $firstName . $separator . $lastName;
+    }
+
+    /**
+     * Check if the user is part of a specific organization.
+     */
+    public function isPartOfOrganization(Organization $organization): bool
+    {
+        return $this->organizations()->where('organization_id', $organization->id)->exists();
     }
 }

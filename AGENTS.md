@@ -19,6 +19,7 @@ This application is a Laravel application and its main Laravel ecosystems packag
 - phpunit/phpunit (PHPUNIT) - v11
 - rector/rector (RECTOR) - v2
 - alpinejs (ALPINEJS) - v3
+- prettier (PRETTIER) - v3
 - tailwindcss (TAILWINDCSS) - v4
 
 ## Conventions

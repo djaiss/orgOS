@@ -28,7 +28,6 @@
         <!-- Login form -->
         <x-box>
           <x-form method="post" :action="route('login')" class="space-y-4">
-
             <!-- Email address -->
             <x-input type="email" id="email" value="{{ old('email') }}" :label="__('Email address')" required placeholder="john@doe.com" :error="$errors->get('email')" :passManagerDisabled="false" autocomplete="username" autofocus />
 
@@ -45,13 +44,15 @@
               </label>
             </div>
 
-            {{-- @if (config('app.show_marketing_site'))
+            {{--
+              @if (config('app.show_marketing_site'))
               <div class="mt-4 mb-0">
-                <x-turnstile data-size="flexible" />
-
-                <x-error :messages="$errors->get('cf-turnstile-response')" class="mt-2" />
+              <x-turnstile data-size="flexible" />
+              
+              <x-error :messages="$errors->get('cf-turnstile-response')" class="mt-2" />
               </div>
-            @endif --}}
+              @endif
+            --}}
 
             <div class="flex items-center justify-between">
               <x-link href="{{ route('password.request') }}" class="text-sm text-gray-600">
@@ -66,7 +67,7 @@
         <!-- local login link -->
         @env('local')
           <x-box class="text-center text-sm">
-            <x-login-link label="Michael Scott" email="michael.scott@dundermifflin.com" redirect-url="{{ route('dashboard.index') }}" />
+            <x-login-link label="Michael Scott" email="michael.scott@dundermifflin.com" redirect-url="{{ route('organization.index') }}" />
           </x-box>
         @endenv
 

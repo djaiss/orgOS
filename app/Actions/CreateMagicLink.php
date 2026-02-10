@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace App\Actions;
 
@@ -40,7 +40,7 @@ class CreateMagicLink
     private function create(): void
     {
         $action = new LoginAction($this->user);
-        $action->response(redirect(route('dashboard.index', absolute: false)));
+        $action->response(redirect(route('organization.index', absolute: false)));
 
         $this->magicLinkUrl = MagicLink::create($action, 5)->url;
     }

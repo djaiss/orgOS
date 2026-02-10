@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace App\Jobs;
 
@@ -26,7 +26,7 @@ class LogUserAction implements ShouldQueue
      */
     public function handle(): void
     {
-        Log::create([
+        Log::query()->create([
             'organization_id' => $this->organization?->id,
             'user_id' => $this->user->id,
             'user_name' => $this->user->getFullName(),

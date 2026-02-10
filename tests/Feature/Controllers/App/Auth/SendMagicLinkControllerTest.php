@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace Tests\Feature\Controllers\App\Auth;
 
@@ -43,7 +43,10 @@ class SendMagicLinkControllerTest extends TestCase
 
         Queue::assertPushed(
             SendEmail::class,
-            fn (SendEmail $job): bool => $job->emailType === EmailType::MAGIC_LINK_CREATED && $job->user->id === $user->id,
+            fn (SendEmail $job): bool => (
+                $job->emailType === EmailType::MAGIC_LINK_CREATED
+                && $job->user->id === $user->id
+            ),
         );
     }
 

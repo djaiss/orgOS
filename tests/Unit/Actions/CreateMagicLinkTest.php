@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace Tests\Unit\Actions;
 
@@ -35,7 +35,7 @@ class CreateMagicLinkTest extends TestCase
         Queue::assertPushedOn(
             queue: 'low',
             job: LogUserAction::class,
-            callback: fn (LogUserAction $job) => (
+            callback: fn (LogUserAction $job): bool => (
                 $job->action === 'magic_link_created'
                 && $job->user->id === $user->id
                 && $job->description === 'Sent a magic link'
@@ -55,7 +55,7 @@ class CreateMagicLinkTest extends TestCase
         )->execute();
 
         $appUrl = config('app.url');
-        $this->assertStringStartsWith($appUrl.'/magiclink/', $magicLinkUrl);
+        $this->assertStringStartsWith($appUrl . '/magiclink/', $magicLinkUrl);
         $this->assertMatchesRegularExpression('/\/magiclink\/[a-f0-9-]+%3A[A-Za-z0-9]+/', $magicLinkUrl);
     }
 

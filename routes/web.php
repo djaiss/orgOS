@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\App\DashboardController;
+use App\Http\Controllers\App\Organization\OrganizationController;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Route;
@@ -8,7 +8,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', fn (): Factory|View => view('welcome'));
 
 Route::middleware(['auth', 'verified', 'throttle:60,1'])->group(function (): void {
-    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
+    Route::get('organizations', [OrganizationController::class, 'index'])->name('organization.index');
+
+    Route::middleware(['organization'])->group(function (): void {
+        Route::get('organizations/{slug}', [OrganizationController::class, 'show'])->name('organizations.show');
+    });
 });
 
 require __DIR__.'/auth.php';
