@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Tests\Unit\Actions;
 
 use App\Actions\CreateMagicLink;
-use App\Jobs\UpdateUserLastActivityDate;
+use App\Jobs\LogUserAction;
 use App\Models\User;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -34,8 +34,12 @@ class CreateMagicLinkTest extends TestCase
 
         Queue::assertPushedOn(
             queue: 'low',
-            job: UpdateUserLastActivityDate::class,
-            callback: fn (UpdateUserLastActivityDate $job): bool => $job->user->id === $user->id,
+            job: LogUserAction::class,
+            callback: fn (LogUserAction $job) => (
+                $job->action === 'magic_link_created'
+                && $job->user->id === $user->id
+                && $job->description === 'Sent a magic link'
+            ),
         );
     }
 
