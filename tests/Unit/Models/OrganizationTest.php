@@ -26,4 +26,14 @@ class OrganizationTest extends TestCase
 
         $this->assertTrue($organization->users()->exists());
     }
+
+    #[Test]
+    public function it_gets_avatar(): void
+    {
+        $organization = Organization::factory()->create();
+
+        $avatar = $organization->getAvatar();
+
+        $this->assertStringStartsWith('data:image/svg+xml;base64,', $avatar);
+    }
 }

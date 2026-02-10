@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use App\Actions\GenerateOrganizationAvatar;
 use Carbon\Carbon;
 use Database\Factories\OrganizationFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -61,5 +62,15 @@ class Organization extends Model
         return $this->belongsToMany(User::class)
             ->withPivot(['joined_at'])
             ->withTimestamps();
+    }
+
+    /**
+     * Gets the avatar of the organization.
+     *
+     * @return string
+     */
+    public function getAvatar(): string
+    {
+        return new GenerateOrganizationAvatar($this->id . '-' . $this->name)->execute();
     }
 }
