@@ -117,4 +117,12 @@ class User extends Authenticatable implements MustVerifyEmail
 
         return $firstName.$separator.$lastName;
     }
+
+    /**
+     * Check if the user is part of a specific organization.
+     */
+    public function isPartOfOrganization(Organization $organization): bool
+    {
+        return $this->organizations()->where('organization_id', $organization->id)->exists();
+    }
 }

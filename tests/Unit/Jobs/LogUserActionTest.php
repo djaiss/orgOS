@@ -30,7 +30,7 @@ class LogUserActionTest extends TestCase
             description: 'Updated their personal profile',
         );
 
-        $log = Log::first();
+        $log = Log::query()->first();
 
         $this->assertEquals('Michael Scott', $log->getUserName());
         $this->assertEquals('personal_profile_update', $log->action);

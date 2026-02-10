@@ -8,7 +8,7 @@
     <!-- selectors -->
     @if (isset($organization))
       <div class="flex items-center gap-1">
-        <a href="{{ route('dashboard.index') }}" data-turbo="true" class="rounded-md border border-transparent px-2 py-1 font-medium hover:border-gray-200 hover:bg-gray-100 dark:hover:border-gray-700 dark:hover:bg-gray-800">{{ __('Dashboard') }}</a>
+        <a href="{{ route('organization.index') }}" data-turbo="true" class="rounded-md border border-transparent px-2 py-1 font-medium hover:border-gray-200 hover:bg-gray-100 dark:hover:border-gray-700 dark:hover:bg-gray-800">{{ __('Dashboard') }}</a>
         <span class="text-gray-500">/</span>
         <div class="flex items-center pl-2">
           {{ $organization->name }}
@@ -25,12 +25,12 @@
 
     <!-- right side menu -->
     <div class="flex items-center gap-1">
-      <a class="flex items-center gap-2 rounded-md border border-transparent px-2 py-1 font-medium hover:border-gray-200 hover:bg-gray-100 dark:hover:border-gray-700 dark:hover:bg-gray-800" href="{{ route('marketing.features.modules') }}" data-turbo="true">
+      <a class="flex items-center gap-2 rounded-md border border-transparent px-2 py-1 font-medium hover:border-gray-200 hover:bg-gray-100 dark:hover:border-gray-700 dark:hover:bg-gray-800" href="" data-turbo="true">
         <x-phosphor-books class="size-4 text-gray-600 transition-transform duration-150" />
         {{ __('Modules') }}
       </a>
 
-      <a href="{{ route('marketing.docs.index') }}" class="flex items-center gap-2 rounded-md border border-transparent px-2 py-1 font-medium hover:border-gray-200 hover:bg-gray-100 dark:hover:border-gray-700 dark:hover:bg-gray-800">
+      <a href="" class="flex items-center gap-2 rounded-md border border-transparent px-2 py-1 font-medium hover:border-gray-200 hover:bg-gray-100 dark:hover:border-gray-700 dark:hover:bg-gray-800">
         <x-phosphor-lifebuoy class="size-4 text-gray-600 transition-transform duration-150" />
         {{ __('Docs') }}
       </a>

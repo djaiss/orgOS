@@ -35,7 +35,7 @@ class CreateMagicLinkTest extends TestCase
         Queue::assertPushedOn(
             queue: 'low',
             job: LogUserAction::class,
-            callback: fn (LogUserAction $job) => (
+            callback: fn (LogUserAction $job): bool => (
                 $job->action === 'magic_link_created'
                 && $job->user->id === $user->id
                 && $job->description === 'Sent a magic link'

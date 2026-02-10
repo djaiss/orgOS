@@ -67,7 +67,7 @@ class LoginController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(route('dashboard.index', absolute: false));
+        return redirect()->intended(route('organization.index', absolute: false));
     }
 
     private function ensureIsNotRateLimited(Request $request): void

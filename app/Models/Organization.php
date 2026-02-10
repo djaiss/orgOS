@@ -66,11 +66,9 @@ class Organization extends Model
 
     /**
      * Gets the avatar of the organization.
-     *
-     * @return string
      */
     public function getAvatar(): string
     {
-        return new GenerateOrganizationAvatar($this->id . '-' . $this->name)->execute();
+        return new GenerateOrganizationAvatar($this->id.'-'.$this->name)->execute();
     }
 }

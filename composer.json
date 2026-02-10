@@ -93,7 +93,6 @@
     ],
     "orgos:update-blacklist-domains": "php artisan erag:sync-disposable-email-list",
     "precommit": [
-      "@orgos:format",
       "@orgos:lint",
       "@orgos:rector",
       "@orgos:unit",

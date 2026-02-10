@@ -60,4 +60,18 @@ class UserTest extends TestCase
 
         $this->assertEquals('Dwight Schrute', $user->getFullName());
     }
+
+    #[Test]
+    public function it_checks_if_user_is_part_of_organization(): void
+    {
+        $user = User::factory()->create();
+        $organization = Organization::factory()->create();
+
+        $this->assertFalse($user->isPartOfOrganization($organization));
+
+        $user->organizations()->attach($organization->id, [
+            'joined_at' => now(),
+        ]);
+        $this->assertTrue($user->isPartOfOrganization($organization));
+    }
 }

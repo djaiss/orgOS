@@ -28,11 +28,11 @@ class EmailVerificationControllerTest extends TestCase
     #[Test]
     public function it_redirects_to_the_dashboard_if_the_email_is_verified(): void
     {
-        $user = User::factory()->create();
+        $user = $this->createUser();
 
         $response = $this->actingAs($user)->get('/verify-email');
 
-        $response->assertRedirect(route('dashboard.index', absolute: false));
+        $response->assertRedirect(route('organization.index', absolute: false));
     }
 
     #[Test]

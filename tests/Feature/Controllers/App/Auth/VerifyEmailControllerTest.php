@@ -33,7 +33,7 @@ class VerifyEmailControllerTest extends TestCase
 
         $this->assertNotNull($user->fresh()->email_verified_at);
         Event::assertDispatched(Verified::class);
-        $response->assertRedirect(route('dashboard.index', absolute: false).'?verified=1');
+        $response->assertRedirect(route('organization.index', absolute: false).'?verified=1');
     }
 
     #[Test]
@@ -41,7 +41,7 @@ class VerifyEmailControllerTest extends TestCase
     {
         Event::fake();
 
-        $user = User::factory()->create();
+        $user = $this->createUser();
 
         $verificationUrl = URL::temporarySignedRoute(
             'verification.verify',
@@ -52,7 +52,7 @@ class VerifyEmailControllerTest extends TestCase
         $response = $this->actingAs($user)->get($verificationUrl);
 
         Event::assertNotDispatched(Verified::class);
-        $response->assertRedirect(route('dashboard.index', absolute: false).'?verified=1');
+        $response->assertRedirect(route('organization.index', absolute: false).'?verified=1');
     }
 
     #[Test]
