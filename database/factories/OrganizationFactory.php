@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace Database\Factories;
 
@@ -31,7 +31,7 @@ class OrganizationFactory extends Factory
     public function configure(): static
     {
         return $this->afterCreating(function (Organization $organization): void {
-            $organization->slug = $organization->id.'-'.Str::lower($organization->name);
+            $organization->slug = $organization->id . '-' . Str::lower($organization->name);
             $organization->save();
         });
     }

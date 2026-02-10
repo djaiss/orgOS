@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace Tests\Feature\Controllers\App\Organization;
 
@@ -25,13 +25,10 @@ class OrganizationControllerTest extends TestCase
         $response = $this->actingAs($user)->get('/organizations');
 
         $response->assertStatus(200);
-        $response->assertViewHas('organizations', function ($organizations) {
-            return $organizations->count() === 1
-            && $organizations->every(fn ($org) => isset(
-                $org->name,
-                $org->link,
-                $org->avatar)
-            );
-        });
+        $response->assertViewHas(
+            'organizations',
+            fn ($organizations) => $organizations->count() === 1
+            && $organizations->every(fn ($org) => isset($org->name, $org->link, $org->avatar)),
+        );
     }
 }

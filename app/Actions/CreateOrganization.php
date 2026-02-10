@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace App\Actions;
 
@@ -53,7 +53,7 @@ class CreateOrganization
 
     private function generateSlug(): void
     {
-        $slug = $this->organization->id.'-'.Str::of($this->organizationName)->slug('-');
+        $slug = $this->organization->id . '-' . Str::of($this->organizationName)->slug('-');
 
         $this->organization->slug = $slug;
         $this->organization->save();

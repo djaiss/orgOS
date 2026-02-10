@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace App\Models;
 
@@ -69,6 +69,6 @@ class Organization extends Model
      */
     public function getAvatar(): string
     {
-        return new GenerateOrganizationAvatar($this->id.'-'.$this->name)->execute();
+        return new GenerateOrganizationAvatar($this->id . '-' . $this->name)->execute();
     }
 }

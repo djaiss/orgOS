@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace App\Mail;
 
@@ -21,7 +21,7 @@ class LoginFailed extends Mailable implements ShouldQueue
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Login attempt on '.config('app.name'),
+            subject: 'Login attempt on ' . config('app.name'),
         );
     }
 

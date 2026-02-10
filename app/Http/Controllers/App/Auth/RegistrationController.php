@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace App\Http\Controllers\App\Auth;
 
@@ -37,7 +37,7 @@ class RegistrationController extends Controller
                 'lowercase',
                 'email',
                 'max:255',
-                'unique:'.User::class,
+                'unique:' . User::class,
                 'disposable_email',
             ],
             'password' => ['required', 'string', 'max:255', 'confirmed', Password::min(8)->uncompromised()],
