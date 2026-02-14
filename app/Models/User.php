@@ -20,6 +20,7 @@ use Illuminate\Support\Str;
  * @property int $id
  * @property string $first_name
  * @property string $last_name
+ * @property string $nickname
  * @property string $email
  * @property Carbon|null $email_verified_at
  * @property Carbon|null $last_activity_at
@@ -42,6 +43,7 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $fillable = [
         'first_name',
         'last_name',
+        'nickname',
         'email',
         'password',
         'email_verified_at',

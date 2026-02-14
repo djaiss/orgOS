@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\App\Organization\OrganizationController;
+use App\Http\Controllers\App\Settings\SettingsController;
 use App\Http\Controllers\LocaleController;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -18,6 +19,10 @@ Route::middleware(['auth', 'verified', 'throttle:60,1'])->group(function (): voi
     Route::middleware(['organization'])->group(function (): void {
         Route::get('organizations/{slug}', [OrganizationController::class, 'show'])->name('organization.show');
     });
+
+    // settings
+    Route::get('settings', [SettingsController::class, 'index'])->name('settings.index');
+    Route::put('settings/profile', [SettingsController::class, 'update'])->name('settings.profile.update');
 });
 
 require __DIR__.'/auth.php';

@@ -7,18 +7,15 @@ namespace App\Actions;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
-/**
- * Create an account for a user.
- */
 class CreateAccount
 {
     private User $user;
 
     public function __construct(
-        private readonly string $email,
-        private readonly string $password,
-        private readonly string $firstName,
-        private readonly string $lastName,
+        private string $email,
+        private string $password,
+        private string $firstName,
+        private string $lastName,
     ) {}
 
     public function execute(): User
