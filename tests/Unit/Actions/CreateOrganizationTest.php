@@ -27,7 +27,7 @@ class CreateOrganizationTest extends TestCase
 
         $organization = new CreateOrganization(
             user: $user,
-            organizationName: 'Dunder Mifflin',
+            name: 'Dunder Mifflin',
         )->execute();
 
         $expectedSlug = $organization->id . '-dunder-mifflin';
@@ -66,7 +66,7 @@ class CreateOrganizationTest extends TestCase
 
         new CreateOrganization(
             user: $user,
-            organizationName: 'Dunder & Mifflin',
+            name: 'Dunder & Mifflin',
         )->execute();
     }
 }

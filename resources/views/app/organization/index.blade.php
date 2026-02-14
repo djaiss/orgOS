@@ -8,7 +8,7 @@
       <div class="mb-4 flex items-center justify-between">
         <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">{{ __('Your journals') }}</h2>
 
-        <x-button.secondary href="" turbo="true">
+        <x-button.secondary href="{{ route('organization.create') }}" turbo="true">
           <x-slot:icon>
             <x-phosphor-plus-bold class="size-4" />
           </x-slot>

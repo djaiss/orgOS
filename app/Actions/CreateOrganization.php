@@ -20,7 +20,7 @@ class CreateOrganization
 
     public function __construct(
         public User $user,
-        public string $organizationName,
+        public string $name,
     ) {}
 
     public function execute(): Organization
@@ -37,7 +37,7 @@ class CreateOrganization
     private function validate(): void
     {
         // make sure the organization name doesn't contain any special characters
-        if (in_array(preg_match('/^[a-zA-Z0-9\s\-_]+$/', $this->organizationName), [0, false], true)) {
+        if (in_array(preg_match('/^[a-zA-Z0-9\s\-_]+$/', $this->name), [0, false], true)) {
             throw ValidationException::withMessages([
                 'organization_name' => 'Organization name can only contain letters, numbers, spaces, hyphens and underscores',
             ]);
@@ -47,13 +47,13 @@ class CreateOrganization
     private function create(): void
     {
         $this->organization = Organization::query()->create([
-            'name' => $this->organizationName,
+            'name' => $this->name,
         ]);
     }
 
     private function generateSlug(): void
     {
-        $slug = $this->organization->id . '-' . Str::of($this->organizationName)->slug('-');
+        $slug = $this->organization->id . '-' . Str::of($this->name)->slug('-');
 
         $this->organization->slug = $slug;
         $this->organization->save();
@@ -72,7 +72,7 @@ class CreateOrganization
             organization: $this->organization,
             user: $this->user,
             action: 'organization_creation',
-            description: sprintf('Created an organization called %s', $this->organizationName),
+            description: sprintf('Created an organization called %s', $this->name),
         )->onQueue('low');
     }
 }
