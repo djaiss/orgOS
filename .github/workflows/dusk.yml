@@ -1,0 +1,58 @@
+name: Browser tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    types: [opened, synchronize, reopened]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  dusk:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout sources
+        uses: actions/checkout@v6
+
+      - name: Setup PHP 8.4
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          extensions: mbstring, dom, fileinfo, sqlite
+          coverage: none
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: lts/*
+
+      - name: Install composer dependencies
+        run: composer install --no-progress --no-interaction --prefer-dist --optimize-autoloader
+
+      - name: Install node dependencies
+        run: npm install
+
+      - name: Build frontend assets
+        run: npm run build
+
+      - name: Prepare Dusk environment
+        run: |
+          cp tests/.env.ci.dusk .env.dusk.ci
+          touch database/dusk.sqlite
+
+      - name: Generate key
+        run: php artisan key:generate --env=dusk.ci --no-interaction
+
+      - name: Run migrations
+        run: php artisan migrate --env=dusk.ci --force --no-interaction
+
+
+      - name: Install ChromeDriver for the current Chrome version
+        run: php artisan dusk:chrome-driver --detect --no-interaction
+
+      - name: Run Dusk tests
+        run: php artisan dusk --env=ci

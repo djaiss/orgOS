@@ -33,7 +33,8 @@
     "mockery/mockery": "^1.6.12",
     "nunomaduro/collision": "^8.8.3",
     "phpunit/phpunit": "^11.5.52",
-    "rector/rector": "^2.3.6"
+    "rector/rector": "^2.3.6",
+    "laravel/dusk": "^8.3"
   },
   "autoload": {
     "psr-4": {
@@ -102,6 +103,10 @@
       "@orgos:update",
       "@orgos:update-blacklist-domains",
       "@orgos:locale"
+    ],
+    "test:dusk": [
+      "@php -r \"file_exists('database/dusk.sqlite') || touch('database/dusk.sqlite');\"",
+      "@php artisan dusk --env=dusk.local"
     ]
   },
   "extra": {
