@@ -17,6 +17,6 @@
 
     <x-footer />
 
-    {{-- <x-toaster /> --}}
+    <x-toaster />
   </body>
 </html>
