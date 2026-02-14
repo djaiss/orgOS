@@ -24,7 +24,7 @@ class SettingsController extends Controller
             ->with('user')
             ->with('organization')
             ->latest()
-            ->limit(6)
+            ->limit(5)
             ->get()
             ->map(fn (Log $log) => (object) [
                 'username' => $log->getUserName(),
@@ -35,6 +35,8 @@ class SettingsController extends Controller
                 'created_at' => $log->created_at->format('Y-m-d H:i:s'),
                 'created_at_human' => $log->created_at->diffForHumans(),
             ]);
+
+        $hasMoreLogs = Log::where('user_id', $request->user()->id)->count() > 5;
 
         // $emails = EmailSent::query()
         //     ->where('user_id', $request->user()->id)
@@ -57,6 +59,7 @@ class SettingsController extends Controller
         return view('app.settings.index', [
             'user' => $user,
             'logs' => $logs,
+            'hasMoreLogs' => $hasMoreLogs,
         ]);
     }
 

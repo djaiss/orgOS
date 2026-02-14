@@ -30,9 +30,9 @@
     </div>
   @endforeach
 
-  {{-- @if ($hasMoreLogs) --}}
-  <div class="flex justify-center rounded-b-lg p-3 text-sm">
-    {{-- <x-link href="{{ route('settings.logs.index') }}" class="text-center">{{ __('Browse all activity') }}</x-link> --}}
-  </div>
-  {{-- @endif --}}
+  @if ($hasMoreLogs)
+    <div class="flex justify-center rounded-b-lg p-3 text-sm">
+      <x-link href="{{ route('settings.logs.index') }}" class="text-center">{{ __('Browse all activity') }}</x-link>
+    </div>
+  @endif
 </x-box>

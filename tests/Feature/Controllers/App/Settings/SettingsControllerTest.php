@@ -30,6 +30,7 @@ class SettingsControllerTest extends TestCase
             ->assertViewHasAll([
                 'user',
                 'logs',
+                'hasMoreLogs',
             ]);
 
         $response->assertViewHas(
