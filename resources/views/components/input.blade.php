@@ -12,9 +12,13 @@
   'help' => null,
   'autofocus' => false,
   'disabled' => false,
+  'maxCharacters' => null,
 ])
 
 @php
+  $inputValue = $attributes->get('value', $value);
+  $characterCount = mb_strlen((string) ($inputValue ?? ''));
+
   $classes = [
     'block w-full appearance-none',
     'pr-3 pl-3',
@@ -33,18 +37,31 @@
 
 @if ($label)
   <div class="space-y-2">
-    <div class="flex items-center space-x-2">
-      <x-label :for="$id" :value="$label" />
-      @if (! $required)
-        <span class="text-sm text-gray-500">({{ __('optional') }})</span>
+    <div
+      @if ($maxCharacters)
+        x-data="{ remainingCharacters: {{ max($maxCharacters - $characterCount, 0) }} }"
       @endif
-    </div>
-    <input id="{{ $id }}" name="{{ $id }}" type="{{ $type }}" {{ $attributes->class($classes) }} value="{{ $value }}" {{ $autocomplete ? 'autocomplete="' . $autocomplete . '"' : '' }} placeholder="{{ $placeholder ? $placeholder : '' }}" @if($passManagerDisabled) data-1p-ignore @endif {{ $autofocus ? 'autofocus' : '' }} {{ $required ? 'required' : '' }} {{ $disabled ? 'disabled' : '' }} />
-    @if ($help)
-      <p class="mt-1 block text-xs text-gray-700 dark:text-gray-300">{{ $help }}</p>
-    @endif
+      class="space-y-2"
+    >
+      <div class="flex items-center justify-between gap-3">
+        <div class="flex items-center space-x-2">
+          <x-label :for="$id" :value="$label" />
+          @if (! $required)
+            <span class="text-sm text-gray-500">({{ __('optional') }})</span>
+          @endif
+        </div>
+        @if ($maxCharacters)
+          <span class="text-sm text-gray-500" x-text="remainingCharacters"></span>
+        @endif
+      </div>
 
-    <x-error :messages="$error" />
+      <input id="{{ $id }}" name="{{ $id }}" type="{{ $type }}" {{ $attributes->class($classes) }} value="{{ $value }}" {{ $autocomplete ? 'autocomplete="' . $autocomplete . '"' : '' }} placeholder="{{ $placeholder ? $placeholder : '' }}" @if($passManagerDisabled) data-1p-ignore @endif {{ $autofocus ? 'autofocus' : '' }} {{ $required ? 'required' : '' }} {{ $disabled ? 'disabled' : '' }} {{ $maxCharacters ? 'maxlength="' . $maxCharacters . '"' : '' }} @if ($maxCharacters) x-on:input="remainingCharacters = Math.max({{ $maxCharacters }} - $event.target.value.length, 0)" @endif />
+      @if ($help)
+        <p class="mt-1 block text-xs text-gray-700 dark:text-gray-300">{{ $help }}</p>
+      @endif
+
+      <x-error :messages="$error" />
+    </div>
   </div>
 @else
   <div class="space-y-2">
