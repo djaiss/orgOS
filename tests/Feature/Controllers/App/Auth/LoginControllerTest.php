@@ -6,7 +6,7 @@ namespace Tests\Feature\Controllers\App\Auth;
 
 use App\Enums\EmailType;
 use App\Jobs\SendEmail;
-use App\Models\User;
+
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Queue;
 use PHPUnit\Framework\Attributes\Test;
@@ -28,7 +28,7 @@ class LoginControllerTest extends TestCase
     public function it_authenticates_a_user(): void
     {
         config(['app.show_marketing_site' => false]);
-        $user = User::factory()->create();
+        $user = $this->createUser();
 
         $response = $this->post('/login', [
             'email' => $user->email,
@@ -45,7 +45,7 @@ class LoginControllerTest extends TestCase
         Queue::fake();
         config(['app.show_marketing_site' => false]);
 
-        $user = User::factory()->create();
+        $user = $this->createUser();
 
         $this->post('/login', [
             'email' => $user->email,
@@ -62,7 +62,7 @@ class LoginControllerTest extends TestCase
     public function it_does_not_authenticate_a_user_with_invalid_password(): void
     {
         config(['app.show_marketing_site' => false]);
-        $user = User::factory()->create();
+        $user = $this->createUser();
 
         $this->post('/login', [
             'email' => $user->email,
@@ -75,7 +75,7 @@ class LoginControllerTest extends TestCase
     #[Test]
     public function it_logs_out_a_user(): void
     {
-        $user = User::factory()->create();
+        $user = $this->createUser();
 
         $response = $this->actingAs($user)->post('/logout');
 

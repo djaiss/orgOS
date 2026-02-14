@@ -7,7 +7,7 @@ namespace Tests\Unit\Actions;
 use App\Actions\CreateOrganization;
 use App\Jobs\LogUserAction;
 use App\Models\Organization;
-use App\Models\User;
+
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Queue;
 use Illuminate\Validation\ValidationException;
@@ -23,7 +23,7 @@ class CreateOrganizationTest extends TestCase
     {
         Queue::fake();
 
-        $user = User::factory()->create();
+        $user = $this->createUser();
 
         $organization = new CreateOrganization(
             user: $user,
@@ -60,7 +60,7 @@ class CreateOrganizationTest extends TestCase
     #[Test]
     public function it_rejects_organization_names_with_special_characters(): void
     {
-        $user = User::factory()->create();
+        $user = $this->createUser();
 
         $this->expectException(ValidationException::class);
 

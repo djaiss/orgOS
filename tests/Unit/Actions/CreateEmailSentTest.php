@@ -6,7 +6,7 @@ namespace Tests\Unit\Actions;
 
 use App\Actions\CreateEmailSent;
 use App\Models\EmailSent;
-use App\Models\User;
+
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Str;
@@ -21,7 +21,7 @@ class CreateEmailSentTest extends TestCase
     public function it_creates_an_email_sent(): void
     {
         Date::setTestNow(Date::create(2018, 1, 1));
-        $user = User::factory()->create();
+        $user = $this->createUser();
 
         $emailSent = new CreateEmailSent(
             user: $user,
@@ -54,7 +54,7 @@ class CreateEmailSentTest extends TestCase
     #[Test]
     public function it_sanitizes_the_body_and_strips_any_links(): void
     {
-        $user = User::factory()->create();
+        $user = $this->createUser();
 
         $emailSent = new CreateEmailSent(
             user: $user,
@@ -74,7 +74,7 @@ class CreateEmailSentTest extends TestCase
     #[Test]
     public function it_creates_an_email_sent_with_a_uuid(): void
     {
-        $user = User::factory()->create();
+        $user = $this->createUser();
         $uuid = Str::uuid();
 
         $emailSent = new CreateEmailSent(

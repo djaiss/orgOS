@@ -5,7 +5,7 @@ declare(strict_types = 1);
 namespace Tests\Unit\Models;
 
 use App\Models\Organization;
-use App\Models\User;
+
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
@@ -17,7 +17,7 @@ class OrganizationTest extends TestCase
     #[Test]
     public function it_belongs_to_many_users(): void
     {
-        $user = User::factory()->create();
+        $user = $this->createUser();
         $organization = Organization::factory()->create();
 
         $organization->users()->attach($user->id, [
