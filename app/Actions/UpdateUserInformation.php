@@ -1,12 +1,12 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace App\Actions;
 
 use App\Helpers\TextSanitizer;
 use App\Jobs\LogUserAction;
-use App\Jobs\UpdateUserLastActivityDate;
+
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Validation\ValidationException;
@@ -88,15 +88,10 @@ class UpdateUserInformation
     private function log(): void
     {
         LogUserAction::dispatch(
+            organization: null,
             user: $this->user,
-            journal: null,
             action: 'personal_profile_update',
             description: 'Updated their personal profile',
         )->onQueue('low');
-    }
-
-    private function updateUserLastActivityDate(): void
-    {
-        UpdateUserLastActivityDate::dispatch($this->user)->onQueue('low');
     }
 }

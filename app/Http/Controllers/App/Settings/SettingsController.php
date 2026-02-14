@@ -1,14 +1,12 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace App\Http\Controllers\App\Settings;
 
 use App\Actions\UpdateUserInformation;
 use App\Helpers\TextSanitizer;
 use App\Http\Controllers\Controller;
-use App\Models\EmailSent;
-use App\Models\Log;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -35,12 +33,16 @@ class SettingsController extends Controller
         //     ->limit(6)
         //     ->get();
 
-        $user = (object) $request->user()->only([
-            'first_name',
-            'last_name',
-            'nickname',
-            'email',
-        ]);
+        $user = (object) $request
+            ->user()
+            ->only([
+                'first_name',
+                'last_name',
+                'nickname',
+                'email',
+                'locale',
+                'time_format_24h',
+            ]);
 
         return view('app.settings.index', [
             'user' => $user,
@@ -76,7 +78,7 @@ class SettingsController extends Controller
             timeFormat24h: $validated['time_format_24h'] === 'true' ? true : false,
         )->execute();
 
-        return to_route('settings.profile.index')
+        return to_route('settings.index')
             ->with('status', __('Changes saved'));
     }
 }

@@ -18,7 +18,7 @@ class UserTest extends TestCase
     #[Test]
     public function it_has_many_emails_sent(): void
     {
-        $user = User::factory()->create();
+        $user = $this->createUser();
         EmailSent::factory()->create([
             'user_id' => $user->id,
         ]);
@@ -29,7 +29,7 @@ class UserTest extends TestCase
     #[Test]
     public function it_belongs_to_many_organizations(): void
     {
-        $user = User::factory()->create();
+        $user = $this->createUser();
         $organization = Organization::factory()->create();
 
         $user->organizations()->attach($organization->id, [
@@ -64,7 +64,7 @@ class UserTest extends TestCase
     #[Test]
     public function it_checks_if_user_is_part_of_organization(): void
     {
-        $user = User::factory()->create();
+        $user = $this->createUser();
         $organization = Organization::factory()->create();
 
         $this->assertFalse($user->isPartOfOrganization($organization));

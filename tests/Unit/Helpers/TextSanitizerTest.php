@@ -8,7 +8,7 @@ use App\Helpers\TextSanitizer;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
-final class TextSanitizerTest extends TestCase
+class TextSanitizerTest extends TestCase
 {
     #[Test]
     public function plain_text_strips_tags_and_trims(): void
