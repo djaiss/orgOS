@@ -20,12 +20,15 @@ use Illuminate\Support\Str;
  * @property int $id
  * @property string $first_name
  * @property string $last_name
+ * @property string $nickname
  * @property string $email
  * @property Carbon|null $email_verified_at
  * @property Carbon|null $last_activity_at
  * @property string $password
  * @property string|null $last_used_ip
  * @property Carbon|null $trial_ends_at
+ * @property string $locale
+ * @property bool $time_format_24h
  * @property Carbon $created_at
  * @property Carbon|null $updated_at
  */
@@ -42,6 +45,7 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $fillable = [
         'first_name',
         'last_name',
+        'nickname',
         'email',
         'password',
         'email_verified_at',
@@ -49,6 +53,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'last_used_ip',
         'last_activity_at',
         'locale',
+        'time_format_24h',
     ];
 
     /**
@@ -73,6 +78,7 @@ class User extends Authenticatable implements MustVerifyEmail
             'trial_ends_at' => 'datetime',
             'password' => 'hashed',
             'last_activity_at' => 'datetime',
+            'time_format_24h' => 'boolean',
         ];
     }
 
