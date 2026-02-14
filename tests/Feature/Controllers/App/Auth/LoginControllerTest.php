@@ -6,7 +6,6 @@ namespace Tests\Feature\Controllers\App\Auth;
 
 use App\Enums\EmailType;
 use App\Jobs\SendEmail;
-
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Queue;
 use PHPUnit\Framework\Attributes\Test;

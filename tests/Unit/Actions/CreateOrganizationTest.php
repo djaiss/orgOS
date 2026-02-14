@@ -7,7 +7,6 @@ namespace Tests\Unit\Actions;
 use App\Actions\CreateOrganization;
 use App\Jobs\LogUserAction;
 use App\Models\Organization;
-
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Queue;
 use Illuminate\Validation\ValidationException;

@@ -78,7 +78,10 @@ class UpdateUserInformationTest extends TestCase
             timeFormat24h: true,
         )->execute();
 
-        Event::assertDispatched(Registered::class);
+        Event::assertDispatched(
+            event: Registered::class,
+            callback: fn (Registered $event) => $event->user->email === 'dwight.schrute@dundermifflin.com',
+        );
         $this->assertNull($user->refresh()->email_verified_at);
     }
 

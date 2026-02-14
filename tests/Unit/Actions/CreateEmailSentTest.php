@@ -6,7 +6,6 @@ namespace Tests\Unit\Actions;
 
 use App\Actions\CreateEmailSent;
 use App\Models\EmailSent;
-
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Str;

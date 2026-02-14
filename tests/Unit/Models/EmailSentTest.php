@@ -5,7 +5,6 @@ declare(strict_types = 1);
 namespace Tests\Unit\Models;
 
 use App\Models\EmailSent;
-
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
