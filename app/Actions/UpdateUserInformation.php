@@ -6,7 +6,6 @@ namespace App\Actions;
 
 use App\Helpers\TextSanitizer;
 use App\Jobs\LogUserAction;
-
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Validation\ValidationException;
@@ -31,8 +30,9 @@ class UpdateUserInformation
     public function execute(): User
     {
         $this->validate();
-        $this->triggerEmailVerification();
+        $emailChanged = $this->user->email !== $this->email;
         $this->update();
+        $this->triggerEmailVerification($emailChanged);
         $this->log();
 
         return $this->user;
@@ -64,9 +64,9 @@ class UpdateUserInformation
         }
     }
 
-    private function triggerEmailVerification(): void
+    private function triggerEmailVerification(bool $emailChanged): void
     {
-        if ($this->user->email !== $this->email) {
+        if ($emailChanged) {
             $this->user->email_verified_at = null;
             $this->user->save();
             event(new Registered($this->user));
