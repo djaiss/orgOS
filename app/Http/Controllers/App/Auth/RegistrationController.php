@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace App\Http\Controllers\App\Auth;
 
 use App\Actions\CreateAccount;
+use App\Helpers\TextSanitizer;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
@@ -40,14 +41,20 @@ class RegistrationController extends Controller
                 'unique:' . User::class,
                 'disposable_email',
             ],
-            'password' => ['required', 'string', 'max:255', 'confirmed', Password::min(8)->uncompromised()],
+            'password' => [
+                'required',
+                'string',
+                'max:255',
+                'confirmed',
+                Password::min(8)->uncompromised(),
+            ],
         ]);
 
         $user = new CreateAccount(
             email: mb_strtolower((string) $validated['email']),
             password: $validated['password'],
-            firstName: $validated['first_name'],
-            lastName: $validated['last_name'],
+            firstName: TextSanitizer::plainText($validated['first_name']),
+            lastName: TextSanitizer::plainText($validated['last_name']),
         )->execute();
 
         event(new Registered($user));

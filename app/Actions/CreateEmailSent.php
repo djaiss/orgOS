@@ -15,12 +15,12 @@ class CreateEmailSent
     private string $updatedBody = '';
 
     public function __construct(
-        private readonly User $user,
-        private readonly ?string $uuid,
-        private readonly string $emailType,
-        private readonly string $emailAddress,
-        private readonly string $subject,
-        private readonly string $body,
+        private User $user,
+        private ?string $uuid,
+        private string $emailType,
+        private string $emailAddress,
+        private string $subject,
+        private string $body,
     ) {}
 
     public function execute(): EmailSent
