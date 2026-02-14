@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace Tests\Feature\Controllers\App\Settings;
 
+use App\Models\Log;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
@@ -17,12 +18,35 @@ class SettingsControllerTest extends TestCase
     {
         $user = $this->createUser();
 
-        $this->actingAs($user)
-            ->get('/settings')
+        Log::factory()->create([
+            'user_id' => $user->id,
+        ]);
+
+        $response = $this->actingAs($user)
+            ->get('/settings');
+
+        $response
             ->assertOk()
             ->assertViewHasAll([
                 'user',
+                'logs',
             ]);
+
+        $response->assertViewHas(
+            'logs',
+            fn ($logs) => $logs->count() === 1
+            && $logs->every(
+                fn ($log) => isset(
+                    $log->username,
+                    $log->organization_name,
+                    $log->organization_link,
+                    $log->action,
+                    $log->description,
+                    $log->created_at,
+                    $log->created_at_human,
+                ),
+            ),
+        );
     }
 
     #[Test]

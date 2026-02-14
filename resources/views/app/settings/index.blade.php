@@ -20,7 +20,7 @@
         @include('app.settings._detail', ['user' => $user, 'errors' => $errors])
 
         <!-- logs -->
-        {{-- @include('app.settings.profile.partials.logs', ['logs' => $logs, 'hasMoreLogs' => $hasMoreLogs]) --}}
+        @include('app.settings._logs', ['logs' => $logs])
 
         <!-- emails sent -->
         {{-- @include('app.settings.profile.partials.emails', ['emails' => $emails, 'hasMoreEmails' => $hasMoreEmails]) --}}
