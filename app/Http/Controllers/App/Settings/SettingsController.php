@@ -7,6 +7,7 @@ namespace App\Http\Controllers\App\Settings;
 use App\Actions\UpdateUserInformation;
 use App\Helpers\TextSanitizer;
 use App\Http\Controllers\Controller;
+use App\Models\Log;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -18,13 +19,22 @@ class SettingsController extends Controller
 {
     public function index(Request $request): View
     {
-        // $logs = Log::query()
-        //     ->where('user_id', $request->user()->id)
-        //     ->with('user')
-        //     ->with('journal')
-        //     ->latest()
-        //     ->limit(6)
-        //     ->get();
+        $logs = Log::query()
+            ->where('user_id', $request->user()->id)
+            ->with('user')
+            ->with('organization')
+            ->latest()
+            ->limit(6)
+            ->get()
+            ->map(fn (Log $log) => (object) [
+                'username' => $log->getUserName(),
+                'organization_name' => $log->organization?->name,
+                'organization_link' => $log->organization ? route('organization.show', $log->organization_id) : null,
+                'action' => $log->action,
+                'description' => $log->description,
+                'created_at' => $log->created_at->format('Y-m-d H:i:s'),
+                'created_at_human' => $log->created_at->diffForHumans(),
+            ]);
 
         // $emails = EmailSent::query()
         //     ->where('user_id', $request->user()->id)
@@ -46,6 +56,7 @@ class SettingsController extends Controller
 
         return view('app.settings.index', [
             'user' => $user,
+            'logs' => $logs,
         ]);
     }
 
