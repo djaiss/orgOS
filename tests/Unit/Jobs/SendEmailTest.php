@@ -76,8 +76,11 @@ class SendEmailTest extends TestCase
             ))
             ->andReturn(Email::from(['id' => 'resend-uuid-12345']));
 
-        // The facade accesses the emails property directly, not method
-        $resendMock->emails = $emailsMock;
+        // Mock the emails() method to return the emails mock
+        $resendMock
+            ->shouldReceive('emails')
+            ->once()
+            ->andReturn($emailsMock);
 
         // Replace the Resend service binding with our mock
         app()->instance('resend', $resendMock);

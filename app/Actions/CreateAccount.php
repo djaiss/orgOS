@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace App\Actions;
 
+use App\Jobs\LogUserAction;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
@@ -21,6 +22,7 @@ class CreateAccount
     public function execute(): User
     {
         $this->create();
+        $this->log();
 
         return $this->user;
     }
@@ -34,5 +36,15 @@ class CreateAccount
             'password' => Hash::make($this->password),
             'trial_ends_at' => now()->addDays(30),
         ]);
+    }
+
+    private function log(): void
+    {
+        LogUserAction::dispatch(
+            organization: null,
+            user: $this->user,
+            action: 'account_creation',
+            description: sprintf('Created an account'),
+        )->onQueue('low');
     }
 }
