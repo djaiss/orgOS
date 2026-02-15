@@ -58,10 +58,18 @@ class LoginController extends Controller
             ]);
         }
 
+        if (!is_null($request->user()->two_factor_confirmed_at)) {
+            $userId = $request->user()->id;
+            Auth::logout();
+            session(['2fa:user:id' => $userId]);
+
+            return to_route('2fa.challenge.create');
+        }
+
         RateLimiter::clear($this->throttleKey($request));
 
         CheckLastLogin::dispatch(
-            user: Auth::user(),
+            user: $request->user(),
             ip: $request->ip(),
         )->onQueue('low');
 

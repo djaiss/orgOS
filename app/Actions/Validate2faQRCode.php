@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace App\Actions;
 
@@ -30,7 +30,7 @@ class Validate2faQRCode
     {
         $google2fa = $this->google2fa ?? new Google2FA(request());
 
-        if (! $google2fa->verifyKey($this->user->two_factor_secret, $this->token)) {
+        if (!$google2fa->verifyKey($this->user->two_factor_secret, $this->token)) {
             throw new InvalidArgumentException(__('The provided token is invalid.'));
         }
 
