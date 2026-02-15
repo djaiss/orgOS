@@ -4,43 +4,46 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Actions;
 
-use App\Actions\Generate2faQRCode;
+use App\Actions\Remove2fa;
 use App\Jobs\LogUserAction;
 use App\Models\User;
-use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Queue;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
-class Generate2faQRCodeTest extends TestCase
+class Remove2faTest extends TestCase
 {
     use RefreshDatabase;
 
     #[Test]
-    public function it_generates_a_2fa_qr_code(): void
+    public function it_removes_2fa_from_user_account(): void
     {
         Queue::fake();
 
-        Carbon::setTestNow(Carbon::parse('2025-07-16 10:00:00'));
-
         $user = User::factory()->create([
-            'email' => 'michael.scott@dundermifflin.com',
+            'two_factor_secret' => 'test-secret',
+            'two_factor_confirmed_at' => now(),
+            'two_factor_recovery_codes' => ['code1', 'code2'],
         ]);
 
-        $result = new Generate2faQRCode(
+        new Remove2fa(
             user: $user,
         )->execute();
 
-        $this->assertIsString($result['secret']);
+        $user->refresh();
+
+        $this->assertNull($user->two_factor_secret);
+        $this->assertNull($user->two_factor_confirmed_at);
+        $this->assertNull($user->two_factor_recovery_codes);
 
         Queue::assertPushedOn(
             queue: 'low',
             job: LogUserAction::class,
             callback: fn (LogUserAction $job) => (
-                $job->action === '2fa_qr_code_generation'
+                $job->action === '2fa_removal'
                 && $job->user->id === $user->id
-                && $job->description === 'Generated 2FA QR code for setup'
+                && $job->description === 'Removed 2FA from account'
             ),
         );
     }

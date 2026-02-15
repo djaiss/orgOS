@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Tests\Feature\Controllers\App\Settings;
 
@@ -76,5 +76,22 @@ class TwoFAControllerTest extends TestCase
 
         $user->refresh();
         $this->assertNull($user->two_factor_confirmed_at);
+    }
+
+    #[Test]
+    public function it_removes_2fa_from_user_account(): void
+    {
+        $user = $this->createUser([
+            'two_factor_secret' => 'test-secret',
+            'two_factor_confirmed_at' => now(),
+            'two_factor_recovery_codes' => ['code1', 'code2'],
+        ]);
+
+        $response = $this->actingAs($user)
+            ->from('/settings/security')
+            ->delete('/settings/security/2fa');
+
+        $response->assertRedirect('/settings/security');
+        $response->assertSessionHas('status', 'Changes saved');
     }
 }

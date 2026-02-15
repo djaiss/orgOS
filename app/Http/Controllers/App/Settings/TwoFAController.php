@@ -1,10 +1,11 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace App\Http\Controllers\App\Settings;
 
 use App\Actions\Generate2faQRCode;
+use App\Actions\Remove2fa;
 use App\Actions\Validate2faQRCode;
 use App\Helpers\TextSanitizer;
 use App\Http\Controllers\Controller;
@@ -46,5 +47,15 @@ class TwoFAController extends Controller
 
         return to_route('settings.security.index')
             ->with('status', __('Two-factor authentication has been enabled successfully.'));
+    }
+
+    public function destroy(Request $request): RedirectResponse
+    {
+        new Remove2fa(
+            user: $request->user(),
+        )->execute();
+
+        return to_route('settings.security.index')
+            ->with('status', __('Changes saved'));
     }
 }
