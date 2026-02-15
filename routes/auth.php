@@ -8,6 +8,7 @@ use App\Http\Controllers\App\Auth\NewPasswordController;
 use App\Http\Controllers\App\Auth\PasswordResetLinkController;
 use App\Http\Controllers\App\Auth\RegistrationController;
 use App\Http\Controllers\App\Auth\SendMagicLinkController;
+use App\Http\Controllers\App\Auth\TwoFAChallengeController;
 use App\Http\Controllers\App\Auth\VerifyEmailController;
 use Illuminate\Support\Facades\Route;
 
@@ -32,11 +33,9 @@ Route::middleware('guest')->group(function (): void {
     Route::get('reset-password/{token}', [NewPasswordController::class, 'create'])->name('password.reset');
     Route::post('reset-password', [NewPasswordController::class, 'store'])->name('password.store');
 
-    // Route::get('/2fa-challenge', [LoginController::class, 'show2faForm'])
-    //     ->name('2fa.challenge');
+    Route::get('/2fa-challenge', [TwoFAChallengeController::class, 'create'])->name('2fa.challenge.create');
 
-    // Route::post('/2fa-challenge', [LoginController::class, 'verify2fa'])
-    //     ->name('2fa.verify');
+    Route::post('/2fa-challenge', [TwoFAChallengeController::class, 'store'])->name('2fa.challenge.store');
 });
 
 Route::middleware('auth')->group(function (): void {

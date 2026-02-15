@@ -39,7 +39,7 @@
           <p class="text-xs text-gray-600">{{ __('Use these codes to access your account if you lose access to your authenticator app.') }}</p>
         </div>
 
-        <x-button.secondary href="{{ route('settings.security.recoverycodes.show') }}" x-target="recovery-codes" class="mr-2 text-sm">
+        <x-button.secondary turbo="true" href="{{ route('settings.security.recoverycodes.show') }}" x-target="recovery-codes" class="mr-2 text-sm">
           {{ __('Show') }}
         </x-button.secondary>
       </div>
