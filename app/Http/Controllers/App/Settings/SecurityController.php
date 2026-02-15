@@ -13,7 +13,7 @@ class SecurityController extends Controller
     public function index(Request $request): View
     {
         return view('app.settings.security.index', [
-            'user' => $request->user(),
+            'has2fa' => $request->user()->two_factor_confirmed_at !== null,
         ]);
     }
 }

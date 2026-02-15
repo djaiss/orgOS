@@ -263,13 +263,10 @@ protected function isAccessible(User $user, ?string $path = null): bool
 
 ## Guidelines
 
-- Start: say hi + 1 motivating line. Work style: telegraph; noun-phrases ok; drop grammar; min tokens.
+- Work style: telegraph; noun-phrases ok; drop grammar; min tokens.
 - Commits: Conventional Commits (feat|fix|refactor|build|ci|chore|docs|style|perf|test).
-- Style: telegraph. Drop filler/grammar. Min tokens (global AGENTS + replies).
 
 ## Overview of the project
-
-JournalOS is a personal diary. Users can have journals. A journal is made of journal entries. We provide a web application, an API and a marketing documentation. The marketing website is part of the codebase as well - although everything on the marketing website will be cached by Cloudflare for performance reasons.
 
 ## General information
 
@@ -280,7 +277,7 @@ JournalOS is a personal diary. Users can have journals. A journal is made of jou
 ## Overall structure
 
 - Every action a user can do (ie: LogWork) is an Action in the project. Actions are stored in /app/Actions.
-- We use Presenters to prepare data for the views.
+- Always use `$request->user()` to get the authenticated user, not `Auth::user()`.
 - Most jobs are queued on the `low` priority queue.
 
 ## Tests

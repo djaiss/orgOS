@@ -21,7 +21,7 @@ class PasswordControllerTest extends TestCase
 
         $response = $this->actingAs($user)
             ->from('/settings/security')
-            ->put('/settings/password', [
+            ->put('/settings/security/password', [
                 'current_password' => '5UTHSmdj',
                 'new_password' => 'new-5UTHSmdj',
                 'new_password_confirmation' => 'new-5UTHSmdj',
