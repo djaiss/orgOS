@@ -83,7 +83,7 @@ class SettingsController extends Controller
         ]);
 
         new UpdateUserInformation(
-            user: Auth::user(),
+            user: $request->user(),
             email: mb_strtolower(TextSanitizer::plainText($validated['email'])),
             firstName: TextSanitizer::plainText($validated['first_name']),
             lastName: TextSanitizer::plainText($validated['last_name']),

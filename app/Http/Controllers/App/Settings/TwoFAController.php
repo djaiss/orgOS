@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace App\Http\Controllers\App\Settings;
 
@@ -10,16 +10,15 @@ use App\Helpers\TextSanitizer;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 use InvalidArgumentException;
 
 class TwoFAController extends Controller
 {
-    public function create(): View
+    public function create(Request $request): View
     {
         $code = new Generate2faQRCode(
-            user: Auth::user(),
+            user: $request->user(),
         )->execute();
 
         return view('app.settings.security._2fa-new', [
@@ -36,7 +35,7 @@ class TwoFAController extends Controller
 
         try {
             new Validate2faQRCode(
-                user: Auth::user(),
+                user: $request->user(),
                 token: TextSanitizer::plainText((string) $request->input('token')),
             )->execute();
         } catch (InvalidArgumentException) {

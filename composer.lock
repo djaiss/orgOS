@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "dc027b97cef74b1158700f92d4c629e1",
+    "content-hash": "2e1b2759a4c6b95809828d9c95777583",
     "packages": [
         {
             "name": "amirami/localizator",

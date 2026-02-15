@@ -1,12 +1,12 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace Tests\Unit\Actions;
 
 use App\Actions\Generate2faQRCode;
 use App\Jobs\LogUserAction;
-use App\Jobs\UpdateUserLastActivityDate;
+
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -38,7 +38,7 @@ class Generate2faQRCodeTest extends TestCase
         Queue::assertPushedOn(
             queue: 'low',
             job: LogUserAction::class,
-            callback: fn(LogUserAction $job) => (
+            callback: fn (LogUserAction $job) => (
                 $job->action === '2fa_qr_code_generation'
                 && $job->user->id === $user->id
                 && $job->description === 'Generated 2FA QR code for setup'

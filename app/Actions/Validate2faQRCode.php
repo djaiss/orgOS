@@ -1,10 +1,10 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace App\Actions;
 
-use App\Jobs\UpdateUserLastActivityDate;
+
 use App\Models\User;
 use Illuminate\Support\Str;
 use InvalidArgumentException;
@@ -45,6 +45,6 @@ class Validate2faQRCode
 
     private function generateRandomCodes(): array
     {
-        return collect()->times(8)->map(fn() => Str::random(10))->all();
+        return collect()->times(8)->map(fn () => Str::random(10))->all();
     }
 }

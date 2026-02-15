@@ -1,11 +1,11 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace Tests\Unit\Actions;
 
 use App\Actions\Validate2faQRCode;
-use App\Jobs\UpdateUserLastActivityDate;
+
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Queue;
@@ -90,6 +90,8 @@ class Validate2faQRCodeTest extends TestCase
     #[Test]
     public function it_does_not_update_recovery_codes_when_token_is_invalid(): void
     {
+        Queue::fake();
+
         $secret = 'JBSWY3DPEHPK3PXP';
 
         $user = User::factory()->create([
@@ -111,7 +113,8 @@ class Validate2faQRCodeTest extends TestCase
                 token: 'invalid-token',
                 google2fa: $google2faMock,
             )->execute();
-        } catch (InvalidArgumentException) {}
+        } catch (InvalidArgumentException) {
+        }
 
         $user->refresh();
 

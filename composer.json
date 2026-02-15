@@ -12,7 +12,7 @@
   "require": {
     "php": "^8.4.0",
     "amirami/localizator": "^0.14.0@alpha",
-    "bacon/bacon-qr-code": "^3.0",
+    "bacon/bacon-qr-code": "^3.0.3",
     "cesargb/laravel-magiclink": "^2.25.1",
     "codeat3/blade-phosphor-icons": "^2.3",
     "erag/laravel-disposable-email": "^3.8",

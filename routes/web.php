@@ -3,9 +3,10 @@
 use App\Http\Controllers\App\Organization\OrganizationController;
 use App\Http\Controllers\App\Settings\LogController;
 use App\Http\Controllers\App\Settings\PasswordController;
-use App\Http\Controllers\App\Settings\TwoFAController;
+use App\Http\Controllers\App\Settings\RecoveryCodeController;
 use App\Http\Controllers\App\Settings\SecurityController;
 use App\Http\Controllers\App\Settings\SettingsController;
+use App\Http\Controllers\App\Settings\TwoFAController;
 use App\Http\Controllers\LocaleController;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -38,6 +39,7 @@ Route::middleware(['auth', 'verified', 'throttle:60,1', 'set.locale'])->group(fu
     // 2fa
     Route::get('settings/security/2fa/create', [TwoFAController::class, 'create'])->name('settings.security.2fa.create');
     Route::post('settings/security/2fa', [TwoFAController::class, 'store'])->name('settings.security.2fa.store');
+    Route::get('settings/security/recovery-codes', [RecoveryCodeController::class, 'show'])->name('settings.security.recoverycodes.show');
 });
 
 require __DIR__.'/auth.php';
