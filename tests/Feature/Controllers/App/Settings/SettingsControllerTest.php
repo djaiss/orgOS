@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace Tests\Feature\Controllers\App\Settings;
 
+use App\Models\EmailSent;
 use App\Models\Log;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use PHPUnit\Framework\Attributes\Test;
@@ -21,6 +22,9 @@ class SettingsControllerTest extends TestCase
         Log::factory()->create([
             'user_id' => $user->id,
         ]);
+        EmailSent::factory()->create([
+            'user_id' => $user->id,
+        ]);
 
         $response = $this->actingAs($user)
             ->get('/settings');
@@ -31,6 +35,8 @@ class SettingsControllerTest extends TestCase
                 'user',
                 'logs',
                 'hasMoreLogs',
+                'emails',
+                'hasMoreEmails',
             ]);
 
         $response->assertViewHas(
@@ -45,6 +51,21 @@ class SettingsControllerTest extends TestCase
                     $log->description,
                     $log->created_at,
                     $log->created_at_human,
+                ),
+            ),
+        );
+
+        $response->assertViewHas(
+            'emails',
+            fn ($emails) => $emails->count() === 1
+            || $emails->every(
+                fn ($email) => isset(
+                    $email->email_address,
+                    $email->subject,
+                    $email->body,
+                    $email->sent_at,
+                    $email->delivered_at,
+                    $email->bounced_at,
                 ),
             ),
         );

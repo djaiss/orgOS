@@ -23,7 +23,7 @@
         @include('app.settings._logs', ['logs' => $logs, 'hasMoreLogs' => $hasMoreLogs])
 
         <!-- emails sent -->
-        {{-- @include('app.settings.profile.partials.emails', ['emails' => $emails, 'hasMoreEmails' => $hasMoreEmails]) --}}
+        @include('app.settings._emails', ['emails' => $emails, 'hasMoreEmails' => $hasMoreEmails])
       </div>
     </section>
   </div>
