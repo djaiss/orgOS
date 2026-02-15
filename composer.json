@@ -12,11 +12,13 @@
   "require": {
     "php": "^8.4.0",
     "amirami/localizator": "^0.14.0@alpha",
+    "bacon/bacon-qr-code": "^3.0",
     "cesargb/laravel-magiclink": "^2.25.1",
     "codeat3/blade-phosphor-icons": "^2.3",
     "erag/laravel-disposable-email": "^3.8",
     "laravel/framework": "^12.51",
     "laravel/tinker": "^2.11.1",
+    "pragmarx/google2fa-laravel": "^2.3",
     "resend/resend-laravel": "^1.2",
     "spatie/laravel-login-link": "^1.6.3",
     "stevebauman/purify": "^6.3.1"

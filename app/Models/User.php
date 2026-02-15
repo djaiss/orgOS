@@ -25,6 +25,9 @@ use Illuminate\Support\Str;
  * @property Carbon|null $email_verified_at
  * @property Carbon|null $last_activity_at
  * @property string $password
+ * @property string|null $two_factor_secret
+ * @property array|null $two_factor_recovery_codes
+ * @property Carbon|null $two_factor_confirmed_at
  * @property string|null $last_used_ip
  * @property Carbon|null $trial_ends_at
  * @property string $locale
@@ -48,6 +51,9 @@ class User extends Authenticatable implements MustVerifyEmail
         'nickname',
         'email',
         'password',
+        'two_factor_secret',
+        'two_factor_recovery_codes',
+        'two_factor_confirmed_at',
         'email_verified_at',
         'trial_ends_at',
         'last_used_ip',
@@ -79,6 +85,8 @@ class User extends Authenticatable implements MustVerifyEmail
             'password' => 'hashed',
             'last_activity_at' => 'datetime',
             'time_format_24h' => 'boolean',
+            'two_factor_confirmed_at' => 'datetime',
+            'two_factor_recovery_codes' => 'array',
         ];
     }
 
