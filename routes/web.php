@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\App\Organization\OrganizationController;
+use App\Http\Controllers\App\Settings\EmailSentController;
 use App\Http\Controllers\App\Settings\LogController;
 use App\Http\Controllers\App\Settings\PasswordController;
 use App\Http\Controllers\App\Settings\RecoveryCodeController;
@@ -31,6 +32,9 @@ Route::middleware(['auth', 'verified', 'throttle:60,1', 'set.locale'])->group(fu
 
     // log dedicated page
     Route::get('settings/logs', [LogController::class, 'index'])->name('settings.logs.index');
+
+    // emails dedicated page
+    Route::get('settings/emails', [EmailSentController::class, 'index'])->name('settings.emails.index');
 
     // security
     Route::get('settings/security', [SecurityController::class, 'index'])->name('settings.security.index');

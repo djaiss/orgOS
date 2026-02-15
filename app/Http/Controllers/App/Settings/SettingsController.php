@@ -7,6 +7,7 @@ namespace App\Http\Controllers\App\Settings;
 use App\Actions\UpdateUserInformation;
 use App\Helpers\TextSanitizer;
 use App\Http\Controllers\Controller;
+use App\Models\EmailSent;
 use App\Models\Log;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
@@ -38,12 +39,21 @@ class SettingsController extends Controller
 
         $hasMoreLogs = Log::where('user_id', $request->user()->id)->count() > 5;
 
-        // $emails = EmailSent::query()
-        //     ->where('user_id', $request->user()->id)
-        //     ->with('user')
-        //     ->latest('sent_at')
-        //     ->limit(6)
-        //     ->get();
+        $emails = EmailSent::query()
+            ->where('user_id', $request->user()->id)
+            ->latest('sent_at')
+            ->limit(6)
+            ->get()
+            ->map(fn (EmailSent $email) => (object) [
+                'email_address' => $email->email_address,
+                'subject' => $email->subject,
+                'body' => $email->body,
+                'sent_at' => $email->sent_at,
+                'delivered_at' => $email->delivered_at,
+                'bounced_at' => $email->bounced_at,
+            ]);
+
+        $hasMoreEmails = EmailSent::where('user_id', $request->user()->id)->count() > 6;
 
         $user = (object) $request
             ->user()
@@ -60,6 +70,8 @@ class SettingsController extends Controller
             'user' => $user,
             'logs' => $logs,
             'hasMoreLogs' => $hasMoreLogs,
+            'emails' => $emails,
+            'hasMoreEmails' => $hasMoreEmails,
         ]);
     }
 
