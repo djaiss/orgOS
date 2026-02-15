@@ -14,9 +14,11 @@
       </div>
 
       @if ($has2fa)
-        <x-button.secondary href="{{ route('settings.security.2fa.create') }}" x-target="authenticator-app" class="mr-2 text-sm">
-          {{ __('Edit') }}
-        </x-button.secondary>
+        <x-form onsubmit="return confirm('Are you absolutely sure? This action cannot be undone.');" action="{{ route('settings.security.2fa.destroy') }}" method="delete">
+          <x-button.secondary x-target="authenticator-app" class="mr-2 text-sm">
+            {{ __('Remove') }}
+          </x-button.secondary>
+        </x-form>
       @else
         <x-button.secondary href="{{ route('settings.security.2fa.create') }}" x-target="authenticator-app" class="mr-2 text-sm">
           {{ __('Set up') }}
