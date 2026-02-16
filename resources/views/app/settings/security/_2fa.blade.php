@@ -1,6 +1,6 @@
 <x-box padding="p-0">
   <!-- Authenticator app -->
-  <div id="authenticator-app" class="flex items-center rounded-t-lg border-b border-gray-200 p-3 hover:bg-blue-50 dark:border-gray-700 dark:hover:bg-gray-800">
+  <div id="authenticator-app" class="flex items-center rounded-t-lg p-3 hover:bg-blue-50 dark:border-gray-700 dark:hover:bg-gray-800">
     <x-phosphor-device-mobile class="h-5 w-5 text-gray-500" />
     <div class="ms-5 flex w-full items-center justify-between">
       <div>
@@ -29,7 +29,7 @@
 
   <!-- recovery codes -->
   @if ($has2fa)
-    <div id="recovery-codes" class="flex items-center p-3 rounded-b-lg hover:bg-blue-50 dark:border-gray-700 dark:hover:bg-gray-800">
+    <div id="recovery-codes" class="flex items-center rounded-b-lg border-t border-gray-200 p-3 hover:bg-blue-50 dark:border-gray-700 dark:hover:bg-gray-800">
       <x-phosphor-toolbox class="h-5 w-5 text-gray-500" />
       <div class="ms-5 flex w-full items-center justify-between">
         <div>
