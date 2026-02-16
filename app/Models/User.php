@@ -32,6 +32,7 @@ use Illuminate\Support\Str;
  * @property Carbon|null $trial_ends_at
  * @property string $locale
  * @property bool $time_format_24h
+ * @property bool $auto_delete_account
  * @property Carbon $created_at
  * @property Carbon|null $updated_at
  */
@@ -60,6 +61,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'last_activity_at',
         'locale',
         'time_format_24h',
+        'auto_delete_account',
     ];
 
     /**
@@ -87,6 +89,7 @@ class User extends Authenticatable implements MustVerifyEmail
             'time_format_24h' => 'boolean',
             'two_factor_confirmed_at' => 'datetime',
             'two_factor_recovery_codes' => 'array',
+            'auto_delete_account' => 'boolean',
         ];
     }
 

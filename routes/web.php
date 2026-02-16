@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\App\Organization\OrganizationController;
+use App\Http\Controllers\App\Settings\AutoDeleteAccountController;
 use App\Http\Controllers\App\Settings\EmailSentController;
 use App\Http\Controllers\App\Settings\LogController;
 use App\Http\Controllers\App\Settings\PasswordController;
@@ -45,6 +46,9 @@ Route::middleware(['auth', 'verified', 'throttle:60,1', 'set.locale'])->group(fu
     Route::post('settings/security/2fa', [TwoFAController::class, 'store'])->name('settings.security.2fa.store');
     Route::delete('settings/security/2fa', [TwoFAController::class, 'destroy'])->name('settings.security.2fa.destroy');
     Route::get('settings/security/recovery-codes', [RecoveryCodeController::class, 'show'])->name('settings.security.recoverycodes.show');
+
+    // auto delete account
+    Route::put('settings/security/auto-delete-account', [AutoDeleteAccountController::class, 'update'])->name('settings.security.auto-delete.update');
 });
 
 require __DIR__.'/auth.php';

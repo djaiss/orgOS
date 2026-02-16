@@ -22,11 +22,11 @@
         <!-- two factor authentication -->
         @include('app.settings.security._2fa', ['has2fa' => $has2fa, 'errors' => $errors])
 
+        <!-- auto delete account -->
+        @include('app.settings.security._auto-delete', ['errors' => $errors])
+
+        <!-- api keys -->
         {{--
-          <!-- auto delete account -->
-          @include('app.settings.security.partials.auto-delete', ['errors' => $errors])
-          
-          <!-- api keys -->
           @include('app.settings.security.partials.api.index', ['apiKeys' => $apiKeys])
         --}}
       </div>

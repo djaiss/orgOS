@@ -27,6 +27,7 @@ return new class extends Migration
             $table->datetime('last_activity_at')->nullable();
             $table->string('locale', 3)->default('en');
             $table->boolean('time_format_24h')->default(true);
+            $table->boolean('auto_delete_account')->default(false);
             $table->rememberToken();
             $table->timestamps();
         });
