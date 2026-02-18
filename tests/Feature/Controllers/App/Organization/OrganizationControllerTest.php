@@ -27,8 +27,8 @@ class OrganizationControllerTest extends TestCase
         $response->assertStatus(200);
         $response->assertViewHas(
             'organizations',
-            fn ($organizations) => $organizations->count() === 1
-            && $organizations->every(fn ($org) => isset($org->name, $org->link, $org->avatar)),
+            fn ($organizations): bool => $organizations->count() === 1
+            && $organizations->every(fn ($org): bool => isset($org->name, $org->link, $org->avatar)),
         );
     }
 
@@ -56,7 +56,7 @@ class OrganizationControllerTest extends TestCase
             'name' => 'My Organization',
         ]);
 
-        $organization = Organization::where('name', 'My Organization')->first();
+        $organization = Organization::query()->where('name', 'My Organization')->first();
         $response->assertRedirect(route('organization.show', $organization->slug));
         $response->assertSessionHas('status', 'Organization created successfully');
     }

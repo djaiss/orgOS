@@ -10,8 +10,8 @@ use App\Models\User;
 class ToggleAutoDeleteAccount
 {
     public function __construct(
-        private User $user,
-        private bool $autoDeleteAccount,
+        private readonly User $user,
+        private readonly bool $autoDeleteAccount,
     ) {}
 
     /**

@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Controllers\App\Settings;
 
+use Illuminate\Support\Facades\Date;
 use App\Models\Log;
-use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
@@ -17,10 +17,10 @@ class LogControllerTest extends TestCase
     #[Test]
     public function it_shows_all_the_logs(): void
     {
-        Carbon::setTestNow(Carbon::create(2018, 1, 1));
+        Date::setTestNow(Date::create(2018, 1, 1));
         $user = $this->createUser();
 
-        $log = Log::factory()->create([
+        Log::factory()->create([
             'organization_id' => null,
             'user_id' => $user->id,
             'action' => 'profile_update',

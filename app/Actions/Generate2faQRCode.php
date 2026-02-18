@@ -18,7 +18,7 @@ class Generate2faQRCode
     private string $qrCodeSvg;
 
     public function __construct(
-        private User $user,
+        private readonly User $user,
     ) {}
 
     public function execute(): array

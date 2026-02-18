@@ -37,7 +37,7 @@ class SettingsController extends Controller
                 'created_at_human' => $log->created_at->diffForHumans(),
             ]);
 
-        $hasMoreLogs = Log::where('user_id', $request->user()->id)->count() > 5;
+        $hasMoreLogs = Log::query()->where('user_id', $request->user()->id)->count() > 5;
 
         $emails = EmailSent::query()
             ->where('user_id', $request->user()->id)
@@ -53,7 +53,7 @@ class SettingsController extends Controller
                 'bounced_at' => $email->bounced_at,
             ]);
 
-        $hasMoreEmails = EmailSent::where('user_id', $request->user()->id)->count() > 6;
+        $hasMoreEmails = EmailSent::query()->where('user_id', $request->user()->id)->count() > 6;
 
         $user = (object) $request
             ->user()
@@ -101,7 +101,7 @@ class SettingsController extends Controller
             lastName: TextSanitizer::plainText($validated['last_name']),
             nickname: TextSanitizer::nullablePlainText($validated['nickname']),
             locale: TextSanitizer::plainText($validated['locale']),
-            timeFormat24h: $validated['time_format_24h'] === 'true' ? true : false,
+            timeFormat24h: $validated['time_format_24h'] === 'true',
         )->execute();
 
         return to_route('settings.index')

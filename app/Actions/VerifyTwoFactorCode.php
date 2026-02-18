@@ -13,8 +13,8 @@ use PragmaRX\Google2FA\Google2FA;
 class VerifyTwoFactorCode
 {
     public function __construct(
-        private User $user,
-        private string $code,
+        private readonly User $user,
+        private readonly string $code,
     ) {}
 
     /**
@@ -27,12 +27,7 @@ class VerifyTwoFactorCode
         if ($this->verifyTotp()) {
             return true;
         }
-
-        if ($this->verifyRescueCode()) {
-            return true;
-        }
-
-        return false;
+        return $this->verifyRescueCode();
     }
 
     private function verifyTotp(): bool

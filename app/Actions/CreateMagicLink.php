@@ -20,7 +20,7 @@ class CreateMagicLink
     private string $magicLinkUrl;
 
     public function __construct(
-        private string $email,
+        private readonly string $email,
     ) {}
 
     public function execute(): string

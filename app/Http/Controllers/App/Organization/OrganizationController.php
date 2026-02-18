@@ -52,8 +52,7 @@ class OrganizationController extends Controller
             name: TextSanitizer::plainText($validated['organization_name']),
         )->execute();
 
-        return redirect()
-            ->route('organization.show', $organization->slug)
+        return to_route('organization.show', $organization->slug)
             ->with('status', __('Organization created successfully'));
     }
 

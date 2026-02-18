@@ -10,7 +10,7 @@ use App\Models\User;
 class Remove2fa
 {
     public function __construct(
-        private User $user,
+        private readonly User $user,
     ) {}
 
     public function execute(): void

@@ -51,7 +51,7 @@ class UpdateUserInformationTest extends TestCase
         Queue::assertPushedOn(
             queue: 'low',
             job: LogUserAction::class,
-            callback: fn (LogUserAction $job) => (
+            callback: fn (LogUserAction $job): bool => (
                 $job->action === 'personal_profile_update'
                 && $job->user->id === $user->id
             ),
@@ -80,7 +80,7 @@ class UpdateUserInformationTest extends TestCase
 
         Event::assertDispatched(
             event: Registered::class,
-            callback: fn (Registered $event) => $event->user->email === 'dwight.schrute@dundermifflin.com',
+            callback: fn (Registered $event): bool => $event->user->email === 'dwight.schrute@dundermifflin.com',
         );
         $this->assertNull($user->refresh()->email_verified_at);
     }
