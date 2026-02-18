@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Actions;
 
-use Illuminate\Support\Facades\Date;
 use App\Actions\Generate2faQRCode;
 use App\Jobs\LogUserAction;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\Queue;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;

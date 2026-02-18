@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Controllers\App\Settings;
 
-use PragmaRX\Google2FALaravel\Google2FA;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use PHPUnit\Framework\Attributes\Test;
+use PragmaRX\Google2FALaravel\Google2FA;
 use Tests\TestCase;
 
 class TwoFAControllerTest extends TestCase

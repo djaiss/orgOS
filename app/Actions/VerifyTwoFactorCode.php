@@ -27,6 +27,7 @@ class VerifyTwoFactorCode
         if ($this->verifyTotp()) {
             return true;
         }
+
         return $this->verifyRescueCode();
     }
 
