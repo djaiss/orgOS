@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace App\Actions;
 
@@ -39,7 +39,7 @@ class ToggleAutoDeleteAccount
             user: $this->user,
             action: 'auto_delete_account_update',
             description: 'Updated auto delete account setting to '
-            . ( $this->user->auto_delete_account ? 'enabled' : 'disabled' ),
+            .($this->user->auto_delete_account ? 'enabled' : 'disabled'),
         )->onQueue('low');
     }
 }

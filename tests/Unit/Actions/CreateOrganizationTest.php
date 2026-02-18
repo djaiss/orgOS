@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Tests\Unit\Actions;
 
@@ -29,7 +29,7 @@ class CreateOrganizationTest extends TestCase
             name: 'Dunder Mifflin',
         )->execute();
 
-        $expectedSlug = $organization->id . '-dunder-mifflin';
+        $expectedSlug = $organization->id.'-dunder-mifflin';
 
         $this->assertInstanceOf(Organization::class, $organization);
 

@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace App\Actions;
 
@@ -37,7 +37,7 @@ class VerifyTwoFactorCode
 
     private function verifyTotp(): bool
     {
-        if (!$this->user->two_factor_secret) {
+        if (! $this->user->two_factor_secret) {
             return false;
         }
 
@@ -49,7 +49,7 @@ class VerifyTwoFactorCode
 
     private function verifyRescueCode(): bool
     {
-        if (!is_array($this->user->two_factor_recovery_codes)) {
+        if (! is_array($this->user->two_factor_recovery_codes)) {
             return false;
         }
 

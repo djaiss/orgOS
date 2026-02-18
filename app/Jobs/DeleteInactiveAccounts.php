@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace App\Jobs;
 
@@ -38,7 +38,7 @@ class DeleteInactiveAccounts implements ShouldQueue
 
             Mail::to(config('app.account_deletion_notification_email'))
                 ->queue(new AccountAutomaticallyDestroyed(
-                    age: $user->created_at->diffInMonths(now()) . ' months',
+                    age: $user->created_at->diffInMonths(now()).' months',
                 ));
         }
     }
