@@ -1,11 +1,12 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Tests\Unit\Actions;
 
 use App\Actions\CreateAccount;
 use App\Jobs\LogUserAction;
+use App\Models\Organization;
 use App\Models\User;
 use Illuminate\Database\UniqueConstraintViolationException;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -51,7 +52,7 @@ class CreateAccountTest extends TestCase
             callback: fn (LogUserAction $job): bool => (
                 $job->action === 'account_creation'
                 && $job->user->id === $user->id
-                && $job->organization === null
+                && ! $job->organization instanceof Organization
                 && $job->description === 'Created an account'
             ),
         );

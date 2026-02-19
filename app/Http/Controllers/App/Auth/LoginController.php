@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace App\Http\Controllers\App\Auth;
 
@@ -40,7 +40,7 @@ class LoginController extends Controller
 
         $this->ensureIsNotRateLimited($request);
 
-        if (!Auth::attempt($request->only('email', 'password'), $request->boolean('remember'))) {
+        if (! Auth::attempt($request->only('email', 'password'), $request->boolean('remember'))) {
             RateLimiter::hit($this->throttleKey($request));
 
             $user = User::query()->where('email', $request->input('email'))->first();
@@ -58,7 +58,7 @@ class LoginController extends Controller
             ]);
         }
 
-        if (!is_null($request->user()->two_factor_confirmed_at)) {
+        if (! is_null($request->user()->two_factor_confirmed_at)) {
             $userId = $request->user()->id;
             Auth::logout();
             session(['2fa:user:id' => $userId]);
@@ -80,7 +80,7 @@ class LoginController extends Controller
 
     private function ensureIsNotRateLimited(Request $request): void
     {
-        if (!RateLimiter::tooManyAttempts($this->throttleKey($request), 5)) {
+        if (! RateLimiter::tooManyAttempts($this->throttleKey($request), 5)) {
             return;
         }
 
@@ -98,7 +98,7 @@ class LoginController extends Controller
 
     private function throttleKey(Request $request): string
     {
-        return Str::transliterate(Str::lower((string) $request->string('email')) . '|' . $request->ip());
+        return Str::transliterate(Str::lower((string) $request->string('email')).'|'.$request->ip());
     }
 
     public function destroy(Request $request): RedirectResponse

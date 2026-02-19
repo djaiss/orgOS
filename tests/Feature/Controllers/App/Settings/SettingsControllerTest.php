@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Tests\Feature\Controllers\App\Settings;
 
@@ -41,9 +41,9 @@ class SettingsControllerTest extends TestCase
 
         $response->assertViewHas(
             'logs',
-            fn ($logs) => $logs->count() === 1
+            fn ($logs): bool => $logs->count() === 1
             && $logs->every(
-                fn ($log) => isset(
+                fn ($log): bool => isset(
                     $log->username,
                     $log->organization_name,
                     $log->organization_link,
@@ -57,9 +57,9 @@ class SettingsControllerTest extends TestCase
 
         $response->assertViewHas(
             'emails',
-            fn ($emails) => $emails->count() === 1
+            fn ($emails): bool => $emails->count() === 1
             || $emails->every(
-                fn ($email) => isset(
+                fn ($email): bool => isset(
                     $email->email_address,
                     $email->subject,
                     $email->body,

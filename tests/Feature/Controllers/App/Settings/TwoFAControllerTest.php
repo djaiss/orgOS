@@ -1,11 +1,12 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Tests\Feature\Controllers\App\Settings;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use PHPUnit\Framework\Attributes\Test;
+use PragmaRX\Google2FALaravel\Google2FA;
 use Tests\TestCase;
 
 class TwoFAControllerTest extends TestCase
@@ -31,7 +32,7 @@ class TwoFAControllerTest extends TestCase
     #[Test]
     public function it_enables_2fa_with_valid_token(): void
     {
-        $google2fa = new \PragmaRX\Google2FALaravel\Google2FA(request());
+        $google2fa = new Google2FA(request());
         $secret = $google2fa->generateSecretKey();
 
         $user = $this->createUser([
@@ -58,7 +59,7 @@ class TwoFAControllerTest extends TestCase
     #[Test]
     public function it_rejects_invalid_token(): void
     {
-        $google2fa = new \PragmaRX\Google2FALaravel\Google2FA(request());
+        $google2fa = new Google2FA(request());
         $secret = $google2fa->generateSecretKey();
 
         $user = $this->createUser([

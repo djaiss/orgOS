@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Tests\Unit\Actions;
 
@@ -36,7 +36,7 @@ class ToggleAutoDeleteAccountTest extends TestCase
         Queue::assertPushedOn(
             queue: 'low',
             job: LogUserAction::class,
-            callback: fn (LogUserAction $job) => (
+            callback: fn (LogUserAction $job): bool => (
                 $job->action === 'auto_delete_account_update'
                 && $job->user->id === $user->id
                 && $job->description === 'Updated auto delete account setting to enabled'

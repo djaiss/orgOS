@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace App\Actions;
 
@@ -18,7 +18,7 @@ class Generate2faQRCode
     private string $qrCodeSvg;
 
     public function __construct(
-        private User $user,
+        private readonly User $user,
     ) {}
 
     public function execute(): array

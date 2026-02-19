@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace App\Http\Controllers\App\Auth;
 
@@ -18,7 +18,7 @@ class TwoFAChallengeController extends Controller
 {
     public function create(): View
     {
-        if (!session('2fa:user:id')) {
+        if (! session('2fa:user:id')) {
             return view('app.auth.2fa', [
                 'error' => __('Session expired. Please login again.'),
             ]);
@@ -41,7 +41,7 @@ class TwoFAChallengeController extends Controller
         $userId = session('2fa:user:id');
         $user = User::query()->find($userId);
 
-        if (!new VerifyTwoFactorCode(
+        if (! new VerifyTwoFactorCode(
             user: $user,
             code: TextSanitizer::plainText((string) $request->input('code')),
         )->execute()) {

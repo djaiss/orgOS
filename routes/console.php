@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-use Illuminate\Support\Facades\Schedule;
 use App\Jobs\DeleteInactiveAccounts;
+use Illuminate\Support\Facades\Schedule;
 
 Schedule::job(
-    new DeleteInactiveAccounts(),
+    new DeleteInactiveAccounts,
     'low',
 )->dailyAt('00:30');

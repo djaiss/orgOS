@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace App\Actions;
 
@@ -20,7 +20,7 @@ class CreateMagicLink
     private string $magicLinkUrl;
 
     public function __construct(
-        private string $email,
+        private readonly string $email,
     ) {}
 
     public function execute(): string

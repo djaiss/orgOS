@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Tests\Unit\Actions;
 
@@ -40,7 +40,7 @@ class Remove2faTest extends TestCase
         Queue::assertPushedOn(
             queue: 'low',
             job: LogUserAction::class,
-            callback: fn (LogUserAction $job) => (
+            callback: fn (LogUserAction $job): bool => (
                 $job->action === '2fa_removal'
                 && $job->user->id === $user->id
                 && $job->description === 'Removed 2FA from account'

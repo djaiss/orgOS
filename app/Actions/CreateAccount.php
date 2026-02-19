@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace App\Actions;
 
@@ -13,10 +13,10 @@ class CreateAccount
     private User $user;
 
     public function __construct(
-        private string $email,
-        private string $password,
-        private string $firstName,
-        private string $lastName,
+        private readonly string $email,
+        private readonly string $password,
+        private readonly string $firstName,
+        private readonly string $lastName,
     ) {}
 
     public function execute(): User
@@ -44,7 +44,7 @@ class CreateAccount
             organization: null,
             user: $this->user,
             action: 'account_creation',
-            description: sprintf('Created an account'),
+            description: 'Created an account',
         )->onQueue('low');
     }
 }

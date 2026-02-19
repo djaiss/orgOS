@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace App\Actions;
 
@@ -10,7 +10,7 @@ use App\Models\User;
 class Remove2fa
 {
     public function __construct(
-        private User $user,
+        private readonly User $user,
     ) {}
 
     public function execute(): void

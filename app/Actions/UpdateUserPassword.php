@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace App\Actions;
 
@@ -12,9 +12,9 @@ use InvalidArgumentException;
 class UpdateUserPassword
 {
     public function __construct(
-        private User $user,
-        private string $currentPassword,
-        private string $newPassword,
+        private readonly User $user,
+        private readonly string $currentPassword,
+        private readonly string $newPassword,
     ) {}
 
     /**
@@ -31,9 +31,7 @@ class UpdateUserPassword
 
     private function validate(): void
     {
-        if (!Hash::check($this->currentPassword, $this->user->password)) {
-            throw new InvalidArgumentException('Current password is incorrect');
-        }
+        throw_unless(Hash::check($this->currentPassword, $this->user->password), InvalidArgumentException::class, 'Current password is incorrect');
     }
 
     private function update(): void

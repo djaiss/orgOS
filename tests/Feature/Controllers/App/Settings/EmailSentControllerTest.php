@@ -1,12 +1,12 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Tests\Feature\Controllers\App\Settings;
 
 use App\Models\EmailSent;
-use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Date;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
@@ -17,10 +17,10 @@ class EmailSentControllerTest extends TestCase
     #[Test]
     public function it_shows_all_the_emails(): void
     {
-        Carbon::setTestNow(Carbon::create(2025, 1, 1));
+        Date::setTestNow(Date::create(2025, 1, 1));
         $user = $this->createUser();
 
-        $email = EmailSent::factory()->create([
+        EmailSent::factory()->create([
             'user_id' => $user->id,
             'email_address' => 'test@example.com',
             'subject' => 'Test Email',

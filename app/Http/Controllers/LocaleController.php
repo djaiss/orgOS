@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
@@ -25,6 +25,6 @@ class LocaleController extends Controller
             Auth::user()->update(['locale' => $validated['locale']]);
         }
 
-        return redirect()->back()->with('status', __('Locale updated'));
+        return back()->with('status', __('Locale updated'));
     }
 }
