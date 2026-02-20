@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
+use Laravel\Sanctum\HasApiTokens;
 
 /**
  * Class User
@@ -38,8 +39,12 @@ use Illuminate\Support\Str;
  */
 class User extends Authenticatable implements MustVerifyEmail
 {
+    use HasApiTokens;
+
     /** @use HasFactory<UserFactory> */
-    use HasFactory, Notifiable;
+    use HasFactory;
+
+    use Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -120,9 +125,9 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     public function initials(): string
     {
-        return Str::of($this->first_name.' '.$this->last_name)
+        return Str::of($this->first_name . ' ' . $this->last_name)
             ->explode(' ')
-            ->map(fn (string $name) => Str::of($name)->substr(0, 1))
+            ->map(fn(string $name) => Str::of($name)->substr(0, 1))
             ->implode('');
     }
 
@@ -135,7 +140,7 @@ class User extends Authenticatable implements MustVerifyEmail
         $lastName = $this->last_name;
         $separator = $firstName && $lastName ? ' ' : '';
 
-        return $firstName.$separator.$lastName;
+        return $firstName . $separator . $lastName;
     }
 
     /**

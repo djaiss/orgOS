@@ -20,7 +20,7 @@ class OrganizationController extends Controller
             ->user()
             ->organizations()
             ->get()
-            ->map(fn (Organization $organization) => (object) [
+            ->map(fn(Organization $organization) => (object) [
                 'name' => $organization->name,
                 'link' => route('organization.show', $organization->slug),
                 'avatar' => $organization->getAvatar(),

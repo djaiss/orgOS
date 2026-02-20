@@ -7,10 +7,10 @@ namespace App\Actions;
 use App\Jobs\LogUserAction;
 use App\Models\User;
 
-class Remove2fa
+readonly class Remove2fa
 {
     public function __construct(
-        private readonly User $user,
+        private User $user,
     ) {}
 
     public function execute(): void

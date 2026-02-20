@@ -7,11 +7,11 @@ namespace App\Actions;
 use App\Jobs\LogUserAction;
 use App\Models\User;
 
-class ToggleAutoDeleteAccount
+readonly class ToggleAutoDeleteAccount
 {
     public function __construct(
-        private readonly User $user,
-        private readonly bool $autoDeleteAccount,
+        private User $user,
+        private bool $autoDeleteAccount,
     ) {}
 
     /**
@@ -39,7 +39,7 @@ class ToggleAutoDeleteAccount
             user: $this->user,
             action: 'auto_delete_account_update',
             description: 'Updated auto delete account setting to '
-            .($this->user->auto_delete_account ? 'enabled' : 'disabled'),
+            . ($this->user->auto_delete_account ? 'enabled' : 'disabled'),
         )->onQueue('low');
     }
 }

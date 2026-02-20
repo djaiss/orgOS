@@ -25,7 +25,7 @@ class UserIpAddressChanged extends Mailable implements ShouldQueue
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'New sign-in detected on your '.config('app.name').' account',
+            subject: 'New sign-in detected on your ' . config('app.name') . ' account',
         );
     }
 

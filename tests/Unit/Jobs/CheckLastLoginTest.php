@@ -35,7 +35,7 @@ class CheckLastLoginTest extends TestCase
 
         Queue::assertPushed(
             SendEmail::class,
-            fn (SendEmail $job): bool => $job->user->id === $user->id && $job->emailType === EmailType::USER_IP_CHANGED,
+            fn(SendEmail $job): bool => $job->user->id === $user->id && $job->emailType === EmailType::USER_IP_CHANGED,
         );
 
         $this->assertEquals('192.168.1.2', $user->fresh()->last_used_ip);

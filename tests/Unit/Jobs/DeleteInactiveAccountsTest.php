@@ -37,7 +37,7 @@ class DeleteInactiveAccountsTest extends TestCase
 
         Mail::assertQueued(
             AccountAutomaticallyDestroyed::class,
-            fn (AccountAutomaticallyDestroyed $mail): bool => $mail->hasTo('admin@example.com'),
+            fn(AccountAutomaticallyDestroyed $mail): bool => $mail->hasTo('admin@example.com'),
         );
     }
 

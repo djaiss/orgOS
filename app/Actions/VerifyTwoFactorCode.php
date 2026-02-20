@@ -10,11 +10,11 @@ use PragmaRX\Google2FA\Google2FA;
 /**
  * Service to verify a user's 2FA code (TOTP or rescue code).
  */
-class VerifyTwoFactorCode
+readonly class VerifyTwoFactorCode
 {
     public function __construct(
-        private readonly User $user,
-        private readonly string $code,
+        private User $user,
+        private string $code,
     ) {}
 
     /**

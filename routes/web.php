@@ -1,6 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
 use App\Http\Controllers\App\Organization\OrganizationController;
+use App\Http\Controllers\App\Settings\ApiKeyController;
 use App\Http\Controllers\App\Settings\AutoDeleteAccountController;
 use App\Http\Controllers\App\Settings\EmailSentController;
 use App\Http\Controllers\App\Settings\LogController;
@@ -14,7 +17,7 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', fn (): Factory|View => view('welcome'));
+Route::get('/', fn(): Factory|View => view('welcome'));
 
 Route::put('/locale', [LocaleController::class, 'update'])->name('locale.update');
 
@@ -49,6 +52,11 @@ Route::middleware(['auth', 'verified', 'throttle:60,1', 'set.locale'])->group(fu
 
     // auto delete account
     Route::put('settings/security/auto-delete-account', [AutoDeleteAccountController::class, 'update'])->name('settings.security.auto-delete.update');
+
+    // api
+    Route::get('settings/api-keys/create', [ApiKeyController::class, 'create'])->name('settings.api-keys.create');
+    Route::post('settings/api-keys', [ApiKeyController::class, 'store'])->name('settings.api-keys.store');
+    Route::delete('settings/api-keys/{apiKey}', [ApiKeyController::class, 'destroy'])->name('settings.api-keys.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

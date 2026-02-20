@@ -49,7 +49,7 @@ class CreateAccountTest extends TestCase
         Queue::assertPushedOn(
             queue: 'low',
             job: LogUserAction::class,
-            callback: fn (LogUserAction $job): bool => (
+            callback: fn(LogUserAction $job): bool => (
                 $job->action === 'account_creation'
                 && $job->user->id === $user->id
                 && ! $job->organization instanceof Organization
