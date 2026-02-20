@@ -22,5 +22,7 @@ class SecurityControllerTest extends TestCase
 
         $response->assertStatus(200);
         $response->assertViewIs('app.settings.security.index');
+        $response->assertViewHas('apiKeys');
+        $response->assertViewHas('has2fa');
     }
 }

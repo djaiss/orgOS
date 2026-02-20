@@ -5,7 +5,7 @@
 
   <x-breadcrumb :items="[
     ['label' => __('Dashboard'), 'route' => route('organization.index')],
-    ['label' => __('Security and access')]
+    ['label' => __('Security and access')],
   ]" />
 
   <!-- settings layout -->
@@ -26,9 +26,7 @@
         @include('app.settings.security._auto-delete', ['errors' => $errors])
 
         <!-- api keys -->
-        {{--
-          @include('app.settings.security.partials.api.index', ['apiKeys' => $apiKeys])
-        --}}
+        @include('app.settings.security._api', ['apiKeys' => $apiKeys])
       </div>
     </section>
   </div>

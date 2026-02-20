@@ -27,8 +27,8 @@ class OrganizationControllerTest extends TestCase
         $response->assertStatus(200);
         $response->assertViewHas(
             'organizations',
-            fn ($organizations): bool => $organizations->count() === 1
-            && $organizations->every(fn ($org): bool => isset($org->name, $org->link, $org->avatar)),
+            fn($organizations): bool => $organizations->count() === 1
+            && $organizations->every(fn($org): bool => isset($org->name, $org->link, $org->avatar)),
         );
     }
 

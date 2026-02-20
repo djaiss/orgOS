@@ -43,7 +43,7 @@ class SendEmailTest extends TestCase
 
         Mail::assertQueued(
             LoginFailed::class,
-            fn (LoginFailed $mail) => $mail->hasTo($user->email),
+            fn(LoginFailed $mail) => $mail->hasTo($user->email),
         );
 
         $emailSent = EmailSent::query()->latest()->first();
@@ -66,7 +66,7 @@ class SendEmailTest extends TestCase
             ->shouldReceive('send')
             ->once()
             ->with(Mockery::on(
-                fn ($args): bool => (
+                fn($args): bool => (
                     $args['from'] === 'noreply@example.com'
                     && $args['to'] === ['michael.scott@dundermifflin.com']
                     && $args['subject'] === 'Login attempt on orgOS'

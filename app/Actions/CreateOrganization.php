@@ -53,7 +53,7 @@ class CreateOrganization
 
     private function generateSlug(): void
     {
-        $slug = $this->organization->id.'-'.Str::of($this->name)->slug('-');
+        $slug = $this->organization->id . '-' . Str::of($this->name)->slug('-');
 
         $this->organization->slug = $slug;
         $this->organization->save();

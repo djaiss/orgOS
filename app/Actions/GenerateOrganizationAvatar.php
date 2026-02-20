@@ -17,7 +17,7 @@ class GenerateOrganizationAvatar
     {
         $avatar = $this->generate();
 
-        return 'data:image/svg+xml;base64,'.base64_encode($avatar);
+        return 'data:image/svg+xml;base64,' . base64_encode($avatar);
     }
 
     private function generate(): string

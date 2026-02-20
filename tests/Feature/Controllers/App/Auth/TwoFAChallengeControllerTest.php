@@ -57,7 +57,7 @@ class TwoFAChallengeControllerTest extends TestCase
         Queue::assertPushedOn(
             queue: 'low',
             job: CheckLastLogin::class,
-            callback: fn (CheckLastLogin $job): bool => $job->user->id === $user->id,
+            callback: fn(CheckLastLogin $job): bool => $job->user->id === $user->id,
         );
     }
 

@@ -19,7 +19,7 @@ class LogController extends Controller
             ->with('organization')
             ->latest()
             ->cursorPaginate(10)
-            ->through(fn (Log $log) => (object) [
+            ->through(fn(Log $log) => (object) [
                 'username' => $log->getUserName(),
                 'organization_name' => $log->organization?->name,
                 'organization_link' => $log->organization ? route('organization.show', $log->organization_id) : null,

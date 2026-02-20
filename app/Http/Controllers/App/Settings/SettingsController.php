@@ -27,7 +27,7 @@ class SettingsController extends Controller
             ->latest()
             ->limit(5)
             ->get()
-            ->map(fn (Log $log) => (object) [
+            ->map(fn(Log $log) => (object) [
                 'username' => $log->getUserName(),
                 'organization_name' => $log->organization?->name,
                 'organization_link' => $log->organization ? route('organization.show', $log->organization_id) : null,
@@ -44,7 +44,7 @@ class SettingsController extends Controller
             ->latest('sent_at')
             ->limit(6)
             ->get()
-            ->map(fn (EmailSent $email) => (object) [
+            ->map(fn(EmailSent $email) => (object) [
                 'email_address' => $email->email_address,
                 'subject' => $email->subject,
                 'body' => $email->body,
