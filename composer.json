@@ -90,6 +90,7 @@
     "orgos:prettier": "npx prettier --write resources/",
     "orgos:lint": "vendor/bin/pint",
     "orgos:rector": "./vendor/bin/rector",
+    "orgos:static": "./vendor/bin/phpstan analyse --memory-limit=256M",
     "orgos:unit": "rm -f database/test.sqlite_test* && php artisan migrate:fresh --database=testing && php artisan test --parallel",
     "orgos:locale": "php artisan localize en,fr --remove-missing",
     "orgos:update": [
@@ -100,6 +101,7 @@
     "precommit": [
       "@orgos:prettier",
       "@orgos:lint",
+      "@orgos:static",
       "@orgos:rector",
       "@orgos:unit",
       "@orgos:update",
