@@ -111,21 +111,21 @@ class OrganizationControllerTest extends TestCase
         $response->assertStatus(403);
     }
 
-    // #[Test]
-    // public function it_can_update_the_organization(): void
-    // {
-    //     $user = $this->createUser();
-    //     $organization = $this->addOrganization($user, 'Dunder Mifflin');
+    #[Test]
+    public function it_can_update_the_organization(): void
+    {
+        $user = $this->createUser();
+        $organization = $this->addOrganization($user, 'Dunder Mifflin');
 
-    //     Sanctum::actingAs($user);
+        Sanctum::actingAs($user);
 
-    //     $response = $this->json('PUT', '/api/organizations/' . $organization->id, [
-    //         'name' => 'Dunder Mifflin Michael Scott Edition',
-    //     ]);
+        $response = $this->json('PUT', '/api/organizations/' . $organization->id, [
+            'name' => 'Dunder Mifflin Michael Scott Edition',
+        ]);
 
-    //     $response->assertStatus(200);
-    //     $response->assertJsonStructure($this->jsonStructure);
-    // }
+        $response->assertStatus(200);
+        $response->assertJsonStructure($this->jsonStructure);
+    }
 
     // #[Test]
     // public function it_can_delete_an_organization(): void
