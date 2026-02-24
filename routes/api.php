@@ -2,7 +2,9 @@
 
 declare(strict_types=1);
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\Api\HealthController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/user', fn(Request $request) => $request->user())->middleware('auth:sanctum');
+Route::name('api.')->group(function (): void {
+    Route::get('health', [HealthController::class, 'show'])->middleware('throttle:60,1');
+});
