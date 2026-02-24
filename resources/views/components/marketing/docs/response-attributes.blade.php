@@ -4,7 +4,11 @@
     <x-phosphor-caret-right x-bind:class="open ? 'rotate-90' : ''" class="h-4 w-4 text-gray-500 transition-transform duration-300" />
   </div>
 
-  <div x-show="open" x-transition>
-    {{ $slot }}
+  <div x-show="open" x-transition class="mt-2">
+    @if ($attributes->has('no-parameters'))
+      <p class="text-gray-500">This endpoint does not have any response attributes.</p>
+    @else
+      {{ $slot }}
+    @endif
   </div>
 </div>

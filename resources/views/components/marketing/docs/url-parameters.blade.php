@@ -1,7 +1,3 @@
-@props([
-  'no-parameters' => false,
-])
-
 <div x-cloak x-data="{ open: false }" class="mb-8">
   <div @click="open = !open" x-bind:class="open ? 'border-b border-gray-200 dark:border-gray-700' : ''" class="mb-2 flex cursor-pointer items-center justify-between pb-2">
     <p class="font-semibold">URL parameters</p>
@@ -9,7 +5,7 @@
   </div>
 
   <div x-show="open" x-transition class="mt-2">
-    @if ($noParameters)
+    @if ($attributes->has('no-parameters'))
       <p class="text-gray-500">This endpoint does not have any parameters.</p>
     @else
       {{ $slot }}
