@@ -79,119 +79,34 @@
       </div>
       <div>
         <x-marketing.docs.code title="Example of pagination" verb="GET">
-          <div class="pl-4">
-            "meta":
-            <span class="text-rose-800">{</span>
-          </div>
-          <div class="pl-8">
-            "current_page":
-            <span class="text-lime-700">1</span>
-            ,
-          </div>
-          <div class="pl-8">
-            "from":
-            <span class="text-lime-700">1</span>
-            ,
-          </div>
-          <div class="pl-8">
-            "last_page":
-            <span class="text-lime-700">1</span>
-            ,
-          </div>
-          <div class="pl-8">
-            "links":
-            <span class="text-rose-800">[</span>
-          </div>
-          <div class="pl-12">{</div>
-          <div class="pl-16">
-            "url":
-            <span class="text-rose-800">null</span>
-            ,
-          </div>
-          <div class="pl-16">
-            "label":
-            <span class="text-rose-800">"&laquo; Previous"</span>
-            ,
-          </div>
-          <div class="pl-16">
-            "page":
-            <span class="text-rose-800">null</span>
-            ,
-          </div>
-          <div class="pl-16">
-            "active":
-            <span class="text-rose-800">false</span>
-          </div>
-          <div class="pl-12">},</div>
-          <div class="pl-12">{</div>
-          <div class="pl-16">
-            "url":
-            <span class="text-rose-800">"{{ config('app.url') }}/api/settings/logs?page=1"</span>
-            ,
-          </div>
-          <div class="pl-16">
-            "label":
-            <span class="text-rose-800">"1"</span>
-            ,
-          </div>
-          <div class="pl-16">
-            "page":
-            <span class="text-lime-700">1</span>
-            ,
-          </div>
-          <div class="pl-16">
-            "active":
-            <span class="text-rose-800">true</span>
-          </div>
-          <div class="pl-12">},</div>
-          <div class="pl-12">{</div>
-          <div class="pl-16">
-            "url":
-            <span class="text-rose-800">null</span>
-            ,
-          </div>
-          <div class="pl-16">
-            "label":
-            <span class="text-rose-800">"Next &raquo;"</span>
-            ,
-          </div>
-          <div class="pl-16">
-            "page":
-            <span class="text-rose-800">null</span>
-            ,
-          </div>
-          <div class="pl-16">
-            "active":
-            <span class="text-rose-800">false</span>
-          </div>
-          <div class="pl-12">
-            <span class="text-rose-800">]</span>
-          </div>
-          <div class="pl-8">
-            <span class="text-rose-800">},</span>
-          </div>
-          <div class="pl-8">
-            "path":
-            <span class="text-rose-800">"{{ config('app.url') }}/api/settings/logs"</span>
-            ,
-          </div>
-          <div class="pl-8">
-            "per_page":
-            <span class="text-lime-700">10</span>
-            ,
-          </div>
-          <div class="pl-8">
-            "to":
-            <span class="text-lime-700">1</span>
-            ,
-          </div>
-          <div class="pl-8">
-            "total":
-            <span class="text-lime-700">1</span>
-          </div>
-          <div class="pl-4">
-            <span class="text-rose-800">}</span>
-          </div>
+          <x-marketing.docs.json-section level="1" name="meta">
+            <x-marketing.docs.json-line level="2" key="current_page" value="1" type="integer" comma />
+            <x-marketing.docs.json-line level="2" key="from" value="1" type="integer" comma />
+            <x-marketing.docs.json-line level="2" key="last_page" value="1" type="integer" comma />
+            <div class="pl-8">"links": [</div>
+            <div class="pl-12">{</div>
+            <x-marketing.docs.json-line level="4" key="url" value="null" comma />
+            <x-marketing.docs.json-line level="4" key="label" value="&laquo; Previous" type="string" comma />
+            <x-marketing.docs.json-line level="4" key="page" value="null" comma />
+            <x-marketing.docs.json-line level="4" key="active" value="false" />
+            <div class="pl-12">},</div>
+            <div class="pl-12">{</div>
+            <x-marketing.docs.json-line level="4" key="url" value="{{ config('app.url') }}/api/settings/logs?page=1" type="string" comma />
+            <x-marketing.docs.json-line level="4" key="label" value="1" type="string" comma />
+            <x-marketing.docs.json-line level="4" key="page" value="1" type="integer" comma />
+            <x-marketing.docs.json-line level="4" key="active" value="true" />
+            <div class="pl-12">},</div>
+            <div class="pl-12">{</div>
+            <x-marketing.docs.json-line level="4" key="url" value="null" comma />
+            <x-marketing.docs.json-line level="4" key="label" value="Next &raquo;" type="string" comma />
+            <x-marketing.docs.json-line level="4" key="page" value="null" comma />
+            <x-marketing.docs.json-line level="4" key="active" value="false" />
+            <div class="pl-12">}],</div>
+            <x-marketing.docs.json-line level="2" key="path" value="{{ config('app.url') }}/api/settings/logs" type="string" comma />
+            <x-marketing.docs.json-line level="2" key="per_page" value="10" type="integer" comma />
+            <x-marketing.docs.json-line level="2" key="to" value="1" type="integer" comma />
+            <x-marketing.docs.json-line level="2" key="total" value="1" type="integer" />
+          </x-marketing.docs.json-section>
         </x-marketing.docs.code>
       </div>
     </div>
@@ -203,14 +118,10 @@
         <p class="mb-10">This endpoint checks the health of the application and returns a simple "ok" message. It lets you know if the application is running and if the database is connected.</p>
 
         <!-- url parameters -->
-        <x-marketing.docs.url-parameters>
-          <p class="text-gray-500">This endpoint does not have any parameters.</p>
-        </x-marketing.docs.url-parameters>
+        <x-marketing.docs.url-parameters no-parameters></x-marketing.docs.url-parameters>
 
         <!-- query parameters -->
-        <x-marketing.docs.query-parameters>
-          <p class="text-gray-500">This endpoint does not have any parameters.</p>
-        </x-marketing.docs.query-parameters>
+        <x-marketing.docs.query-parameters no-parameters></x-marketing.docs.query-parameters>
 
         <!-- response attributes -->
         <x-marketing.docs.response-attributes>
