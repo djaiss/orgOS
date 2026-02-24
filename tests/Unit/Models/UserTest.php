@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Unit\Models;
 
 use App\Models\EmailSent;
+use App\Models\Member;
 use App\Models\Organization;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -27,13 +28,24 @@ class UserTest extends TestCase
     }
 
     #[Test]
-    public function it_belongs_to_many_organizations(): void
+    public function it_has_many_memberships(): void
+    {
+        $user = $this->createUser();
+        Member::factory()->create([
+            'user_id' => $user->id,
+        ]);
+
+        $this->assertTrue($user->memberships()->exists());
+    }
+
+    #[Test]
+    public function it_has_many_organizations_through_memberships(): void
     {
         $user = $this->createUser();
         $organization = Organization::factory()->create();
-
-        $user->organizations()->attach($organization->id, [
-            'joined_at' => now(),
+        Member::factory()->create([
+            'user_id' => $user->id,
+            'organization_id' => $organization->id,
         ]);
 
         $this->assertTrue($user->organizations()->exists());
@@ -69,9 +81,32 @@ class UserTest extends TestCase
 
         $this->assertFalse($user->isPartOfOrganization($organization));
 
-        $user->organizations()->attach($organization->id, [
-            'joined_at' => now(),
+        Member::factory()->create([
+            'user_id' => $user->id,
+            'organization_id' => $organization->id,
         ]);
         $this->assertTrue($user->isPartOfOrganization($organization));
+    }
+
+    #[Test]
+    public function it_gets_the_member_object_for_the_given_user(): void
+    {
+        $dwight = Member::factory()->create([]);
+
+        $this->assertInstanceOf(
+            Member::class,
+            $dwight->user->memberOf($dwight->organization),
+        );
+    }
+
+    #[Test]
+    public function it_fails_to_get_the_member_object_if_user_is_not_part_of_the_organization(): void
+    {
+        $dwight = Member::factory()->create([]);
+        $organization = Organization::factory()->create([]);
+
+        $this->assertNull(
+            $dwight->user->memberOf($organization),
+        );
     }
 }

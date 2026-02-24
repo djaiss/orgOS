@@ -24,7 +24,7 @@ class CheckOrganizationAPI
         try {
             $organization = Organization::query()->findOrFail($id);
 
-            abort_unless($request->user()->isPartOfOrganization($organization), 403);
+            abort_unless($request->user()->memberOf($organization) !== null, 403);
 
             $request->attributes->add(['organization' => $organization]);
 

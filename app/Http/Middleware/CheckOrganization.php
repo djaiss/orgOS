@@ -26,9 +26,11 @@ class CheckOrganization
         try {
             $organization = Organization::query()->findOrFail($id);
 
-            abort_unless($request->user()->isPartOfOrganization($organization), 403);
+            $member = $request->user()->memberOf($organization);
+            abort_unless($member !== null, 403);
 
             $request->attributes->add(['organization' => $organization]);
+            $request->attributes->add(['member' => $member]);
 
             return $next($request);
         } catch (ModelNotFoundException) {

@@ -8,8 +8,8 @@ use Carbon\Carbon;
 use Database\Factories\UserFactory;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
@@ -109,15 +109,30 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /**
+     * Get the memberships associated with the user.
+     *
+     * @return HasMany<Member, $this>
+     */
+    public function memberships(): HasMany
+    {
+        return $this->hasMany(Member::class);
+    }
+
+    /**
      * Get the organizations associated with the user.
      *
-     * @return BelongsToMany<Organization, $this>
+     * @return HasManyThrough<Organization, Member, $this>
      */
-    public function organizations(): BelongsToMany
+    public function organizations(): HasManyThrough
     {
-        return $this->belongsToMany(Organization::class)
-            ->withPivot(['joined_at'])
-            ->withTimestamps();
+        return $this->hasManyThrough(
+            Organization::class,
+            Member::class,
+            'user_id',          // Foreign key on members table...
+            'id',               // Foreign key on organizations table...
+            'id',               // Local key on users table...
+            'organization_id',  // Local key on members table...
+        );
     }
 
     /**
@@ -148,6 +163,14 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     public function isPartOfOrganization(Organization $organization): bool
     {
-        return $this->organizations()->where('organization_id', $organization->id)->exists();
+        return $this->memberships()->where('organization_id', $organization->id)->exists();
+    }
+
+    /**
+     * Return the member object for the user in the given organization.
+     */
+    public function memberOf(Organization $organization): ?Member
+    {
+        return $this->memberships()->where('organization_id', $organization->id)->first();
     }
 }
