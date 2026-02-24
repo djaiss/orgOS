@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
+
+    @include('partials.meta', ['title' => $title ?? null])
+
+    <!-- Scripts -->
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    <!-- json-ld -->
+    @yield('json-ld')
+  </head>
+  <body class="font-sans antialiased">
+    <div class="min-h-screen bg-white dark:bg-gray-900">
+      @include('components.marketing.header')
+
+      <!-- Page Content -->
+      <main>
+        @if (! empty($breadcrumbItems))
+          <x-breadcrumb :items="$breadcrumbItems" />
+        @endif
+
+        {{ $slot }}
+      </main>
+
+      @include('components.marketing.footer')
+    </div>
+  </body>
+</html>

@@ -13,11 +13,9 @@ use App\Http\Controllers\App\Settings\SecurityController;
 use App\Http\Controllers\App\Settings\SettingsController;
 use App\Http\Controllers\App\Settings\TwoFAController;
 use App\Http\Controllers\LocaleController;
-use Illuminate\Contracts\View\Factory;
-use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', fn(): Factory|View => view('welcome'));
+require __DIR__ . '/marketing.php';
 
 Route::put('/locale', [LocaleController::class, 'update'])->name('locale.update');
 
