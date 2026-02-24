@@ -127,16 +127,16 @@ class OrganizationControllerTest extends TestCase
         $response->assertJsonStructure($this->jsonStructure);
     }
 
-    // #[Test]
-    // public function it_can_delete_an_organization(): void
-    // {
-    //     $user = $this->createUser();
-    //     $organization = $this->addOrganization($user, 'Dunder Mifflin');
+    #[Test]
+    public function it_can_delete_an_organization(): void
+    {
+        $user = $this->createUser();
+        $organization = $this->addOrganization($user, 'Dunder Mifflin');
 
-    //     Sanctum::actingAs($user);
+        Sanctum::actingAs($user);
 
-    //     $response = $this->json('DELETE', '/api/organizations/' . $organization->id);
+        $response = $this->json('DELETE', '/api/organizations/' . $organization->id);
 
-    //     $response->assertNoContent();
-    // }
+        $response->assertNoContent();
+    }
 }

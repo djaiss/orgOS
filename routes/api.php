@@ -16,6 +16,7 @@ Route::name('api.')->group(function (): void {
         Route::middleware(['organization.api'])->group(function (): void {
             Route::get('organizations/{id}', [OrganizationController::class, 'show'])->name('organization.show');
             Route::put('organizations/{id}', [OrganizationController::class, 'update'])->name('organization.update');
+            Route::delete('organizations/{id}', [OrganizationController::class, 'destroy'])->name('organization.destroy');
         });
     });
 });

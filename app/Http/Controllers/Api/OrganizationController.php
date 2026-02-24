@@ -5,11 +5,13 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Api;
 
 use App\Actions\CreateOrganization;
+use App\Actions\DestroyOrganization;
 use App\Actions\UpdateOrganization;
 use App\Helpers\TextSanitizer;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\OrganizationResource;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
@@ -69,15 +71,15 @@ class OrganizationController extends Controller
             ->setStatusCode(200);
     }
 
-    // public function destroy(Request $request): Response
-    // {
-    //     $journal = $request->attributes->get('journal');
+    public function destroy(Request $request): Response
+    {
+        $organization = $request->attributes->get('organization');
 
-    //     new DestroyJournal(
-    //         user: $request->user(),
-    //         journal: $journal,
-    //     )->execute();
+        new DestroyOrganization(
+            user: $request->user(),
+            organization: $organization,
+        )->execute();
 
-    //     return response()->noContent(204);
-    // }
+        return response()->noContent(204);
+    }
 }
