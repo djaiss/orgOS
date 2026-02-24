@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Actions;
 
 use App\Jobs\LogUserAction;
+use App\Models\Member;
 use App\Models\Organization;
 use App\Models\User;
 use Illuminate\Support\Str;
@@ -28,7 +29,7 @@ class CreateOrganization
         $this->validate();
         $this->create();
         $this->generateSlug();
-        $this->addFirstUser();
+        $this->addMembership();
         $this->log();
 
         return $this->organization;
@@ -59,9 +60,11 @@ class CreateOrganization
         $this->organization->save();
     }
 
-    private function addFirstUser(): void
+    private function addMembership(): void
     {
-        $this->user->organizations()->attach($this->organization->id, [
+        Member::query()->create([
+            'organization_id' => $this->organization->id,
+            'user_id' => $this->user->id,
             'joined_at' => now(),
         ]);
     }

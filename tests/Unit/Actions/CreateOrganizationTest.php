@@ -39,7 +39,7 @@ class CreateOrganizationTest extends TestCase
             'slug' => $expectedSlug,
         ]);
 
-        $this->assertDatabaseHas('organization_user', [
+        $this->assertDatabaseHas('members', [
             'organization_id' => $organization->id,
             'user_id' => $user->id,
         ]);

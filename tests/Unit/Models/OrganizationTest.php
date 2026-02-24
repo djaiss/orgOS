@@ -14,19 +14,6 @@ class OrganizationTest extends TestCase
     use RefreshDatabase;
 
     #[Test]
-    public function it_belongs_to_many_users(): void
-    {
-        $user = $this->createUser();
-        $organization = Organization::factory()->create();
-
-        $organization->users()->attach($user->id, [
-            'joined_at' => now(),
-        ]);
-
-        $this->assertTrue($organization->users()->exists());
-    }
-
-    #[Test]
     public function it_gets_avatar(): void
     {
         $organization = Organization::factory()->create();

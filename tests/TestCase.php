@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests;
 
+use App\Models\Member;
 use App\Models\Organization;
 use App\Models\User;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
@@ -20,7 +21,10 @@ abstract class TestCase extends BaseTestCase
         $organization = Organization::factory()->create([
             'name' => $name,
         ]);
-        $user->organizations()->attach($organization, ['joined_at' => now()]);
+        Member::factory()->create([
+            'user_id' => $user->id,
+            'organization_id' => $organization->id,
+        ]);
 
         return $organization;
     }
