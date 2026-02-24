@@ -17,10 +17,7 @@ class OrganizationControllerTest extends TestCase
     public function it_shows_the_list_of_organizations(): void
     {
         $user = $this->createUser();
-        $organization = Organization::factory()->create([
-            'name' => 'Dunder Mifflin',
-        ]);
-        $user->organizations()->attach($organization, ['joined_at' => now()]);
+        $this->addOrganization($user);
 
         $response = $this->actingAs($user)->get('/organizations');
 
@@ -52,12 +49,8 @@ class OrganizationControllerTest extends TestCase
             'organization_name' => 'My Organization',
         ]);
 
-        $this->assertDatabaseHas('organizations', [
-            'name' => 'My Organization',
-        ]);
-
         $organization = Organization::query()->where('name', 'My Organization')->first();
-        $response->assertRedirect(route('organization.show', $organization->slug));
+        $response->assertRedirect('/organizations/' . $organization->slug);
         $response->assertSessionHas('status', 'Organization created successfully');
     }
 
@@ -65,12 +58,10 @@ class OrganizationControllerTest extends TestCase
     public function it_shows_a_single_organization(): void
     {
         $user = $this->createUser();
-        $organization = Organization::factory()->create([
-            'name' => 'Dunder Mifflin',
-        ]);
-        $user->organizations()->attach($organization, ['joined_at' => now()]);
+        $organization = $this->addOrganization($user, 'Dunder Mifflin');
 
-        $response = $this->actingAs($user)->get(route('organization.show', $organization->slug));
+        $response = $this->actingAs($user)
+            ->get('/organizations/' . $organization->slug);
 
         $response->assertStatus(200);
         $response->assertViewIs('app.organization.show');

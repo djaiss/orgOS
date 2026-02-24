@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Http\Controllers\Marketing\Docs\ApiIntroductionController;
+use App\Http\Controllers\Marketing\Docs\ApiOrganizationController;
 use App\Http\Controllers\Marketing\MarketingController;
 use Illuminate\Support\Facades\Route;
 
@@ -11,4 +12,5 @@ Route::middleware(['marketing'])->group(function (): void {
 
     // api docs
     Route::get('/docs/api', [ApiIntroductionController::class, 'index'])->name('marketing.docs.api.index');
+    Route::get('/docs/api/organizations', [ApiOrganizationController::class, 'index'])->name('marketing.docs.api.organizations.index');
 });

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use App\Http\Middleware\CheckMarketing;
 use App\Http\Middleware\CheckOrganization;
+use App\Http\Middleware\CheckOrganizationAPI;
 use App\Http\Middleware\SetLocale;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -21,6 +22,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'set.locale' => SetLocale::class,
             'organization' => CheckOrganization::class,
             'marketing' => CheckMarketing::class,
+            'organization.api' => CheckOrganizationAPI::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

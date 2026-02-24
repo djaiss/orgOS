@@ -24,5 +24,5 @@
   "{{ $name }}":
   <span>{</span>
   {{ $slot }}
-  <span>}</span>
+  <span>}{{ $comma ? ',' : '' }}</span>
 </div>

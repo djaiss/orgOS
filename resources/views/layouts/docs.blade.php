@@ -11,6 +11,9 @@
           openApiDocumentation:
             '{{ str_starts_with( request()->route()->getName(),'marketing.docs.api.',) ? 'true' : 'false' }}' ===
             'true',
+          organizationsDocumentation:
+            '{{ str_starts_with( request()->route()->getName(),'marketing.docs.api.organizations.',) ? 'true' : 'false' }}' ===
+            'true',
         }" class="bg-light dark:bg-dark z-10 pt-16">
           <!-- api documentation -->
           <div @click="openApiDocumentation = !openApiDocumentation" class="mb-2 flex cursor-pointer items-center justify-between rounded-md border border-transparent px-2 py-1 hover:border-gray-200 hover:bg-blue-50 dark:hover:border-gray-700 dark:hover:bg-gray-800">
@@ -23,6 +26,17 @@
             <div class="mb-3 flex flex-col gap-y-2">
               <div>
                 <a href="{{ route('marketing.docs.api.index') }}" class="{{ request()->routeIs('marketing.docs.api.index') ? 'border-l-blue-400' : 'border-l-transparent' }} block border-l-3 pl-3 hover:border-l-blue-400 hover:underline">Introduction</a>
+              </div>
+            </div>
+
+            <!-- organizations -->
+            <div @click="organizationsDocumentation = !organizationsDocumentation" class="mb-3 flex cursor-pointer items-center justify-between rounded-md border border-transparent px-2 py-1 pl-3 text-xs text-gray-500 uppercase hover:border-gray-200 hover:bg-blue-50 dark:text-gray-400 dark:hover:border-gray-700 dark:hover:bg-gray-800">
+              <h3>Organizations</h3>
+              <x-phosphor-caret-right x-bind:class="organizationsDocumentation ? 'rotate-90' : ''" class="h-4 w-4 text-gray-500 transition-transform duration-300" />
+            </div>
+            <div x-show="organizationsDocumentation" class="mb-3 flex flex-col gap-y-2">
+              <div>
+                <a href="{{ route('marketing.docs.api.organizations.index') }}" class="{{ request()->routeIs('marketing.docs.api.organizations.index') ? 'border-l-blue-400' : 'border-l-transparent' }} block border-l-3 pl-3 hover:border-l-blue-400 hover:underline">Organizations</a>
               </div>
             </div>
           </div>
