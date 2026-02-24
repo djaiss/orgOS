@@ -1,10 +1,3 @@
-<?php
-
-/**
- * @var array<int, array<string, mixed>> $items
- */
-?>
-
 @props([
   'items',
 ])

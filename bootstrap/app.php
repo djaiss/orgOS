@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Http\Middleware\CheckMarketing;
 use App\Http\Middleware\CheckOrganization;
 use App\Http\Middleware\SetLocale;
 use Illuminate\Foundation\Application;
@@ -19,6 +20,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'set.locale' => SetLocale::class,
             'organization' => CheckOrganization::class,
+            'marketing' => CheckMarketing::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
