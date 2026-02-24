@@ -15,9 +15,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * @property int $id
  * @property int $organization_id
  * @property int|null $user_id
+ * @property Carbon|null $joined_at
  * @property string|null $timezone
  * @property Carbon|null $birthdate
- * @property Carbon|null $joined_at
+ * @property string|null $job_position_free_text
+ * @property string|null $phone_number
  * @property Carbon $created_at
  * @property Carbon|null $updated_at
  */
@@ -38,6 +40,8 @@ class Member extends Model
         'timezone',
         'birthdate',
         'joined_at',
+        'job_position_free_text',
+        'phone_number',
     ];
 
     /**

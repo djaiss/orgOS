@@ -29,6 +29,8 @@ class MemberFactory extends Factory
             'timezone' => fake()->timezone(),
             'birthdate' => null,
             'joined_at' => now(),
+            'job_position_free_text' => fake()->jobTitle(),
+            'phone_number' => fake()->phoneNumber(),
         ];
     }
 }
