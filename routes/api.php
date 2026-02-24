@@ -15,6 +15,7 @@ Route::name('api.')->group(function (): void {
         Route::get('organizations', [OrganizationController::class, 'index'])->name('organization.index');
         Route::middleware(['organization.api'])->group(function (): void {
             Route::get('organizations/{id}', [OrganizationController::class, 'show'])->name('organization.show');
+            Route::put('organizations/{id}', [OrganizationController::class, 'update'])->name('organization.update');
         });
     });
 });
