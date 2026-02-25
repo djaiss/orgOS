@@ -5,9 +5,15 @@
 ])
 
 <div class="flex flex-col gap-2">
-  @isset($title)
-    <h2 class="font-semi-bold mb-1 text-lg">{{ $title }}</h2>
-  @endisset
+  <div class="flex items-center justify-between">
+    @isset($title)
+      <h2 class="font-semi-bold mb-1 text-lg">{{ $title }}</h2>
+    @endisset
+
+    @isset($actions)
+    <div>{{ $actions }}</div>
+    @endisset
+  </div>
 
   @isset($description)
     <div class="mb-2 flex flex-col gap-y-2 text-sm text-gray-500">

@@ -9,6 +9,7 @@ use Carbon\Carbon;
 use Database\Factories\OrganizationFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * Class Organization
@@ -49,6 +50,16 @@ class Organization extends Model
     protected function casts(): array
     {
         return [];
+    }
+
+    /**
+     * Get the members of the organization.
+     *
+     * @return HasMany<Member, $this>
+     */
+    public function members(): HasMany
+    {
+        return $this->hasMany(Member::class);
     }
 
     /**
