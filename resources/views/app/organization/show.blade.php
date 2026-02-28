@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-app-layout :organization="$organization">
   <x-slot:title>
     {{ __('Organization') }}
   </x-slot>

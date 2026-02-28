@@ -29,6 +29,7 @@ class CreateOrganization
         $this->validate();
         $this->create();
         $this->generateSlug();
+        $this->generateInvitationCode();
         $this->addMembership();
         $this->log();
 
@@ -57,6 +58,11 @@ class CreateOrganization
         $slug = $this->organization->id . '-' . Str::of($this->name)->slug('-');
 
         $this->organization->slug = $slug;
+    }
+
+    private function generateInvitationCode(): void
+    {
+        $this->organization->invitation_code = Str::random(64);
         $this->organization->save();
     }
 
