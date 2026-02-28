@@ -17,6 +17,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property int $id
  * @property string $name
  * @property string $slug
+ * @property string|null $invitation_code
  * @property Carbon $created_at
  * @property Carbon|null $updated_at
  */
@@ -40,6 +41,7 @@ class Organization extends Model
     protected $fillable = [
         'name',
         'slug',
+        'invitation_code',
     ];
 
     /**

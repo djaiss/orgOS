@@ -2,6 +2,7 @@
   'title' => null,
   'padding' => 'p-4',
   'description' => null,
+  'additionalInfo' => null,
 ])
 
 <div class="flex flex-col gap-2">
@@ -11,7 +12,7 @@
     @endisset
 
     @isset($actions)
-    <div>{{ $actions }}</div>
+      <div>{{ $actions }}</div>
     @endisset
   </div>
 
@@ -19,6 +20,10 @@
     <div class="mb-2 flex flex-col gap-y-2 text-sm text-gray-500">
       {{ $description }}
     </div>
+  @endisset
+
+  @isset($additionalInfo)
+    {{ $additionalInfo }}
   @endisset
 
   <div {{ $attributes->merge(['class' => 'rounded-lg border border-gray-200 bg-white dark:border-gray-700 dark:bg-gray-900 ' . $padding]) }}>

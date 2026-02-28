@@ -15,9 +15,7 @@
 
     <!-- Main content -->
     <section class="p-4 sm:p-8">
-      <div class="mx-auto max-w-2xl space-y-6 sm:px-0">
-        sdafs
-      </div>
+      <div class="mx-auto max-w-2xl space-y-6 sm:px-0">sdafs</div>
     </section>
   </div>
 </x-app-layout>

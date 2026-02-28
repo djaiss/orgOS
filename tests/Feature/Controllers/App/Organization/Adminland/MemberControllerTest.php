@@ -32,7 +32,7 @@ class MemberControllerTest extends TestCase
         $response->assertViewIs('app.organization.adminland.members.index');
         $response->assertViewHas(
             'members',
-            fn ($members): bool => $members->count() === 2,
+            fn($members): bool => $members->count() === 2,
         );
     }
 }

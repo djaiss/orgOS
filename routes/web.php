@@ -3,7 +3,6 @@
 declare(strict_types=1);
 
 use App\Http\Controllers\App\Organization\Adminland\AdminlandController;
-use App\Http\Controllers\App\Organization\Adminland\InviteMemberController;
 use App\Http\Controllers\App\Organization\Adminland\MemberController;
 use App\Http\Controllers\App\Organization\OrganizationController;
 use App\Http\Controllers\App\Settings\ApiKeyController;
@@ -33,8 +32,6 @@ Route::middleware(['auth', 'verified', 'throttle:60,1', 'set.locale'])->group(fu
         // adminland
         Route::get('organizations/{slug}/adminland', [AdminlandController::class, 'index'])->name('organization.adminland.index');
         Route::get('organizations/{slug}/adminland/members', [MemberController::class, 'index'])->name('organization.adminland.member.index');
-        Route::get('organizations/{slug}/adminland/members/invite', [InviteMemberController::class, 'index'])->name('organization.adminland.member.invite.index');
-        Route::post('organizations/{slug}/adminland/members/invite', [InviteMemberController::class, 'store'])->name('organization.adminland.member.invite.store');
     });
 
     // settings
