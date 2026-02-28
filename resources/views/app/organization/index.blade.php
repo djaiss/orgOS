@@ -5,15 +5,21 @@
 
   <div class="px-6 pt-6">
     <div class="mx-auto w-full max-w-4xl items-start justify-center">
-      <div class="mb-4 flex items-center justify-between">
-        <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">{{ __('Your journals') }}</h2>
+      <div class="flex items-center justify-between">
+        <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">{{ __('Your organizations') }}</h2>
 
-        <x-button.secondary href="{{ route('organization.create') }}" turbo="true">
-          <x-slot:icon>
-            <x-phosphor-plus-bold class="size-4" />
-          </x-slot>
-          {{ __('New organization') }}
-        </x-button.secondary>
+        <div class="flex items-center gap-x-2">
+          <x-button.secondary href="{{ route('organization.join.create') }}" turbo="true">
+            {{ __('Join') }}
+          </x-button.secondary>
+
+          <x-button href="{{ route('organization.create') }}" turbo="true">
+            <x-slot:icon>
+              <x-phosphor-plus-bold class="size-4" />
+            </x-slot>
+            {{ __('New organization') }}
+          </x-button>
+        </div>
       </div>
 
       <x-box padding="p-0">

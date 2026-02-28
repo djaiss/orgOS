@@ -60,6 +60,8 @@
     "If you provide a nickname, it will be displayed to others instead of your real name.": "Si vous fournissez un surnom, il sera affiché aux autres à la place de votre vrai nom.",
     "Instance administration": "Administration de l'instance",
     "Invite": "Inviter",
+    "Join": "",
+    "Join organization": "",
     "Label for the API key": "Étiquette pour la clé API",
     "Language": "Langue",
     "Last name": "Nom de famille",
@@ -87,6 +89,7 @@
     "Organization": "Organisation",
     "Organization created successfully": "Organisation créée avec succès",
     "Password": "Mot de passe",
+    "Paste the invitation code": "",
     "Personal API Keys": "Clés API personnelles",
     "Please copy your API key now. For security reasons, it won't be shown again.": "Veuillez copier votre clé API maintenant. Pour des raisons de sécurité, elle ne sera plus affichée.",
     "Please enter your new password below": "Veuillez entrer votre nouveau mot de passe ci-dessous",
@@ -114,6 +117,7 @@
     "Subject:": "Sujet :",
     "Table of contents": "Table des matières",
     "Thanks for signing up!": "Merci pour votre inscription !",
+    "The invitation code is given by the organization administrator.": "",
     "The name can only contain letters, numbers, spaces, hyphens, and underscores.": "Le nom ne peut contenir que des lettres, des chiffres, des espaces, des traits d'union et des tirets bas.",
     "The provided token is invalid.": "Le jeton fourni est invalide.",
     "These are the details that will be displayed on your profile. Everyone within organizations you belong to will have the opportunity to view them.": "Ce sont les détails qui seront affichés sur votre profil. Toutes les personnes au sein des organisations auxquelles vous appartenez pourront les consulter.",
@@ -134,6 +138,6 @@
     "Yes": "Oui",
     "You are here:": "Vous êtes ici :",
     "You are not a member of any organizations yet.": "Vous n'êtes encore membre d'aucune organisation.",
-    "Your journals": "Vos journaux",
+    "Your organizations": "",
     "You will be the administrator of this account.": "Vous serez l'administrateur de ce compte."
 }

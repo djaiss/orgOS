@@ -60,6 +60,8 @@
     "If you provide a nickname, it will be displayed to others instead of your real name.": "If you provide a nickname, it will be displayed to others instead of your real name.",
     "Instance administration": "Instance administration",
     "Invite": "Invite",
+    "Join": "Join",
+    "Join organization": "Join organization",
     "Label for the API key": "Label for the API key",
     "Language": "Language",
     "Last name": "Last name",
@@ -87,6 +89,7 @@
     "Organization": "Organization",
     "Organization created successfully": "Organization created successfully",
     "Password": "Password",
+    "Paste the invitation code": "Paste the invitation code",
     "Personal API Keys": "Personal API Keys",
     "Please copy your API key now. For security reasons, it won't be shown again.": "Please copy your API key now. For security reasons, it won't be shown again.",
     "Please enter your new password below": "Please enter your new password below",
@@ -114,6 +117,7 @@
     "Subject:": "Subject:",
     "Table of contents": "Table of contents",
     "Thanks for signing up!": "Thanks for signing up!",
+    "The invitation code is given by the organization administrator.": "The invitation code is given by the organization administrator.",
     "The name can only contain letters, numbers, spaces, hyphens, and underscores.": "The name can only contain letters, numbers, spaces, hyphens, and underscores.",
     "The provided token is invalid.": "The provided token is invalid.",
     "These are the details that will be displayed on your profile. Everyone within organizations you belong to will have the opportunity to view them.": "These are the details that will be displayed on your profile. Everyone within organizations you belong to will have the opportunity to view them.",
@@ -134,6 +138,6 @@
     "Yes": "Yes",
     "You are here:": "You are here:",
     "You are not a member of any organizations yet.": "You are not a member of any organizations yet.",
-    "Your journals": "Your journals",
+    "Your organizations": "Your organizations",
     "You will be the administrator of this account.": "You will be the administrator of this account."
 }
