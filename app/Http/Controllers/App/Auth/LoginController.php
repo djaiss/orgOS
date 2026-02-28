@@ -49,7 +49,7 @@ class LoginController extends Controller
                 SendEmail::dispatch(
                     mailable: new LoginFailed,
                     user: $user,
-                    emailType: EmailType::LOGIN_FAILED,
+                    emailType: EmailType::LoginFailed,
                 )->onQueue('high');
             }
 
