@@ -16,6 +16,7 @@ class MemberController extends Controller
 
         $members = $organization->members()
             ->with('user')
+            ->orderByDesc('joined_at')
             ->get()
             ->map(fn($member) => (object) [
                 'name' => $member->user?->getFullName(),

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use App\Http\Controllers\App\Organization\Adminland\AdminlandController;
 use App\Http\Controllers\App\Organization\Adminland\MemberController;
+use App\Http\Controllers\App\Organization\JoinOrganizationController;
 use App\Http\Controllers\App\Organization\OrganizationController;
 use App\Http\Controllers\App\Settings\ApiKeyController;
 use App\Http\Controllers\App\Settings\AutoDeleteAccountController;
@@ -23,8 +24,14 @@ Route::put('/locale', [LocaleController::class, 'update'])->name('locale.update'
 
 Route::middleware(['auth', 'verified', 'throttle:60,1', 'set.locale'])->group(function (): void {
     Route::get('organizations', [OrganizationController::class, 'index'])->name('organization.index');
+
+    // create
     Route::get('organizations/create', [OrganizationController::class, 'create'])->name('organization.create');
     Route::post('organizations', [OrganizationController::class, 'store'])->name('organization.store');
+
+    // join
+    Route::get('organizations/join', [JoinOrganizationController::class, 'create'])->name('organization.join.create');
+    Route::post('organizations/join', [JoinOrganizationController::class, 'store'])->name('organization.join.store');
 
     Route::middleware(['organization'])->group(function (): void {
         Route::get('organizations/{slug}', [OrganizationController::class, 'show'])->name('organization.show');
