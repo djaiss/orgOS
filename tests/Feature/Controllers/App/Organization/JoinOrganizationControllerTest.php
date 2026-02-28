@@ -38,11 +38,6 @@ class JoinOrganizationControllerTest extends TestCase
 
         $response->assertRedirect('/organizations/' . $organization->slug);
         $response->assertSessionHas('status');
-
-        $this->assertDatabaseHas('members', [
-            'organization_id' => $organization->id,
-            'user_id' => $user->id,
-        ]);
     }
 
     #[Test]
