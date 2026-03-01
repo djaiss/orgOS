@@ -26,7 +26,6 @@ class MemberController extends Controller
             ]);
 
         return view('app.organization.adminland.members.index', [
-            'organization' => $organization,
             'members' => $members,
         ]);
     }
