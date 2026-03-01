@@ -7,6 +7,7 @@ namespace App\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * Class Country
@@ -53,5 +54,15 @@ class Country extends Model
         return [
             'is_active' => 'boolean',
         ];
+    }
+
+    /**
+     * Get the offices in this country.
+     *
+     * @return HasMany<Office, $this>
+     */
+    public function offices(): HasMany
+    {
+        return $this->hasMany(Office::class);
     }
 }
