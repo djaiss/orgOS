@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Unit\Models;
 
 use App\Models\Member;
+use App\Models\Office;
 use App\Models\Organization;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use PHPUnit\Framework\Attributes\Test;
@@ -23,6 +24,17 @@ class OrganizationTest extends TestCase
         ]);
 
         $this->assertTrue($organization->members()->exists());
+    }
+
+    #[Test]
+    public function it_has_many_offices(): void
+    {
+        $organization = Organization::factory()->create();
+        Office::factory()->create([
+            'organization_id' => $organization->id,
+        ]);
+
+        $this->assertTrue($organization->offices()->exists());
     }
 
     #[Test]
