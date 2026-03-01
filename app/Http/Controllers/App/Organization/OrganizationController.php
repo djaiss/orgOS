@@ -56,10 +56,8 @@ class OrganizationController extends Controller
             ->with('status', __('Organization created successfully'));
     }
 
-    public function show(Request $request): View
+    public function show(): View
     {
-        return view('app.organization.show', [
-            'organization' => $request->attributes->get('organization'),
-        ]);
+        return view('app.organization.show');
     }
 }

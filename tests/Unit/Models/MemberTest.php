@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Models;
 
+use App\Enums\Permission;
 use App\Models\Member;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use PHPUnit\Framework\Attributes\Test;
@@ -27,5 +28,25 @@ class MemberTest extends TestCase
         $member = Member::factory()->create();
 
         $this->assertTrue($member->organization()->exists());
+    }
+
+    #[Test]
+    public function it_returns_true_when_member_is_an_administrator(): void
+    {
+        $member = Member::factory()->create([
+            'permission' => Permission::Admin,
+        ]);
+
+        $this->assertTrue($member->isAdministrator());
+    }
+
+    #[Test]
+    public function it_returns_true_when_member_is_an_owner(): void
+    {
+        $member = Member::factory()->create([
+            'permission' => Permission::Owner,
+        ]);
+
+        $this->assertTrue($member->isOwner());
     }
 }

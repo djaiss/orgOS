@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\View;
 
 class CheckOrganization
 {
@@ -31,6 +32,9 @@ class CheckOrganization
 
             $request->attributes->add(['organization' => $organization]);
             $request->attributes->add(['member' => $member]);
+
+            View::share('organization', $organization);
+            View::share('member', $member);
 
             return $next($request);
         } catch (ModelNotFoundException) {
