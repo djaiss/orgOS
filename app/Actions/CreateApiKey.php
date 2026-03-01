@@ -58,7 +58,7 @@ class CreateApiKey
                 label: $this->label,
             ),
             user: $this->user,
-            emailType: EmailType::API_CREATED,
+            emailType: EmailType::ApiCreated,
         )->onQueue('high');
     }
 }

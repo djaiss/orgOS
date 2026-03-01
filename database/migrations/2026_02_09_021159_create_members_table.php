@@ -16,6 +16,7 @@ return new class extends Migration {
             $table->id();
             $table->unsignedBigInteger('organization_id');
             $table->unsignedBigInteger('user_id')->nullable();
+            $table->string('permission', 50);
             $table->timestamp('joined_at');
             $table->string('timezone', 50)->nullable();
             $table->date('birthdate')->nullable();

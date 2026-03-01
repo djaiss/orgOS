@@ -59,7 +59,7 @@ class CreateApiKeyTest extends TestCase
                 $job->mailable instanceof ApiKeyCreated
                 && $job->mailable->label === 'Production API Key'
                 && $job->user->id === $user->id
-                && $job->emailType === EmailType::API_CREATED
+                && $job->emailType === EmailType::ApiCreated
             ),
         );
     }

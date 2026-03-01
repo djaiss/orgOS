@@ -36,7 +36,7 @@ class SendEmailTest extends TestCase
         $job = new SendEmail(
             mailable: new LoginFailed,
             user: $user,
-            emailType: EmailType::LOGIN_FAILED,
+            emailType: EmailType::LoginFailed,
         );
 
         $job->handle();
@@ -47,7 +47,7 @@ class SendEmailTest extends TestCase
         );
 
         $emailSent = EmailSent::query()->latest()->first();
-        $this->assertEquals(EmailType::LOGIN_FAILED->value, $emailSent->email_type);
+        $this->assertEquals(EmailType::LoginFailed->value, $emailSent->email_type);
         $this->assertEquals('michael.scott@dundermifflin.com', $emailSent->email_address);
         $this->assertEquals('Login attempt on orgOS', $emailSent->subject);
     }
@@ -92,13 +92,13 @@ class SendEmailTest extends TestCase
         $job = new SendEmail(
             mailable: new LoginFailed,
             user: $user,
-            emailType: EmailType::LOGIN_FAILED,
+            emailType: EmailType::LoginFailed,
         );
 
         $job->handle();
 
         $emailSent = EmailSent::query()->latest()->first();
-        $this->assertEquals(EmailType::LOGIN_FAILED->value, $emailSent->email_type);
+        $this->assertEquals(EmailType::LoginFailed->value, $emailSent->email_type);
         $this->assertEquals('michael.scott@dundermifflin.com', $emailSent->email_address);
         $this->assertEquals('Login attempt on orgOS', $emailSent->subject);
         $this->assertEquals('resend-uuid-12345', $emailSent->uuid);

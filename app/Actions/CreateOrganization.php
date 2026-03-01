@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Actions;
 
+use App\Enums\Permission;
 use App\Jobs\LogUserAction;
 use App\Models\Member;
 use App\Models\Organization;
@@ -29,6 +30,7 @@ class CreateOrganization
         $this->validate();
         $this->create();
         $this->generateSlug();
+        $this->generateInvitationCode();
         $this->addMembership();
         $this->log();
 
@@ -57,6 +59,11 @@ class CreateOrganization
         $slug = $this->organization->id . '-' . Str::of($this->name)->slug('-');
 
         $this->organization->slug = $slug;
+    }
+
+    private function generateInvitationCode(): void
+    {
+        $this->organization->invitation_code = Str::random(64);
         $this->organization->save();
     }
 
@@ -66,6 +73,7 @@ class CreateOrganization
             'organization_id' => $this->organization->id,
             'user_id' => $this->user->id,
             'joined_at' => now(),
+            'permission' => Permission::Owner,
         ]);
     }
 

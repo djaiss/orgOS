@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use App\Enums\Permission;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -16,6 +17,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * @property int $organization_id
  * @property int|null $user_id
  * @property Carbon|null $joined_at
+ * @property string $permission
  * @property string|null $timezone
  * @property Carbon|null $birthdate
  * @property string|null $job_position_free_text
@@ -37,6 +39,7 @@ class Member extends Model
     protected $fillable = [
         'organization_id',
         'user_id',
+        'permission',
         'timezone',
         'birthdate',
         'joined_at',
@@ -52,6 +55,7 @@ class Member extends Model
     protected $casts = [
         'birthdate' => 'date',
         'joined_at' => 'datetime',
+        'permission' => Permission::class,
     ];
 
     /**

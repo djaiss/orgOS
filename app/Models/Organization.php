@@ -9,6 +9,7 @@ use Carbon\Carbon;
 use Database\Factories\OrganizationFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * Class Organization
@@ -16,6 +17,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $id
  * @property string $name
  * @property string $slug
+ * @property string|null $invitation_code
  * @property Carbon $created_at
  * @property Carbon|null $updated_at
  */
@@ -39,6 +41,7 @@ class Organization extends Model
     protected $fillable = [
         'name',
         'slug',
+        'invitation_code',
     ];
 
     /**
@@ -49,6 +52,16 @@ class Organization extends Model
     protected function casts(): array
     {
         return [];
+    }
+
+    /**
+     * Get the members of the organization.
+     *
+     * @return HasMany<Member, $this>
+     */
+    public function members(): HasMany
+    {
+        return $this->hasMany(Member::class);
     }
 
     /**

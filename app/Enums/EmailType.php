@@ -6,9 +6,9 @@ namespace App\Enums;
 
 enum EmailType: string
 {
-    case LOGIN_FAILED = 'login_failed';
-    case USER_IP_CHANGED = 'user_ip_changed';
-    case MAGIC_LINK_CREATED = 'magic_link_created';
-    case API_CREATED = 'api_created';
-    case API_DESTROYED = 'api_destroyed';
+    case LoginFailed = 'login_failed';
+    case UserIpChanged = 'user_ip_changed';
+    case MagicLinkCreated = 'magic_link_created';
+    case ApiCreated = 'api_created';
+    case ApiDestroyed = 'api_destroyed';
 }

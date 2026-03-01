@@ -16,6 +16,7 @@ return new class extends Migration {
             $table->id();
             $table->string('name');
             $table->string('slug')->unique()->nullable()->index();
+            $table->string('invitation_code', 64)->unique()->nullable();
             $table->timestamps();
         });
     }
