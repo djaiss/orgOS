@@ -77,4 +77,20 @@ class Member extends Model
     {
         return $this->belongsTo(Organization::class);
     }
+
+    /**
+     * Check if the member has admin permissions.
+     */
+    public function isAdministrator(): bool
+    {
+        return $this->permission === Permission::Admin;
+    }
+
+    /**
+     * Check if the member has owner permissions.
+     */
+    public function isOwner(): bool
+    {
+        return $this->permission === Permission::Owner;
+    }
 }
