@@ -61,13 +61,11 @@
               <div class="flex items-center justify-between border-b border-gray-200 p-3 text-sm first:rounded-t-lg last:rounded-b-lg last:border-b-0 hover:bg-blue-50 dark:border-gray-700 dark:hover:bg-gray-800">
                 <div class="flex items-center gap-3">
                   <x-phosphor-pulse class="size-3 min-w-3 text-zinc-600 dark:text-zinc-400" />
-                  <div class="flex flex-col gap-y-2">
-                    <p class="flex items-center gap-2">
-                      <x-link href="">{{ $member->name }}</x-link>
-
-                      <span class="font-mono text-xs">{{ $member->email }}</span>
-                    </p>
-                  </div>
+                  <p class="flex items-center gap-4">
+                    <x-link href="">{{ $member->name }}</x-link>
+                    <span class="font-mono text-xs">{{ $member->email }}</span>
+                    <span>{{ $member->permission }}</span>
+                  </p>
                 </div>
 
                 <x-tooltip text="{{ $member->joined_at?->format('Y-m-d H:i:s') }}">

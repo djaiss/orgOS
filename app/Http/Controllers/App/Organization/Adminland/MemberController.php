@@ -22,6 +22,7 @@ class MemberController extends Controller
                 'name' => $member->user?->getFullName(),
                 'email' => $member->user?->email,
                 'joined_at' => $member->joined_at,
+                'permission' => $member->permission,
             ]);
 
         return view('app.organization.adminland.members.index', [
