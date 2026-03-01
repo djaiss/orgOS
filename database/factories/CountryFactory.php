@@ -23,7 +23,7 @@ class CountryFactory extends Factory
     {
         return [
             'name' => fake()->country(),
-            'iso2' => mb_strtoupper(fake()->unique()->regexify('[0-9][A-Z]')),
+            'iso2' => mb_strtoupper(fake()->unique()->regexify('\d[A-Z]')),
             'iso3' => mb_strtoupper(fake()->unique()->regexify('[0-9][A-Z]{2}')),
             'phone_code' => '+' . fake()->numberBetween(1, 999),
             'currency_code' => mb_strtoupper(fake()->lexify('???')),

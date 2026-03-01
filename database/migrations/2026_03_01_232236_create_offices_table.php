@@ -23,11 +23,12 @@ return new class extends Migration {
             $table->string('state_province')->nullable();
             $table->string('postal_code')->nullable();
             $table->string('timezone', 50)->nullable();
-            $table->string('type');
+            $table->unsignedBigInteger('office_type_id')->nullable();
             $table->timestamps();
 
             $table->foreign('organization_id')->references('id')->on('organizations')->cascadeOnDelete();
             $table->foreign('country_id')->references('id')->on('countries')->nullOnDelete();
+            $table->foreign('office_type_id')->references('id')->on('office_types')->nullOnDelete();
         });
     }
 

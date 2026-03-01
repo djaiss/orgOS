@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Models;
 
-use App\Enums\OfficeType;
 use Carbon\Carbon;
 use Database\Factories\OfficeFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -17,6 +16,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property int $id
  * @property int $organization_id
  * @property int|null $country_id
+ * @property int|null $office_type_id
  * @property string $name
  * @property string $address_line_1
  * @property string|null $address_line_2
@@ -24,7 +24,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property string|null $state_province
  * @property string|null $postal_code
  * @property string|null $timezone
- * @property OfficeType $type
  * @property Carbon $created_at
  * @property Carbon|null $updated_at
  */
@@ -55,7 +54,7 @@ class Office extends Model
         'state_province',
         'postal_code',
         'timezone',
-        'type',
+        'office_type_id',
     ];
 
     /**
@@ -65,9 +64,7 @@ class Office extends Model
      */
     protected function casts(): array
     {
-        return [
-            'type' => OfficeType::class,
-        ];
+        return [];
     }
 
     /**
@@ -88,5 +85,15 @@ class Office extends Model
     public function country(): BelongsTo
     {
         return $this->belongsTo(Country::class);
+    }
+
+    /**
+     * Get the type of the office.
+     *
+     * @return BelongsTo<OfficeType, $this>
+     */
+    public function officeType(): BelongsTo
+    {
+        return $this->belongsTo(OfficeType::class);
     }
 }

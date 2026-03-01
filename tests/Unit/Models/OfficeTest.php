@@ -6,6 +6,7 @@ namespace Tests\Unit\Models;
 
 use App\Models\Country;
 use App\Models\Office;
+use App\Models\OfficeType;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
@@ -31,5 +32,16 @@ class OfficeTest extends TestCase
         ]);
 
         $this->assertTrue($office->country()->exists());
+    }
+
+    #[Test]
+    public function it_belongs_to_an_office_type(): void
+    {
+        $officeType = OfficeType::factory()->create();
+        $office = Office::factory()->create([
+            'office_type_id' => $officeType->id,
+        ]);
+
+        $this->assertTrue($office->officeType()->exists());
     }
 }

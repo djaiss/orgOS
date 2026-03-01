@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Database\Factories;
 
-use App\Enums\OfficeType;
 use App\Models\Country;
 use App\Models\Office;
+use App\Models\OfficeType;
 use App\Models\Organization;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -31,10 +31,10 @@ class OfficeFactory extends Factory
             'address_line_1' => fake()->streetAddress(),
             'address_line_2' => null,
             'city' => fake()->city(),
-            'state_province' => fake()->state(),
+            'state_province' => fake()->city(),
             'postal_code' => fake()->postcode(),
             'timezone' => fake()->timezone(),
-            'type' => fake()->randomElement(OfficeType::cases())->value,
+            'office_type_id' => OfficeType::factory(),
         ];
     }
 }

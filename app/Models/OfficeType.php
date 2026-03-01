@@ -4,26 +4,26 @@ declare(strict_types=1);
 
 namespace App\Models;
 
-use App\Actions\GenerateOrganizationAvatar;
 use Carbon\Carbon;
-use Database\Factories\OrganizationFactory;
+use Database\Factories\OfficeTypeFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
- * Class Organization
+ * Class OfficeType
  *
  * @property int $id
+ * @property int $organization_id
  * @property string $name
- * @property string $slug
- * @property string|null $invitation_code
+ * @property int $position
  * @property Carbon $created_at
  * @property Carbon|null $updated_at
  */
-class Organization extends Model
+class OfficeType extends Model
 {
-    /** @use HasFactory<OrganizationFactory> */
+    /** @use HasFactory<OfficeTypeFactory> */
     use HasFactory;
 
     /**
@@ -31,7 +31,7 @@ class Organization extends Model
      *
      * @var string
      */
-    protected $table = 'organizations';
+    protected $table = 'office_types';
 
     /**
      * The attributes that are mass assignable.
@@ -39,9 +39,9 @@ class Organization extends Model
      * @var list<string>
      */
     protected $fillable = [
+        'organization_id',
         'name',
-        'slug',
-        'invitation_code',
+        'position',
     ];
 
     /**
@@ -55,40 +55,22 @@ class Organization extends Model
     }
 
     /**
-     * Get the members of the organization.
+     * Get the organization that owns this office type.
      *
-     * @return HasMany<Member, $this>
+     * @return BelongsTo<Organization, $this>
      */
-    public function members(): HasMany
+    public function organization(): BelongsTo
     {
-        return $this->hasMany(Member::class);
+        return $this->belongsTo(Organization::class);
     }
 
     /**
-     * Get the offices of the organization.
+     * Get the offices that use this type.
      *
      * @return HasMany<Office, $this>
      */
     public function offices(): HasMany
     {
         return $this->hasMany(Office::class);
-    }
-
-    /**
-     * Get the office types of the organization.
-     *
-     * @return HasMany<OfficeType, $this>
-     */
-    public function officeTypes(): HasMany
-    {
-        return $this->hasMany(OfficeType::class);
-    }
-
-    /**
-     * Gets the avatar of the organization.
-     */
-    public function getAvatar(): string
-    {
-        return new GenerateOrganizationAvatar($this->id . '-' . $this->name)->execute();
     }
 }
