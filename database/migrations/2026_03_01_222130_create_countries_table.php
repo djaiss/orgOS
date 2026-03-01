@@ -32,7 +32,7 @@ return new class extends Migration {
         DB::table('countries')->upsert(
             $countries,
             ['iso2'], // unique key
-            ['name', 'iso3', 'phone_code', 'currency_code', 'timezone_default', 'is_active']
+            ['name', 'iso3', 'phone_code', 'currency_code', 'timezone_default', 'is_active'],
         );
     }
 
