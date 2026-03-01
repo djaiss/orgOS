@@ -52,7 +52,7 @@ class DestroyApiKey
                 label: $this->label,
             ),
             user: $this->user,
-            emailType: EmailType::API_DESTROYED,
+            emailType: EmailType::ApiDestroyed,
         )->onQueue('high');
     }
 }

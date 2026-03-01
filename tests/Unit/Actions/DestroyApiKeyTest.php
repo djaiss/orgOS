@@ -51,7 +51,7 @@ class DestroyApiKeyTest extends TestCase
                 $job->mailable instanceof ApiKeyDestroyed
                 && $job->mailable->label === 'Test API Key'
                 && $job->user->id === $user->id
-                && $job->emailType === EmailType::API_DESTROYED
+                && $job->emailType === EmailType::ApiDestroyed
             ),
         );
     }
