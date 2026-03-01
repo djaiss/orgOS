@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests;
 
+use App\Enums\Permission;
 use App\Models\Member;
 use App\Models\Organization;
 use App\Models\User;
@@ -16,7 +17,7 @@ abstract class TestCase extends BaseTestCase
         return User::factory()->create($attributes);
     }
 
-    protected function addOrganization(User $user, string $name = 'Dunder Mifflin'): Organization
+    protected function addOrganization(User $user, string $name = 'Dunder Mifflin', Permission $permission = Permission::Owner): Organization
     {
         $organization = Organization::factory()->create([
             'name' => $name,
@@ -24,6 +25,7 @@ abstract class TestCase extends BaseTestCase
         Member::factory()->create([
             'user_id' => $user->id,
             'organization_id' => $organization->id,
+            'permission' => $permission,
         ]);
 
         return $organization;

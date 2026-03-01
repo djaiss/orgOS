@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Enums\Permission;
 use App\Http\Controllers\App\Organization\Adminland\AdminlandController;
 use App\Http\Controllers\App\Organization\Adminland\MemberController;
 use App\Http\Controllers\App\Organization\JoinOrganizationController;
@@ -37,8 +38,10 @@ Route::middleware(['auth', 'verified', 'throttle:60,1', 'set.locale'])->group(fu
         Route::get('organizations/{slug}', [OrganizationController::class, 'show'])->name('organization.show');
 
         // adminland
-        Route::get('organizations/{slug}/adminland', [AdminlandController::class, 'index'])->name('organization.adminland.index');
-        Route::get('organizations/{slug}/adminland/members', [MemberController::class, 'index'])->name('organization.adminland.member.index');
+        Route::middleware(['permission:' . Permission::Owner->value . ',' . Permission::Admin->value])->group(function (): void {
+            Route::get('organizations/{slug}/adminland', [AdminlandController::class, 'index'])->name('organization.adminland.index');
+            Route::get('organizations/{slug}/adminland/members', [MemberController::class, 'index'])->name('organization.adminland.member.index');
+        });
     });
 
     // settings
