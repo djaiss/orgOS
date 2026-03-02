@@ -41,9 +41,11 @@ class JoinOrganization
                 'invitation_code' => 'Invalid invitation code',
             ]);
         }
-        throw_if($this->user->isPartOfOrganization($this->organization), ValidationException::withMessages([
-            'invitation_code' => 'You are already a member of this organization',
-        ]));
+        if ($this->user->isPartOfOrganization($this->organization)) {
+            throw ValidationException::withMessages([
+                'invitation_code' => 'You are already a member of this organization',
+            ]);
+        }
     }
 
     private function join(): void

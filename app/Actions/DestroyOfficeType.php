@@ -37,9 +37,17 @@ class DestroyOfficeType
     {
         $member = $this->user->memberOf($this->organization);
 
-        throw_if(!$member instanceof Member, ModelNotFoundException::class, 'Organization not found');
-        throw_if($member->isOwner() === false && $member->isAdministrator() === false, ModelNotFoundException::class, 'Organization not found');
-        throw_if($this->officeType->organization_id !== $this->organization->id, ModelNotFoundException::class, 'Office type not found');
+        if (!$member instanceof Member) {
+            throw new ModelNotFoundException('Organization not found');
+        }
+
+        if ($member->isOwner() === false && $member->isAdministrator() === false) {
+            throw new ModelNotFoundException('Organization not found');
+        }
+
+        if ($this->officeType->organization_id !== $this->organization->id) {
+            throw new ModelNotFoundException('Office type not found');
+        }
     }
 
     private function delete(): void

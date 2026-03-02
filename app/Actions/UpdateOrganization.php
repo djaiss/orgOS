@@ -33,7 +33,9 @@ class UpdateOrganization
     {
         $this->name = TextSanitizer::plainText($this->name);
 
-        throw_if($this->user->isPartOfOrganization($this->organization) === false, ModelNotFoundException::class, 'Organization not found');
+        if ($this->user->isPartOfOrganization($this->organization) === false) {
+            throw new ModelNotFoundException('Organization not found');
+        }
 
         if (in_array(preg_match('/^[a-zA-Z0-9\s\-_]+$/', $this->name), [0, false], true)) {
             throw ValidationException::withMessages([

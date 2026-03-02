@@ -54,8 +54,13 @@ class CreateOffice
 
         $member = $this->user->memberOf($this->organization);
 
-        throw_if(!$member instanceof Member, ModelNotFoundException::class, 'Organization not found');
-        throw_if($member->isOwner() === false && $member->isAdministrator() === false, ModelNotFoundException::class, 'Organization not found');
+        if (!$member instanceof Member) {
+            throw new ModelNotFoundException('Organization not found');
+        }
+
+        if ($member->isOwner() === false && $member->isAdministrator() === false) {
+            throw new ModelNotFoundException('Organization not found');
+        }
 
         $messages = [];
 
@@ -76,18 +81,20 @@ class CreateOffice
         }
 
         if ($this->countryId !== null) {
-            throw_if(Country::query()->whereKey($this->countryId)->exists() === false, ModelNotFoundException::class, 'Country not found');
+            if (Country::query()->whereKey($this->countryId)->exists() === false) {
+                throw new ModelNotFoundException('Country not found');
+            }
         }
 
         if ($this->officeTypeId !== null) {
-            throw_if(
+            if (
                 OfficeType::query()
                     ->whereKey($this->officeTypeId)
                     ->where('organization_id', $this->organization->id)
-                    ->exists() === false,
-                ModelNotFoundException::class,
-                'Office type not found',
-            );
+                    ->exists() === false
+            ) {
+                throw new ModelNotFoundException('Office type not found');
+            }
         }
     }
 

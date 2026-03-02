@@ -29,7 +29,9 @@ class DestroyOrganization
 
     private function validate(): void
     {
-        throw_if($this->user->isPartOfOrganization($this->organization) === false, ModelNotFoundException::class, 'Organization not found');
+        if ($this->user->isPartOfOrganization($this->organization) === false) {
+            throw new ModelNotFoundException('Organization not found');
+        }
     }
 
     private function delete(): void
