@@ -44,4 +44,26 @@ class OfficeTest extends TestCase
 
         $this->assertTrue($office->officeType()->exists());
     }
+
+    #[Test]
+    public function it_formats_the_full_address(): void
+    {
+        $country = Country::factory()->create([
+            'name' => 'United States',
+        ]);
+
+        $office = Office::factory()->create([
+            'country_id' => $country->id,
+            'address_line_1' => '1725 Slough Avenue',
+            'address_line_2' => 'Suite 100',
+            'city' => 'Scranton',
+            'state_province' => 'PA',
+            'postal_code' => '18505',
+        ]);
+
+        $this->assertSame(
+            '1725 Slough Avenue, Suite 100, Scranton, PA 18505, United States',
+            $office->address->format(),
+        );
+    }
 }
