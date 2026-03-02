@@ -6,6 +6,7 @@ namespace App\Actions;
 
 use App\Enums\Permission;
 use App\Jobs\LogUserAction;
+use App\Jobs\PopulateOrganization;
 use App\Models\Member;
 use App\Models\Organization;
 use App\Models\User;
@@ -32,6 +33,7 @@ class CreateOrganization
         $this->generateSlug();
         $this->generateInvitationCode();
         $this->addMembership();
+        $this->populate();
         $this->log();
 
         return $this->organization;
@@ -75,6 +77,11 @@ class CreateOrganization
             'joined_at' => now(),
             'permission' => Permission::Owner,
         ]);
+    }
+
+    private function populate(): void
+    {
+        PopulateOrganization::dispatch($this->organization)->onQueue('low');
     }
 
     private function log(): void
