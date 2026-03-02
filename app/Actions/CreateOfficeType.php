@@ -42,8 +42,13 @@ class CreateOfficeType
 
         $member = $this->user->memberOf($this->organization);
 
-        throw_if(!$member instanceof Member, ModelNotFoundException::class, 'Organization not found');
-        throw_if($member->isOwner() === false && $member->isAdministrator() === false, ModelNotFoundException::class, 'Organization not found');
+        if (!$member instanceof Member) {
+            throw new ModelNotFoundException('Organization not found');
+        }
+
+        if ($member->isOwner() === false && $member->isAdministrator() === false) {
+            throw new ModelNotFoundException('Organization not found');
+        }
 
         if ($this->position === null) {
             $this->position = OfficeType::query()
