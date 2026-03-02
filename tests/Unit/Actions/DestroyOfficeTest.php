@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Unit\Actions;
 
 use App\Actions\DestroyOffice;
+use App\Enums\Permission;
 use App\Jobs\LogUserAction;
 use App\Models\Office;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -60,6 +61,52 @@ class DestroyOfficeTest extends TestCase
 
         $user = $this->createUser();
         $organization = $this->addOrganization($this->createUser());
+        $office = Office::factory()->create([
+            'organization_id' => $organization->id,
+            'country_id' => null,
+            'office_type_id' => null,
+        ]);
+
+        new DestroyOffice(
+            user: $user,
+            organization: $organization,
+            office: $office,
+        )->execute();
+    }
+
+    #[Test]
+    public function it_throws_an_exception_if_user_is_a_member(): void
+    {
+        $this->expectException(ModelNotFoundException::class);
+
+        $user = $this->createUser();
+        $organization = $this->addOrganization(
+            user: $user,
+            permission: Permission::Member,
+        );
+        $office = Office::factory()->create([
+            'organization_id' => $organization->id,
+            'country_id' => null,
+            'office_type_id' => null,
+        ]);
+
+        new DestroyOffice(
+            user: $user,
+            organization: $organization,
+            office: $office,
+        )->execute();
+    }
+
+    #[Test]
+    public function it_throws_an_exception_if_user_is_a_guest(): void
+    {
+        $this->expectException(ModelNotFoundException::class);
+
+        $user = $this->createUser();
+        $organization = $this->addOrganization(
+            user: $user,
+            permission: Permission::Guest,
+        );
         $office = Office::factory()->create([
             'organization_id' => $organization->id,
             'country_id' => null,

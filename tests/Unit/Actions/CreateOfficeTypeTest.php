@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Unit\Actions;
 
 use App\Actions\CreateOfficeType;
+use App\Enums\Permission;
 use App\Jobs\LogUserAction;
 use App\Models\OfficeType;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -49,6 +50,30 @@ class CreateOfficeTypeTest extends TestCase
                 && $job->description === 'Created an office type called Main Office'
             ),
         );
+    }
+
+    #[Test]
+    public function it_creates_an_office_type_when_user_is_admin(): void
+    {
+        Queue::fake();
+
+        $user = $this->createUser();
+        $organization = $this->addOrganization(
+            user: $user,
+            permission: Permission::Admin,
+        );
+
+        $officeType = new CreateOfficeType(
+            user: $user,
+            organization: $organization,
+            name: 'Admin Office Type',
+        )->execute();
+
+        $this->assertDatabaseHas('office_types', [
+            'id' => $officeType->id,
+            'organization_id' => $organization->id,
+            'name' => 'Admin Office Type',
+        ]);
     }
 
     #[Test]
@@ -107,6 +132,42 @@ class CreateOfficeTypeTest extends TestCase
         new CreateOfficeType(
             user: $user,
             organization: $otherOrganization,
+            name: 'Main Office',
+        )->execute();
+    }
+
+    #[Test]
+    public function it_throws_an_exception_if_user_is_a_member(): void
+    {
+        $this->expectException(ModelNotFoundException::class);
+
+        $user = $this->createUser();
+        $organization = $this->addOrganization(
+            user: $user,
+            permission: Permission::Member,
+        );
+
+        new CreateOfficeType(
+            user: $user,
+            organization: $organization,
+            name: 'Main Office',
+        )->execute();
+    }
+
+    #[Test]
+    public function it_throws_an_exception_if_user_is_a_guest(): void
+    {
+        $this->expectException(ModelNotFoundException::class);
+
+        $user = $this->createUser();
+        $organization = $this->addOrganization(
+            user: $user,
+            permission: Permission::Guest,
+        );
+
+        new CreateOfficeType(
+            user: $user,
+            organization: $organization,
             name: 'Main Office',
         )->execute();
     }

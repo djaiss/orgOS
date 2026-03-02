@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Actions;
 
+use App\Models\Member;
 use App\Jobs\LogUserAction;
 use App\Models\Office;
 use App\Models\Organization;
@@ -31,7 +32,10 @@ class DestroyOffice
 
     private function validate(): void
     {
-        throw_if($this->user->isPartOfOrganization($this->organization) === false, ModelNotFoundException::class, 'Organization not found');
+        $member = $this->user->memberOf($this->organization);
+
+        throw_if(!$member instanceof Member, ModelNotFoundException::class, 'Organization not found');
+        throw_if($member->isOwner() === false && $member->isAdministrator() === false, ModelNotFoundException::class, 'Organization not found');
         throw_if($this->office->organization_id !== $this->organization->id, ModelNotFoundException::class, 'Office not found');
     }
 
