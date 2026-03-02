@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Unit\Actions;
 
 use App\Actions\CreateOffice;
+use App\Enums\Permission;
 use App\Jobs\LogUserAction;
 use App\Models\Country;
 use App\Models\Office;
@@ -113,6 +114,54 @@ class CreateOfficeTest extends TestCase
         new CreateOffice(
             user: $user,
             organization: $otherOrganization,
+            name: 'Main Office',
+            addressLine1: '1725 Slough Avenue',
+            addressLine2: null,
+            city: 'Scranton',
+            stateProvince: null,
+            postalCode: null,
+            timezone: null,
+        )->execute();
+    }
+
+    #[Test]
+    public function it_throws_an_exception_if_user_is_a_member(): void
+    {
+        $this->expectException(ModelNotFoundException::class);
+
+        $user = $this->createUser();
+        $organization = $this->addOrganization(
+            user: $user,
+            permission: Permission::Member,
+        );
+
+        new CreateOffice(
+            user: $user,
+            organization: $organization,
+            name: 'Main Office',
+            addressLine1: '1725 Slough Avenue',
+            addressLine2: null,
+            city: 'Scranton',
+            stateProvince: null,
+            postalCode: null,
+            timezone: null,
+        )->execute();
+    }
+
+    #[Test]
+    public function it_throws_an_exception_if_user_is_a_guest(): void
+    {
+        $this->expectException(ModelNotFoundException::class);
+
+        $user = $this->createUser();
+        $organization = $this->addOrganization(
+            user: $user,
+            permission: Permission::Guest,
+        );
+
+        new CreateOffice(
+            user: $user,
+            organization: $organization,
             name: 'Main Office',
             addressLine1: '1725 Slough Avenue',
             addressLine2: null,
