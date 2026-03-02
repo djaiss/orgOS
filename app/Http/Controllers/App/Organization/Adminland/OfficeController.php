@@ -17,8 +17,17 @@ class OfficeController extends Controller
         $officeTypes = $organization->officeTypes()
             ->orderBy('position')
             ->get()
-            ->map(fn($office) => (object) [
-                'name' => $office->name,
+            ->map(fn($officeType) => (object) [
+                'id' => $officeType->id,
+                'name' => $officeType->name,
+                'edit_link' => route('organization.adminland.office_type.edit', [
+                    'slug' => $organization->slug,
+                    'officeType' => $officeType->id,
+                ]),
+                'destroy_link' => route('organization.adminland.office_type.destroy', [
+                    'slug' => $organization->slug,
+                    'officeType' => $officeType->id,
+                ]),
             ]);
 
         $offices = $organization->offices()

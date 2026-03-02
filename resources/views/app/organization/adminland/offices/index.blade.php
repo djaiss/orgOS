@@ -32,6 +32,40 @@
                 </x-button.secondary>
               </div>
             </x-slot>
+
+            <div id="office-type-list">
+              @foreach ($officeTypes as $officeType)
+                <div class="group flex items-center justify-between border-b border-gray-200 p-3 first:border-t last:rounded-b-lg last:border-b-0">
+                  <div class="flex items-center justify-between gap-3">
+                    <div class="rounded-sm bg-zinc-100 p-2">
+                      <x-phosphor-building-office class="h-4 w-4 text-zinc-500" />
+                    </div>
+
+                    <div class="flex flex-col">
+                      <p class="text-sm font-semibold">{{ $officeType->name }}</p>
+                    </div>
+                  </div>
+
+                  <div class="flex gap-2">
+                    <x-button.invisible x-target="office-type-{{ $officeType->id }}" href="{{ $officeType->edit_link }}" class="hidden text-sm group-hover:block">
+                      {{ __('Edit') }}
+                    </x-button.invisible>
+
+                    <form x-target="office-type-list" x-on:ajax:before="
+                      confirm('Are you sure you want to proceed? This can not be undone.') ||
+                        $event.preventDefault()
+                    " action="{{ $officeType->destroy_link }}" method="POST">
+                      @csrf
+                      @method('DELETE')
+
+                      <x-button.invisible class="hidden text-sm group-hover:block">
+                        {{ __('Delete') }}
+                      </x-button.invisible>
+                    </form>
+                  </div>
+                </div>
+              @endforeach
+            </div>
           </x-box>
         </div>
       </div>
