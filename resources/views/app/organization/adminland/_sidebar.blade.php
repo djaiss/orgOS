@@ -17,8 +17,12 @@
         {{ __('Organization') }}
       </a>
       <a data-turbo="true" href="{{ route('organization.adminland.member.index', $organization) }}" class="{{ request()->routeIs('organization.adminland.member.index') ? 'bg-gray-100 font-medium text-gray-900 dark:bg-gray-800 dark:text-gray-100' : 'text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800' }} flex items-center gap-2 rounded-lg px-2 py-1">
-        <x-phosphor-key class="h-4 w-4 {{ request()->routeIs('organization.adminland.member.index') ? 'text-emerald-700' : 'text-gray-500' }}" />
+        <x-phosphor-users-three class="h-4 w-4 {{ request()->routeIs('organization.adminland.member.index') ? 'text-emerald-700' : 'text-gray-500' }}" />
         {{ __('Members') }}
+      </a>
+      <a data-turbo="true" href="{{ route('organization.adminland.member.index', $organization) }}" class="{{ request()->routeIs('organization.adminland.member.index') ? 'bg-gray-100 font-medium text-gray-900 dark:bg-gray-800 dark:text-gray-100' : 'text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800' }} flex items-center gap-2 rounded-lg px-2 py-1">
+        <x-phosphor-building-office class="h-4 w-4 {{ request()->routeIs('organization.adminland.member.index') ? 'text-emerald-700' : 'text-gray-500' }}" />
+        {{ __('Offices') }}
       </a>
     </div>
   </nav>
