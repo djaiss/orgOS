@@ -80,21 +80,14 @@ class CreateOffice
             throw ValidationException::withMessages($messages);
         }
 
-        if ($this->countryId !== null) {
-            if (Country::query()->whereKey($this->countryId)->exists() === false) {
-                throw new ModelNotFoundException('Country not found');
-            }
+        if ($this->countryId !== null && Country::query()->whereKey($this->countryId)->exists() === false) {
+            throw new ModelNotFoundException('Country not found');
         }
 
-        if ($this->officeTypeId !== null) {
-            if (
-                OfficeType::query()
-                    ->whereKey($this->officeTypeId)
-                    ->where('organization_id', $this->organization->id)
-                    ->exists() === false
-            ) {
-                throw new ModelNotFoundException('Office type not found');
-            }
+        if ($this->officeTypeId !== null && OfficeType::query()
+            ->whereKey($this->officeTypeId)
+            ->where('organization_id', $this->organization->id)->exists() === false) {
+            throw new ModelNotFoundException('Office type not found');
         }
     }
 

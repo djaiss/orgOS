@@ -6,6 +6,7 @@ namespace Tests\Unit\Actions;
 
 use App\Actions\CreateOrganization;
 use App\Jobs\LogUserAction;
+use App\Jobs\PopulateOrganization;
 use App\Models\Organization;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Queue;
@@ -53,6 +54,12 @@ class CreateOrganizationTest extends TestCase
                 && $job->organization->id === $organization->id
                 && $job->description === 'Created an organization called Dunder Mifflin'
             ),
+        );
+
+        Queue::assertPushedOn(
+            queue: 'low',
+            job: PopulateOrganization::class,
+            callback: fn(PopulateOrganization $job): bool => $job->organization->id === $organization->id,
         );
     }
 
