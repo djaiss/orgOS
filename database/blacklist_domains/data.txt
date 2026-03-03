@@ -12,7 +12,6 @@
 10mail.org
 10mail.xyz
 10minmail.de
-10minut.xyz
 10minutenmail.xyz
 11jac.com
 1200b.com
@@ -831,7 +830,6 @@ brxkf.anonbox.net
 bs30.fun
 bs6mr.anonbox.net
 bsb5u.anonbox.net
-bsjnd.anonbox.net
 bslvp.anonbox.net
 bspe5.anonbox.net
 bsrdf.anonbox.net
@@ -846,6 +844,7 @@ btpd3.anonbox.net
 btpes.anonbox.net
 btrvo.anonbox.net
 btwyh.anonbox.net
+btxyv.anonbox.net
 bubkc.anonbox.net
 bucols.org
 bucqr.anonbox.net
@@ -1683,7 +1682,6 @@ fliveu.site
 flixsu.fun
 floris.sa.com
 flow2word.com
-flowersth.com
 flpyun.online
 flyovertrees.com
 flyriseweb.com
@@ -1772,7 +1770,6 @@ gaskuy93.art
 gasss.wtf
 gassscloud.net
 gavrom.com
-gawe.works
 gazanfersoylemez.cfd
 gc2nl.anonbox.net
 gddcorp.com
@@ -2461,7 +2458,6 @@ lehoa.top
 lellolidk.de
 leluconnurrima.biz
 lequangduc.cloud
-leresmeeting.com
 lerfuwond.com
 lesotica.com
 lespedia.com
@@ -2481,7 +2477,6 @@ lidercontabilidadebrasil.com
 liggegi.com
 ligit.shop
 ligolfcourse.online
-lihau.chat
 likebaiviet.com
 likemaxcare.com
 likevip.net
@@ -2989,7 +2984,6 @@ netcombase.com
 nethubmail.net
 netmon.ir
 netoiu.com
-neural-ex.com
 neuraxo.com
 nevanata.com
 newbreedapps.com
@@ -4222,7 +4216,6 @@ vmvmv.shop
 vmvzzmv.shop
 vnindexid.edu.vn
 vnvmail.com
-voiunop.shop
 voryxen.com
 voucherskuy.com
 vps79.com
@@ -4386,6 +4379,7 @@ xvism.site
 xx-p1.top
 xxx-tower.net
 xy64m.anonbox.net
+xyxy.app
 xzcn.me
 xzx5l.anonbox.net
 y4vpy.anonbox.net

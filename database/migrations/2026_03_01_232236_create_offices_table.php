@@ -16,6 +16,7 @@ return new class extends Migration {
             $table->id();
             $table->unsignedBigInteger('organization_id');
             $table->unsignedBigInteger('country_id')->nullable();
+            $table->unsignedBigInteger('office_type_id')->nullable();
             $table->string('name');
             $table->string('address_line_1');
             $table->string('address_line_2')->nullable();
@@ -23,7 +24,6 @@ return new class extends Migration {
             $table->string('state_province')->nullable();
             $table->string('postal_code')->nullable();
             $table->string('timezone', 50)->nullable();
-            $table->unsignedBigInteger('office_type_id')->nullable();
             $table->timestamps();
 
             $table->foreign('organization_id')->references('id')->on('organizations')->cascadeOnDelete();
