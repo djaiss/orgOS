@@ -48,6 +48,8 @@ Route::middleware(['auth', 'verified', 'throttle:60,1', 'set.locale'])->group(fu
 
             // offices
             Route::get('organizations/{slug}/adminland/offices', [OfficeController::class, 'index'])->name('organization.adminland.office.index');
+            Route::get('organizations/{slug}/adminland/office-types/create', [OfficeTypeController::class, 'create'])->name('organization.adminland.office_type.create');
+            Route::post('organizations/{slug}/adminland/office-types', [OfficeTypeController::class, 'store'])->name('organization.adminland.office_type.store');
             Route::get('organizations/{slug}/adminland/office-types/{officeType}', [OfficeTypeController::class, 'edit'])->name('organization.adminland.office_type.edit');
             Route::put('organizations/{slug}/adminland/office-types/{officeType}', [OfficeTypeController::class, 'update'])->name('organization.adminland.office_type.update');
             Route::delete('organizations/{slug}/adminland/office-types/{officeType}', [OfficeTypeController::class, 'destroy'])->name('organization.adminland.office_type.destroy');

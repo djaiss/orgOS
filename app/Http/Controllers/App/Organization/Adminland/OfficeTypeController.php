@@ -4,22 +4,49 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\App\Organization\Adminland;
 
+use App\Actions\CreateOfficeType;
 use App\Actions\DestroyOfficeType;
 use App\Actions\UpdateOfficeType;
 use App\Helpers\TextSanitizer;
 use App\Http\Controllers\Controller;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class OfficeTypeController extends Controller
 {
+    public function create(): View
+    {
+        return view('app.organization.adminland.offices._create_office_type');
+    }
+
+    public function store(Request $request): RedirectResponse
+    {
+        $organization = $request->attributes->get('organization');
+
+        $validated = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+        ]);
+
+        new CreateOfficeType(
+            user: $request->user(),
+            organization: $organization,
+            name: TextSanitizer::plainText($validated['name']),
+        )->execute();
+
+        return to_route('organization.adminland.office.index', $organization->slug)
+            ->with('status', trans('Changes saved'));
+    }
+
     public function edit(Request $request): View
     {
         $organization = $request->attributes->get('organization');
-        $officeType = $request->attributes->get('officeType');
 
-        if ($officeType->organization_id !== $organization->id) {
+        $id = $request->route()->parameter('officeType');
+        try {
+            $officeType = $organization->officeTypes()->findOrFail($id);
+        } catch (ModelNotFoundException) {
             abort(404);
         }
 
@@ -31,9 +58,11 @@ class OfficeTypeController extends Controller
     public function update(Request $request): RedirectResponse
     {
         $organization = $request->attributes->get('organization');
-        $officeType = $request->attributes->get('officeType');
 
-        if ($officeType->organization_id !== $organization->id) {
+        $id = $request->route()->parameter('officeType');
+        try {
+            $officeType = $organization->officeTypes()->findOrFail($id);
+        } catch (ModelNotFoundException) {
             abort(404);
         }
 
@@ -48,16 +77,18 @@ class OfficeTypeController extends Controller
             name: TextSanitizer::plainText($validated['name']),
         )->execute();
 
-        return redirect()->route('organization.adminland.office.index', $organization->slug)
+        return to_route('organization.adminland.office.index', $organization->slug)
             ->with('status', trans('Changes saved'));
     }
 
     public function destroy(Request $request): RedirectResponse
     {
         $organization = $request->attributes->get('organization');
-        $officeType = $request->attributes->get('officeType');
 
-        if ($officeType->organization_id !== $organization->id) {
+        $id = $request->route()->parameter('officeType');
+        try {
+            $officeType = $organization->officeTypes()->findOrFail($id);
+        } catch (ModelNotFoundException) {
             abort(404);
         }
 
@@ -67,7 +98,7 @@ class OfficeTypeController extends Controller
             officeType: $officeType,
         )->execute();
 
-        return redirect()->route('organization.adminland.office.index', $organization->slug)
+        return to_route('organization.adminland.office.index', $organization->slug)
             ->with('status', trans('Changes saved'));
     }
 }
