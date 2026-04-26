@@ -48,6 +48,11 @@ Route::middleware(['auth', 'verified', 'throttle:60,1', 'set.locale'])->group(fu
 
             // offices
             Route::get('organizations/{slug}/adminland/offices', [OfficeController::class, 'index'])->name('organization.adminland.office.index');
+            Route::get('organizations/{slug}/adminland/offices/create', [OfficeController::class, 'create'])->name('organization.adminland.office.create');
+            Route::post('organizations/{slug}/adminland/offices', [OfficeController::class, 'store'])->name('organization.adminland.office.store');
+            Route::get('organizations/{slug}/adminland/offices/{office}', [OfficeController::class, 'edit'])->name('organization.adminland.office.edit');
+            Route::put('organizations/{slug}/adminland/offices/{office}', [OfficeController::class, 'update'])->name('organization.adminland.office.update');
+            Route::delete('organizations/{slug}/adminland/offices/{office}', [OfficeController::class, 'destroy'])->name('organization.adminland.office.destroy');
             Route::get('organizations/{slug}/adminland/office-types/create', [OfficeTypeController::class, 'create'])->name('organization.adminland.office_type.create');
             Route::post('organizations/{slug}/adminland/office-types', [OfficeTypeController::class, 'store'])->name('organization.adminland.office_type.store');
             Route::get('organizations/{slug}/adminland/office-types/{officeType}', [OfficeTypeController::class, 'edit'])->name('organization.adminland.office_type.edit');

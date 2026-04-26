@@ -33,7 +33,7 @@
 
     <select id="{{ $id }}" name="{{ $id }}" {{ $attributes->class($classes) }} {{ $required ? 'required' : '' }}>
       @foreach ($options as $value => $label)
-        <option value="{{ $value }}" @selected($value === $selected)>{{ $label }}</option>
+        <option value="{{ $value }}" @selected((string) $value === (string) $selected)>{{ $label }}</option>
       @endforeach
     </select>
     @if ($help)
@@ -46,7 +46,7 @@
   <div class="space-y-2">
     <select id="{{ $id }}" name="{{ $id }}" {{ $attributes->class($classes) }} {{ $required ? 'required' : '' }}>
       @foreach ($options as $value => $label)
-        <option value="{{ $value }}" @selected($value === $selected)>{{ $label }}</option>
+        <option value="{{ $value }}" @selected((string) $value === (string) $selected)>{{ $label }}</option>
       @endforeach
     </select>
     @if ($help)
