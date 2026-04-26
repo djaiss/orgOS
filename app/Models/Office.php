@@ -28,6 +28,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property string|null $timezone
  * @property Carbon $created_at
  * @property Carbon|null $updated_at
+ * @property-read Address $address
  */
 class Office extends Model implements HasAddress
 {
