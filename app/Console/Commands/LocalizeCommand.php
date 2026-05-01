@@ -97,8 +97,8 @@ class LocalizeCommand extends Command
         $patterns = [];
 
         foreach ($functions as $function) {
-            $patterns[] = '/'.preg_quote($function, '/').'\(\s*\'([^\']+)\'/';
-            $patterns[] = '/'.preg_quote($function, '/').'\(\s*"([^\"]+)"/';
+            $patterns[] = '/'.preg_quote($function, '/').'\(\s*\'((?:\\\\.|[^\'\\\\])*)\'/';
+            $patterns[] = '/'.preg_quote($function, '/').'\(\s*"((?:\\\\.|[^"\\\\])*)"/';
         }
 
         $keys = [];
@@ -107,7 +107,7 @@ class LocalizeCommand extends Command
             preg_match_all($pattern, $content, $matches);
 
             foreach ($matches[1] ?? [] as $match) {
-                $keys[] = $match;
+                $keys[] = stripcslashes($match);
             }
         }
 

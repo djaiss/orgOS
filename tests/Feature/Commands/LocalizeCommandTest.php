@@ -28,6 +28,7 @@ class LocalizeCommandTest extends TestCase
 {{ trans("Localize double key") }}
 @lang('Localize lang key')
 {{ trans_key('Localize custom key') }}
+{{ __('We\'ve sent you a temporary login link. This link is valid for 5 minutes. Please check your inbox.') }}
 BLADE
             );
 
@@ -62,10 +63,16 @@ BLADE
             $this->assertSame('Localize double key', $enTranslations['Localize double key']);
             $this->assertSame('Localize lang key', $enTranslations['Localize lang key']);
             $this->assertSame('Localize custom key', $enTranslations['Localize custom key']);
+            $this->assertSame(
+                'We\'ve sent you a temporary login link. This link is valid for 5 minutes. Please check your inbox.',
+                $enTranslations['We\'ve sent you a temporary login link. This link is valid for 5 minutes. Please check your inbox.']
+            );
 
             $this->assertSame('', $frTranslations['Localize double key']);
             $this->assertSame('', $frTranslations['Localize lang key']);
             $this->assertSame('', $frTranslations['Localize custom key']);
+            $this->assertSame('', $frTranslations['We\'ve sent you a temporary login link. This link is valid for 5 minutes. Please check your inbox.']);
+            $this->assertArrayNotHasKey('We\\', $frTranslations);
 
             $this->assertArrayNotHasKey('Localize stale key', $enTranslations);
             $this->assertArrayNotHasKey('Localize stale key', $frTranslations);
