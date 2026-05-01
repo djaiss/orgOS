@@ -34,7 +34,13 @@ class LocalizeCommand extends Command
 
         $translationKeys = $this->extractTranslationKeys();
 
+        $this->syncEnglishLocaleFile($translationKeys);
+
         foreach ($locales as $locale) {
+            if ($locale === 'en') {
+                continue;
+            }
+
             $this->syncLocaleFile($locale, $translationKeys);
         }
 
@@ -111,6 +117,14 @@ class LocalizeCommand extends Command
     /**
      * @param  array<int, string>  $translationKeys
      */
+    private function syncEnglishLocaleFile(array $translationKeys): void
+    {
+        $this->syncLocaleFile('en', $translationKeys);
+    }
+
+    /**
+     * @param  array<int, string>  $translationKeys
+     */
     private function syncLocaleFile(string $locale, array $translationKeys): void
     {
         $localeFile = lang_path($locale.'.json');
@@ -128,7 +142,7 @@ class LocalizeCommand extends Command
         $syncedTranslations = [];
 
         foreach ($translationKeys as $key) {
-            $syncedTranslations[$key] = $existingTranslations[$key] ?? $key;
+            $syncedTranslations[$key] = $existingTranslations[$key] ?? $this->defaultValueForLocale($locale, $key);
         }
 
         ksort($syncedTranslations);
@@ -137,5 +151,14 @@ class LocalizeCommand extends Command
             $localeFile,
             json_encode($syncedTranslations, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE).PHP_EOL
         );
+    }
+
+    private function defaultValueForLocale(string $locale, string $key): string
+    {
+        if ($locale === 'en') {
+            return $key;
+        }
+
+        return '';
     }
 }

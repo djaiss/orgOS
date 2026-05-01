@@ -63,6 +63,10 @@ BLADE
             $this->assertSame('Localize lang key', $enTranslations['Localize lang key']);
             $this->assertSame('Localize custom key', $enTranslations['Localize custom key']);
 
+            $this->assertSame('', $frTranslations['Localize double key']);
+            $this->assertSame('', $frTranslations['Localize lang key']);
+            $this->assertSame('', $frTranslations['Localize custom key']);
+
             $this->assertArrayNotHasKey('Localize stale key', $enTranslations);
             $this->assertArrayNotHasKey('Localize stale key', $frTranslations);
         } finally {
