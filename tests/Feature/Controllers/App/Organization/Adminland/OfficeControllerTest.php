@@ -55,7 +55,7 @@ class OfficeControllerTest extends TestCase
             fn($offices): bool => $offices->count() === 1
                 && $offices->first()->name === 'Main Office'
                 && $offices->first()->office_type === 'Headquarters'
-                && str_contains($offices->first()->address, '1725 Slough Avenue'),
+                && str_contains((string) $offices->first()->address, '1725 Slough Avenue'),
         );
         $response->assertViewHas(
             'countries',
