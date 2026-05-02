@@ -29,6 +29,12 @@ class DepartmentResource extends JsonResource
                 'created_at' => $this->created_at->timestamp,
                 'updated_at' => $this->updated_at->timestamp,
             ],
+            'links' => [
+                'self' => route('api.organization.adminland.department.show', [
+                    'id' => $this->organization_id,
+                    'departmentId' => $this->id,
+                ]),
+            ],
         ];
     }
 }

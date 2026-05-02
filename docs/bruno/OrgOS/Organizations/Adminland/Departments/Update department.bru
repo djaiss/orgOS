@@ -1,0 +1,18 @@
+meta {
+  name: Update department
+  type: http
+  seq: 4
+}
+
+put {
+  url: {{URL}}/organizations/1/adminland/departments/1
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "name": "Product",
+    "position": 1
+  }
+}

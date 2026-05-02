@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Http\Controllers\Api\HealthController;
+use App\Http\Controllers\Api\Adminland\DepartmentController;
 use App\Http\Controllers\Api\Adminland\MemberController;
 use App\Http\Controllers\Api\Adminland\MemberTypeController;
 use App\Http\Controllers\Api\Adminland\OfficeController;
@@ -46,6 +47,13 @@ Route::name('api.')->group(function (): void {
             Route::get('organizations/{id}/adminland/membertypes/{memberTypeId}', [MemberTypeController::class, 'show'])->name('organization.adminland.membertype.show');
             Route::put('organizations/{id}/adminland/membertypes/{memberTypeId}', [MemberTypeController::class, 'update'])->name('organization.adminland.membertype.update');
             Route::delete('organizations/{id}/adminland/membertypes/{memberTypeId}', [MemberTypeController::class, 'destroy'])->name('organization.adminland.membertype.destroy');
+
+            // adminland - departments
+            Route::get('organizations/{id}/adminland/departments', [DepartmentController::class, 'index'])->name('organization.adminland.department.index');
+            Route::post('organizations/{id}/adminland/departments', [DepartmentController::class, 'store'])->name('organization.adminland.department.store');
+            Route::get('organizations/{id}/adminland/departments/{departmentId}', [DepartmentController::class, 'show'])->name('organization.adminland.department.show');
+            Route::put('organizations/{id}/adminland/departments/{departmentId}', [DepartmentController::class, 'update'])->name('organization.adminland.department.update');
+            Route::delete('organizations/{id}/adminland/departments/{departmentId}', [DepartmentController::class, 'destroy'])->name('organization.adminland.department.destroy');
         });
     });
 });
