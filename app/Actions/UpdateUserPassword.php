@@ -31,7 +31,9 @@ readonly class UpdateUserPassword
 
     private function validate(): void
     {
-        throw_unless(Hash::check($this->currentPassword, $this->user->password), InvalidArgumentException::class, 'Current password is incorrect');
+        if (!Hash::check($this->currentPassword, $this->user->password)) {
+            throw new InvalidArgumentException('Current password is incorrect');
+        }
     }
 
     private function update(): void

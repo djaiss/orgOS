@@ -65,6 +65,26 @@ class Organization extends Model
     }
 
     /**
+     * Get the offices of the organization.
+     *
+     * @return HasMany<Office, $this>
+     */
+    public function offices(): HasMany
+    {
+        return $this->hasMany(Office::class);
+    }
+
+    /**
+     * Get the office types of the organization.
+     *
+     * @return HasMany<OfficeType, $this>
+     */
+    public function officeTypes(): HasMany
+    {
+        return $this->hasMany(OfficeType::class);
+    }
+
+    /**
      * Gets the avatar of the organization.
      */
     public function getAvatar(): string

@@ -5,6 +5,8 @@ declare(strict_types=1);
 use App\Enums\Permission;
 use App\Http\Controllers\App\Organization\Adminland\AdminlandController;
 use App\Http\Controllers\App\Organization\Adminland\MemberController;
+use App\Http\Controllers\App\Organization\Adminland\OfficeController;
+use App\Http\Controllers\App\Organization\Adminland\OfficeTypeController;
 use App\Http\Controllers\App\Organization\JoinOrganizationController;
 use App\Http\Controllers\App\Organization\OrganizationController;
 use App\Http\Controllers\App\Settings\ApiKeyController;
@@ -40,7 +42,22 @@ Route::middleware(['auth', 'verified', 'throttle:60,1', 'set.locale'])->group(fu
         // adminland
         Route::middleware(['permission:' . Permission::Owner->value . ',' . Permission::Admin->value])->group(function (): void {
             Route::get('organizations/{slug}/adminland', [AdminlandController::class, 'index'])->name('organization.adminland.index');
+
+            // members
             Route::get('organizations/{slug}/adminland/members', [MemberController::class, 'index'])->name('organization.adminland.member.index');
+
+            // offices
+            Route::get('organizations/{slug}/adminland/offices', [OfficeController::class, 'index'])->name('organization.adminland.office.index');
+            Route::get('organizations/{slug}/adminland/offices/create', [OfficeController::class, 'create'])->name('organization.adminland.office.create');
+            Route::post('organizations/{slug}/adminland/offices', [OfficeController::class, 'store'])->name('organization.adminland.office.store');
+            Route::get('organizations/{slug}/adminland/offices/{office}', [OfficeController::class, 'edit'])->name('organization.adminland.office.edit');
+            Route::put('organizations/{slug}/adminland/offices/{office}', [OfficeController::class, 'update'])->name('organization.adminland.office.update');
+            Route::delete('organizations/{slug}/adminland/offices/{office}', [OfficeController::class, 'destroy'])->name('organization.adminland.office.destroy');
+            Route::get('organizations/{slug}/adminland/office-types/create', [OfficeTypeController::class, 'create'])->name('organization.adminland.office_type.create');
+            Route::post('organizations/{slug}/adminland/office-types', [OfficeTypeController::class, 'store'])->name('organization.adminland.office_type.store');
+            Route::get('organizations/{slug}/adminland/office-types/{officeType}', [OfficeTypeController::class, 'edit'])->name('organization.adminland.office_type.edit');
+            Route::put('organizations/{slug}/adminland/office-types/{officeType}', [OfficeTypeController::class, 'update'])->name('organization.adminland.office_type.update');
+            Route::delete('organizations/{slug}/adminland/office-types/{officeType}', [OfficeTypeController::class, 'destroy'])->name('organization.adminland.office_type.destroy');
         });
     });
 

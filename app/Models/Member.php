@@ -17,7 +17,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * @property int $organization_id
  * @property int|null $user_id
  * @property Carbon|null $joined_at
- * @property string $permission
+ * @property Permission $permission
  * @property string|null $timezone
  * @property Carbon|null $birthdate
  * @property string|null $job_position_free_text
@@ -61,9 +61,9 @@ class Member extends Model
     /**
      * Get the user record associated with the member.
      *
-     * @return BelongsTo
+     * @return BelongsTo<User, $this>
      */
-    public function user()
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
@@ -71,9 +71,9 @@ class Member extends Model
     /**
      * Get the Organization record associated with the member.
      *
-     * @return BelongsTo
+     * @return BelongsTo<Organization, $this>
      */
-    public function organization()
+    public function organization(): BelongsTo
     {
         return $this->belongsTo(Organization::class);
     }
