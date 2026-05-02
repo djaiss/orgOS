@@ -16,6 +16,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * @property int $id
  * @property int $organization_id
  * @property int|null $user_id
+ * @property int|null $member_type_id
  * @property Permission $permission
  * @property string|null $timezone
  * @property Carbon|null $birthdate
@@ -37,6 +38,7 @@ class Member extends Model
     protected $fillable = [
         'organization_id',
         'user_id',
+        'member_type_id',
         'permission',
         'timezone',
         'birthdate',
@@ -53,6 +55,16 @@ class Member extends Model
         'joined_at' => 'datetime',
         'permission' => Permission::class,
     ];
+
+    /**
+     * Get the member type associated with the member.
+     *
+     * @return BelongsTo<MemberType, $this>
+     */
+    public function memberType(): BelongsTo
+    {
+        return $this->belongsTo(MemberType::class);
+    }
 
     /**
      * Get the user record associated with the member.

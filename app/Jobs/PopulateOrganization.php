@@ -22,6 +22,7 @@ class PopulateOrganization implements ShouldQueue
     public function handle(): void
     {
         $this->addOfficeTypes();
+        $this->addMemberTypes();
     }
 
     private function addOfficeTypes(): void
@@ -36,6 +37,23 @@ class PopulateOrganization implements ShouldQueue
 
         foreach ($types as $position => $name) {
             $this->organization->officeTypes()->create([
+                'name' => $name,
+                'position' => $position,
+            ]);
+        }
+    }
+
+    private function addMemberTypes(): void
+    {
+        $types = [
+            'Member',
+            'Employee',
+            'Student',
+            'Freelance',
+        ];
+
+        foreach ($types as $position => $name) {
+            $this->organization->memberTypes()->create([
                 'name' => $name,
                 'position' => $position,
             ]);

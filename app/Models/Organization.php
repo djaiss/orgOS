@@ -85,6 +85,16 @@ class Organization extends Model
     }
 
     /**
+     * Get the employee types of the organization.
+     *
+     * @return HasMany<MemberType, $this>
+     */
+    public function memberTypes(): HasMany
+    {
+        return $this->hasMany(MemberType::class);
+    }
+
+    /**
      * Gets the avatar of the organization.
      */
     public function getAvatar(): string

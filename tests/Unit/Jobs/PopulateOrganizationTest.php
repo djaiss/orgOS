@@ -29,4 +29,20 @@ class PopulateOrganizationTest extends TestCase
 
         $this->assertEquals(5, $organization->officeTypes()->count());
     }
+
+    #[Test]
+    public function it_creates_default_member_types(): void
+    {
+        $user = $this->createUser();
+        $organization = $this->addOrganization($user);
+
+        new PopulateOrganization($organization)->handle();
+
+        $this->assertDatabaseHas('member_types', ['organization_id' => $organization->id, 'name' => 'Member', 'position' => 0]);
+        $this->assertDatabaseHas('member_types', ['organization_id' => $organization->id, 'name' => 'Employee', 'position' => 1]);
+        $this->assertDatabaseHas('member_types', ['organization_id' => $organization->id, 'name' => 'Student', 'position' => 2]);
+        $this->assertDatabaseHas('member_types', ['organization_id' => $organization->id, 'name' => 'Freelance', 'position' => 3]);
+
+        $this->assertEquals(4, $organization->memberTypes()->count());
+    }
 }
