@@ -17,6 +17,13 @@
     <!-- Main content -->
     <section class="p-4 sm:p-8">
       <div class="mx-auto max-w-5xl space-y-6 sm:px-0">
+        @include(
+          'app.organization.adminland.members._member_types',
+          [
+            'memberTypes' => $memberTypes,
+          ]
+        )
+
         <div x-data="{ showInvite: false }">
           <x-box padding="p-0">
             <x-slot:title>{{ __('All the members') }}</x-slot>
