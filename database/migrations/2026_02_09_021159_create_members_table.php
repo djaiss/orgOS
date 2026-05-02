@@ -20,6 +20,8 @@ return new class extends Migration {
             $table->timestamp('joined_at');
             $table->string('timezone', 50)->nullable();
             $table->date('birthdate')->nullable();
+            $table->string('job_position_free_text', 255)->nullable();
+            $table->string('phone_number', 20)->nullable();
             $table->timestamps();
             $table->foreign('organization_id')->references('id')->on('organizations')->cascadeOnDelete();
             $table->foreign('user_id')->references('id')->on('users')->nullOnDelete();
