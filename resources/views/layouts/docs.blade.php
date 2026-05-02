@@ -14,6 +14,9 @@
           organizationsDocumentation:
             '{{ str_starts_with( request()->route()->getName(),'marketing.docs.api.organizations.',) ? 'true' : 'false' }}' ===
             'true',
+          officeTypesDocumentation:
+            '{{ request()->routeIs('marketing.docs.api.organizations.officetypes.*') ? 'true' : 'false' }}' ===
+            'true',
         }" class="bg-light dark:bg-dark z-10 pt-16">
           <!-- api documentation -->
           <div @click="openApiDocumentation = !openApiDocumentation" class="mb-2 flex cursor-pointer items-center justify-between rounded-md border border-transparent px-2 py-1 hover:border-gray-200 hover:bg-blue-50 dark:hover:border-gray-700 dark:hover:bg-gray-800">
@@ -37,6 +40,17 @@
             <div x-show="organizationsDocumentation" class="mb-3 flex flex-col gap-y-2">
               <div>
                 <a href="{{ route('marketing.docs.api.organizations.index') }}" class="{{ request()->routeIs('marketing.docs.api.organizations.index') ? 'border-l-blue-400' : 'border-l-transparent' }} block border-l-3 pl-3 hover:border-l-blue-400 hover:underline">Organizations</a>
+              </div>
+
+              <!-- adminland -->
+              <div @click.stop="officeTypesDocumentation = !officeTypesDocumentation" class="flex cursor-pointer items-center justify-between rounded-md border border-transparent px-2 py-1 pl-3 text-xs text-gray-500 uppercase hover:border-gray-200 hover:bg-blue-50 dark:text-gray-400 dark:hover:border-gray-700 dark:hover:bg-gray-800">
+                <h3>Adminland</h3>
+                <x-phosphor-caret-right x-bind:class="officeTypesDocumentation ? 'rotate-90' : ''" class="h-4 w-4 text-gray-500 transition-transform duration-300" />
+              </div>
+              <div x-show="officeTypesDocumentation" class="flex flex-col gap-y-2">
+                <div>
+                  <a href="{{ route('marketing.docs.api.organizations.officetypes.index') }}" class="{{ request()->routeIs('marketing.docs.api.organizations.officetypes.index') ? 'border-l-blue-400' : 'border-l-transparent' }} block border-l-3 pl-6 hover:border-l-blue-400 hover:underline">Office Types</a>
+                </div>
               </div>
             </div>
           </div>
