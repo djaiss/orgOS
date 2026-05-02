@@ -33,7 +33,13 @@
     <div class="mb-10 grid grid-cols-1 gap-6 border-b border-gray-200 pb-10 sm:grid-cols-2 dark:border-gray-700">
       <div>
         <p class="mb-2">Office types allow you to categorize your offices within an organization (e.g. "Remote", "Headquarters", "Satellite").</p>
-        <p>All office type endpoints require you to be a member of the organization. Create, update, and delete operations additionally require the <strong>Owner</strong> or <strong>Administrator</strong> role.</p>
+        <p>
+          All office type endpoints require you to be a member of the organization. Create, update, and delete operations additionally require the
+          <strong>Owner</strong>
+          or
+          <strong>Administrator</strong>
+          role.
+        </p>
       </div>
       <div>
         <x-marketing.docs.code title="Endpoints">
@@ -77,8 +83,10 @@
         <x-marketing.docs.h2 id="list-office-types" title="List all office types" />
         <p class="mb-2">This endpoint returns all office types belonging to the given organization, ordered by position.</p>
         <p class="mb-10">
-          <strong>Required permission:</strong> any member of the organization.
-          This call is not <x-link href="{{ route('marketing.docs.api.index') }}#pagination">paginated</x-link> at the moment.
+          <strong>Required permission:</strong>
+          any member of the organization. This call is not
+          <x-link href="{{ route('marketing.docs.api.index') }}#pagination">paginated</x-link>
+          at the moment.
         </p>
 
         <!-- url parameters -->
@@ -126,7 +134,10 @@
       <div>
         <x-marketing.docs.h2 id="get-an-office-type" title="Get a specific office type" />
         <p class="mb-2">This endpoint returns a specific office type belonging to the given organization.</p>
-        <p class="mb-10"><strong>Required permission:</strong> any member of the organization.</p>
+        <p class="mb-10">
+          <strong>Required permission:</strong>
+          any member of the organization.
+        </p>
 
         <!-- url parameters -->
         <x-marketing.docs.url-parameters>
@@ -174,7 +185,10 @@
       <div>
         <x-marketing.docs.h2 id="create-an-office-type" title="Create an office type" />
         <p class="mb-2">This endpoint creates a new office type for the given organization. If no position is provided, the new office type is appended at the end of the list. Providing a position will insert it at that position and shift existing types down.</p>
-        <p class="mb-10"><strong>Required permission:</strong> Owner or Administrator.</p>
+        <p class="mb-10">
+          <strong>Required permission:</strong>
+          Owner or Administrator.
+        </p>
 
         <!-- url parameters -->
         <x-marketing.docs.url-parameters>
@@ -224,7 +238,10 @@
       <div>
         <x-marketing.docs.h2 id="update-an-office-type" title="Update an office type" />
         <p class="mb-2">This endpoint updates an existing office type. You can rename it and optionally reorder it by supplying a new position. Changing the position will automatically shift other office types to preserve a consistent ordering.</p>
-        <p class="mb-10"><strong>Required permission:</strong> Owner or Administrator.</p>
+        <p class="mb-10">
+          <strong>Required permission:</strong>
+          Owner or Administrator.
+        </p>
 
         <!-- url parameters -->
         <x-marketing.docs.url-parameters>
@@ -275,7 +292,10 @@
       <div>
         <x-marketing.docs.h2 id="delete-an-office-type" title="Delete an office type" />
         <p class="mb-2">This endpoint permanently deletes an office type from the organization.</p>
-        <p class="mb-10"><strong>Required permission:</strong> Owner or Administrator.</p>
+        <p class="mb-10">
+          <strong>Required permission:</strong>
+          Owner or Administrator.
+        </p>
 
         <!-- url parameters -->
         <x-marketing.docs.url-parameters>

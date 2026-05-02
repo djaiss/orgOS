@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Http\Controllers\Api\HealthController;
+use App\Http\Controllers\Api\Adminland\OfficeController;
 use App\Http\Controllers\Api\Adminland\OfficeTypeController;
 use App\Http\Controllers\Api\OrganizationController;
 use Illuminate\Support\Facades\Route;
@@ -25,6 +26,13 @@ Route::name('api.')->group(function (): void {
             Route::get('organizations/{id}/adminland/officetypes/{officeTypeId}', [OfficeTypeController::class, 'show'])->name('organization.adminland.officetype.show');
             Route::put('organizations/{id}/adminland/officetypes/{officeTypeId}', [OfficeTypeController::class, 'update'])->name('organization.adminland.officetype.update');
             Route::delete('organizations/{id}/adminland/officetypes/{officeTypeId}', [OfficeTypeController::class, 'destroy'])->name('organization.adminland.officetype.destroy');
+
+            // adminland - offices
+            Route::get('organizations/{id}/adminland/offices', [OfficeController::class, 'index'])->name('organization.adminland.office.index');
+            Route::post('organizations/{id}/adminland/offices', [OfficeController::class, 'store'])->name('organization.adminland.office.store');
+            Route::get('organizations/{id}/adminland/offices/{officeId}', [OfficeController::class, 'show'])->name('organization.adminland.office.show');
+            Route::put('organizations/{id}/adminland/offices/{officeId}', [OfficeController::class, 'update'])->name('organization.adminland.office.update');
+            Route::delete('organizations/{id}/adminland/offices/{officeId}', [OfficeController::class, 'destroy'])->name('organization.adminland.office.destroy');
         });
     });
 });
