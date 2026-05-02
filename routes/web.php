@@ -5,6 +5,7 @@ declare(strict_types=1);
 use App\Enums\Permission;
 use App\Http\Controllers\App\Organization\Adminland\AdminlandController;
 use App\Http\Controllers\App\Organization\Adminland\MemberController;
+use App\Http\Controllers\App\Organization\Adminland\MemberTypeController;
 use App\Http\Controllers\App\Organization\Adminland\OfficeController;
 use App\Http\Controllers\App\Organization\Adminland\OfficeTypeController;
 use App\Http\Controllers\App\Organization\JoinOrganizationController;
@@ -45,6 +46,13 @@ Route::middleware(['auth', 'verified', 'throttle:60,1', 'set.locale'])->group(fu
 
             // members
             Route::get('organizations/{slug}/adminland/members', [MemberController::class, 'index'])->name('organization.adminland.member.index');
+
+            // member types
+            Route::get('organizations/{slug}/adminland/member-types/create', [MemberTypeController::class, 'create'])->name('organization.adminland.member_type.create');
+            Route::post('organizations/{slug}/adminland/member-types', [MemberTypeController::class, 'store'])->name('organization.adminland.member_type.store');
+            Route::get('organizations/{slug}/adminland/member-types/{memberType}', [MemberTypeController::class, 'edit'])->name('organization.adminland.member_type.edit');
+            Route::put('organizations/{slug}/adminland/member-types/{memberType}', [MemberTypeController::class, 'update'])->name('organization.adminland.member_type.update');
+            Route::delete('organizations/{slug}/adminland/member-types/{memberType}', [MemberTypeController::class, 'destroy'])->name('organization.adminland.member_type.destroy');
 
             // offices
             Route::get('organizations/{slug}/adminland/offices', [OfficeController::class, 'index'])->name('organization.adminland.office.index');

@@ -25,8 +25,25 @@ class MemberController extends Controller
                 'permission' => $member->permission,
             ]);
 
+        $memberTypes = $organization->memberTypes()
+            ->orderBy('position')
+            ->get()
+            ->map(fn($memberType) => (object) [
+                'id' => $memberType->id,
+                'name' => $memberType->name,
+                'edit_link' => route('organization.adminland.member_type.edit', [
+                    'slug' => $organization->slug,
+                    'memberType' => $memberType->id,
+                ]),
+                'destroy_link' => route('organization.adminland.member_type.destroy', [
+                    'slug' => $organization->slug,
+                    'memberType' => $memberType->id,
+                ]),
+            ]);
+
         return view('app.organization.adminland.members.index', [
             'members' => $members,
+            'memberTypes' => $memberTypes,
         ]);
     }
 }
