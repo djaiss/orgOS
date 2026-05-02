@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Api\Adminland;
 
+use App\Actions\CreateOfficeType;
 use App\Actions\DestroyOfficeType;
 use App\Actions\UpdateOfficeType;
+use App\Helpers\TextSanitizer;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\OfficeTypeResource;
 use Illuminate\Http\JsonResponse;
@@ -24,6 +26,27 @@ class OfficeTypeController extends Controller
             ->get();
 
         return OfficeTypeResource::collection($officeTypes);
+    }
+
+    public function store(Request $request, int $id): JsonResponse
+    {
+        $organization = $request->attributes->get('organization');
+
+        $validated = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'position' => ['nullable', 'integer', 'min:0'],
+        ]);
+
+        $officeType = new CreateOfficeType(
+            user: $request->user(),
+            organization: $organization,
+            name: TextSanitizer::plainText($validated['name']),
+            position: $validated['position'] ?? null,
+        )->execute();
+
+        return new OfficeTypeResource($officeType)
+            ->response()
+            ->setStatusCode(201);
     }
 
     public function show(Request $request, int $id, int $officeTypeId): JsonResponse
@@ -52,7 +75,7 @@ class OfficeTypeController extends Controller
             user: $request->user(),
             organization: $organization,
             officeType: $officeType,
-            name: $validated['name'],
+            name: TextSanitizer::plainText($validated['name']),
             position: $validated['position'] ?? null,
         )->execute();
 

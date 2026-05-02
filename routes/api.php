@@ -21,6 +21,7 @@ Route::name('api.')->group(function (): void {
 
             // adminland - office types
             Route::get('organizations/{id}/adminland/officetypes', [OfficeTypeController::class, 'index'])->name('organization.adminland.officetype.index');
+            Route::post('organizations/{id}/adminland/officetypes', [OfficeTypeController::class, 'store'])->name('organization.adminland.officetype.store');
             Route::get('organizations/{id}/adminland/officetypes/{officeTypeId}', [OfficeTypeController::class, 'show'])->name('organization.adminland.officetype.show');
             Route::put('organizations/{id}/adminland/officetypes/{officeTypeId}', [OfficeTypeController::class, 'update'])->name('organization.adminland.officetype.update');
             Route::delete('organizations/{id}/adminland/officetypes/{officeTypeId}', [OfficeTypeController::class, 'destroy'])->name('organization.adminland.officetype.destroy');
