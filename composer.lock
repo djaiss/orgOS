@@ -835,16 +835,16 @@
         },
         {
             "name": "erag/laravel-disposable-email",
-            "version": "v5.0.0",
+            "version": "v5.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/eramitgupta/laravel-disposable-email.git",
-                "reference": "14665c071064c4afc412c3ba6c2a949563924287"
+                "reference": "90d6d4b807f698e9bab99a60a5ac62589fa398d0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/eramitgupta/laravel-disposable-email/zipball/14665c071064c4afc412c3ba6c2a949563924287",
-                "reference": "14665c071064c4afc412c3ba6c2a949563924287",
+                "url": "https://api.github.com/repos/eramitgupta/laravel-disposable-email/zipball/90d6d4b807f698e9bab99a60a5ac62589fa398d0",
+                "reference": "90d6d4b807f698e9bab99a60a5ac62589fa398d0",
                 "shasum": ""
             },
             "require": {
@@ -904,7 +904,7 @@
             ],
             "support": {
                 "issues": "https://github.com/eramitgupta/laravel-disposable-email/issues",
-                "source": "https://github.com/eramitgupta/laravel-disposable-email/tree/v5.0.0"
+                "source": "https://github.com/eramitgupta/laravel-disposable-email/tree/v5.1.0"
             },
             "funding": [
                 {
@@ -912,7 +912,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-04-30T16:48:28+00:00"
+            "time": "2026-05-02T04:51:06+00:00"
         },
         {
             "name": "ezyang/htmlpurifier",
