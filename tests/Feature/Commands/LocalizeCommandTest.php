@@ -37,7 +37,7 @@ BLADE
                 json_encode([
                     'Localize test key' => 'Preserved English Value',
                     'Localize stale key' => 'Remove me',
-                ], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE).PHP_EOL
+                ], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) . PHP_EOL,
             );
 
             file_put_contents(
@@ -45,7 +45,7 @@ BLADE
                 json_encode([
                     'Localize test key' => 'Valeur Française Conservée',
                     'Localize stale key' => 'Supprime-moi',
-                ], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE).PHP_EOL
+                ], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) . PHP_EOL,
             );
 
             $this->artisan('orgos:localize en,fr')
@@ -65,7 +65,7 @@ BLADE
             $this->assertSame('Localize custom key', $enTranslations['Localize custom key']);
             $this->assertSame(
                 'We\'ve sent you a temporary login link. This link is valid for 5 minutes. Please check your inbox.',
-                $enTranslations['We\'ve sent you a temporary login link. This link is valid for 5 minutes. Please check your inbox.']
+                $enTranslations['We\'ve sent you a temporary login link. This link is valid for 5 minutes. Please check your inbox.'],
             );
 
             $this->assertSame('', $frTranslations['Localize double key']);

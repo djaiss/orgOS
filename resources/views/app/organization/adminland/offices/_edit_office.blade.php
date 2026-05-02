@@ -1,6 +1,6 @@
 @php
-  $officeTypeOptions = ['' => '-'] + $officeTypes->mapWithKeys(fn($officeType) => [(string) $officeType->id => $officeType->name])->all();
-  $countryOptions = ['' => '-'] + $countries->mapWithKeys(fn($country) => [(string) $country->id => $country->name])->all();
+  $officeTypeOptions = ['' => '-'] + $officeTypes->mapWithKeys(fn ($officeType) => [(string) $officeType->id => $officeType->name])->all();
+  $countryOptions = ['' => '-'] + $countries->mapWithKeys(fn ($country) => [(string) $country->id => $country->name])->all();
 @endphp
 
 <x-form id="office-{{ $office->id }}" x-target="office-list notifications office-{{ $office->id }}" x-target.back="office-{{ $office->id }}" action="{{ route('organization.adminland.office.update', [$organization->slug, $office->id]) }}" method="post" class="space-y-5 rounded-t-lg border-b border-gray-200 p-4 hover:bg-blue-50 dark:border-gray-700 dark:hover:bg-gray-800">

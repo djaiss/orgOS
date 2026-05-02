@@ -14,13 +14,19 @@
 
     <section class="p-4 sm:p-8">
       <div class="mx-auto max-w-5xl space-y-6 sm:px-0">
-        @include('app.organization.adminland.offices._offices', [
-          'offices' => $offices,
-        ])
+        @include(
+          'app.organization.adminland.offices._offices',
+          [
+            'offices' => $offices,
+          ]
+        )
 
-        @include('app.organization.adminland.offices._office_types', [
-          'officeTypes' => $officeTypes,
-        ])
+        @include(
+          'app.organization.adminland.offices._office_types',
+          [
+            'officeTypes' => $officeTypes,
+          ]
+        )
       </div>
     </section>
   </div>
