@@ -7,23 +7,25 @@
     <div class="grid grid-cols-1 gap-x-16 lg:grid-cols-[250px_1fr]">
       <!-- Sidebar -->
       <div class="hidden w-full flex-shrink-0 flex-col justify-self-end sm:border-r sm:border-gray-200 sm:pr-3 lg:flex dark:sm:border-gray-700">
-        <div x-data="{
-          openApiDocumentation:
-            '{{ str_starts_with( request()->route()->getName(),'marketing.docs.api.',) ? 'true' : 'false' }}' ===
-            'true',
-          organizationsDocumentation:
-            '{{ str_starts_with( request()->route()->getName(),'marketing.docs.api.organizations.',) ? 'true' : 'false' }}' ===
-            'true',
-          officeTypesDocumentation:
-            '{{ request()->routeIs('marketing.docs.api.organizations.officetypes.*') ? 'true' : 'false' }}' ===
-            'true',
-          officesDocumentation:
-            '{{ request()->routeIs('marketing.docs.api.organizations.offices.*') ? 'true' : 'false' }}' ===
-            'true',
-          membersDocumentation:
-            '{{ request()->routeIs('marketing.docs.api.organizations.members.*') ? 'true' : 'false' }}' ===
-            'true',
-        }" class="bg-light dark:bg-dark z-10 pt-16">
+        <div
+          x-data="{
+            openApiDocumentation:
+              '{{ str_starts_with( request()->route()->getName(),'marketing.docs.api.',) ? 'true' : 'false' }}' ===
+              'true',
+            organizationsDocumentation:
+              '{{ str_starts_with( request()->route()->getName(),'marketing.docs.api.organizations.',) ? 'true' : 'false' }}' ===
+              'true',
+            officeTypesDocumentation:
+              '{{ request()->routeIs('marketing.docs.api.organizations.officetypes.*') ? 'true' : 'false' }}' ===
+              'true',
+            officesDocumentation:
+              '{{ request()->routeIs('marketing.docs.api.organizations.offices.*') ? 'true' : 'false' }}' ===
+              'true',
+            membersDocumentation:
+              '{{ request()->routeIs('marketing.docs.api.organizations.members.*') ? 'true' : 'false' }}' ===
+              'true',
+          }"
+          class="bg-light dark:bg-dark z-10 pt-16">
           <!-- api documentation -->
           <div @click="openApiDocumentation = !openApiDocumentation" class="mb-2 flex cursor-pointer items-center justify-between rounded-md border border-transparent px-2 py-1 hover:border-gray-200 hover:bg-blue-50 dark:hover:border-gray-700 dark:hover:bg-gray-800">
             <h3>API documentation</h3>
