@@ -76,6 +76,55 @@ class OfficeTypeControllerTest extends TestCase
     }
 
     #[Test]
+    public function it_can_create_an_office_type(): void
+    {
+        $user = $this->createUser();
+        $organization = $this->addOrganization($user, 'Dunder Mifflin');
+
+        Sanctum::actingAs($user);
+
+        $response = $this->json('POST', '/api/organizations/' . $organization->id . '/adminland/officetypes', [
+            'name' => 'Remote',
+        ]);
+
+        $response->assertStatus(201);
+        $response->assertJsonStructure($this->jsonStructure);
+    }
+
+    #[Test]
+    public function it_requires_a_name_when_creating_an_office_type(): void
+    {
+        $user = $this->createUser();
+        $organization = $this->addOrganization($user, 'Dunder Mifflin');
+
+        Sanctum::actingAs($user);
+
+        $response = $this->json('POST', '/api/organizations/' . $organization->id . '/adminland/officetypes', []);
+
+        $response->assertStatus(422);
+    }
+
+    #[Test]
+    public function it_returns_404_when_a_non_admin_tries_to_create_an_office_type(): void
+    {
+        $user = $this->createUser();
+        $organization = Organization::factory()->create();
+        Member::factory()->create([
+            'user_id' => $user->id,
+            'organization_id' => $organization->id,
+            'permission' => Permission::Member,
+        ]);
+
+        Sanctum::actingAs($user);
+
+        $response = $this->json('POST', '/api/organizations/' . $organization->id . '/adminland/officetypes', [
+            'name' => 'Remote',
+        ]);
+
+        $response->assertStatus(404);
+    }
+
+    #[Test]
     public function it_restricts_listing_office_types_to_organization_members(): void
     {
         $user = $this->createUser();
@@ -136,6 +185,22 @@ class OfficeTypeControllerTest extends TestCase
 
         $response->assertStatus(200);
         $response->assertJsonStructure($this->jsonStructure);
+    }
+
+    #[Test]
+    public function it_requires_a_name_when_updating_an_office_type(): void
+    {
+        $user = $this->createUser();
+        $organization = $this->addOrganization($user, 'Dunder Mifflin');
+        $officeType = OfficeType::factory()->create([
+            'organization_id' => $organization->id,
+        ]);
+
+        Sanctum::actingAs($user);
+
+        $response = $this->json('PUT', '/api/organizations/' . $organization->id . '/adminland/officetypes/' . $officeType->id, []);
+
+        $response->assertStatus(422);
     }
 
     #[Test]
