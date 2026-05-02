@@ -1,0 +1,17 @@
+meta {
+  name: Create member type
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{URL}}/organizations/1/adminland/membertypes
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "name": "Contractor"
+  }
+}
