@@ -145,4 +145,46 @@ class MemberTypeControllerTest extends TestCase
 
         $response->assertStatus(404);
     }
+
+    #[Test]
+    public function it_sorts_a_member_type(): void
+    {
+        $user = $this->createUser();
+        $organization = $this->addOrganization($user);
+        MemberType::factory()->create([
+            'organization_id' => $organization->id,
+            'position' => 0,
+        ]);
+        $memberType = MemberType::factory()->create([
+            'organization_id' => $organization->id,
+            'position' => 1,
+        ]);
+
+        $response = $this->actingAs($user)
+            ->put('/organizations/' . $organization->slug . '/adminland/member-types/' . $memberType->id, [
+                'position' => 0,
+            ]);
+
+        $response->assertRedirect(route('organization.adminland.member.index', $organization->slug));
+        $response->assertSessionHas('status', 'Changes saved');
+    }
+
+    #[Test]
+    public function it_returns_404_when_sorting_a_member_type_from_another_organization(): void
+    {
+        $user = $this->createUser();
+        $organization = $this->addOrganization($user);
+
+        $otherOrganization = $this->addOrganization($this->createUser());
+        $memberType = MemberType::factory()->create([
+            'organization_id' => $otherOrganization->id,
+        ]);
+
+        $response = $this->actingAs($user)
+            ->put('/organizations/' . $organization->slug . '/adminland/member-types/' . $memberType->id, [
+                'position' => 0,
+            ]);
+
+        $response->assertStatus(404);
+    }
 }

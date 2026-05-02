@@ -67,14 +67,16 @@ class MemberTypeController extends Controller
         }
 
         $validated = $request->validate([
-            'name' => ['required', 'string', 'max:255'],
+            'name' => ['sometimes', 'string', 'max:255'],
+            'position' => ['sometimes', 'integer', 'min:0'],
         ]);
 
         new UpdateMemberType(
             user: $request->user(),
             organization: $organization,
             memberType: $memberType,
-            name: TextSanitizer::plainText($validated['name']),
+            name: TextSanitizer::plainText($validated['name'] ?? $memberType->name),
+            position: isset($validated['position']) ? (int) $validated['position'] : null,
         )->execute();
 
         return to_route('organization.adminland.member.index', $organization->slug)

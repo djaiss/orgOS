@@ -31,6 +31,11 @@ class MemberController extends Controller
             ->map(fn($memberType) => (object) [
                 'id' => $memberType->id,
                 'name' => $memberType->name,
+                'position' => $memberType->position,
+                'update_link' => route('organization.adminland.member_type.update', [
+                    'slug' => $organization->slug,
+                    'memberType' => $memberType->id,
+                ]),
                 'edit_link' => route('organization.adminland.member_type.edit', [
                     'slug' => $organization->slug,
                     'memberType' => $memberType->id,
