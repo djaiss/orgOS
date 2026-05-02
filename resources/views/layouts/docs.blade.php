@@ -7,20 +7,25 @@
     <div class="grid grid-cols-1 gap-x-16 lg:grid-cols-[250px_1fr]">
       <!-- Sidebar -->
       <div class="hidden w-full flex-shrink-0 flex-col justify-self-end sm:border-r sm:border-gray-200 sm:pr-3 lg:flex dark:sm:border-gray-700">
-        <div x-data="{
-          openApiDocumentation:
-            '{{ str_starts_with( request()->route()->getName(),'marketing.docs.api.',) ? 'true' : 'false' }}' ===
-            'true',
-          organizationsDocumentation:
-            '{{ str_starts_with( request()->route()->getName(),'marketing.docs.api.organizations.',) ? 'true' : 'false' }}' ===
-            'true',
-          officeTypesDocumentation:
-            '{{ request()->routeIs('marketing.docs.api.organizations.officetypes.*') ? 'true' : 'false' }}' ===
-            'true',
-          officesDocumentation:
-            '{{ request()->routeIs('marketing.docs.api.organizations.offices.*') ? 'true' : 'false' }}' ===
-            'true',
-        }" class="bg-light dark:bg-dark z-10 pt-16">
+        <div
+          x-data="{
+            openApiDocumentation:
+              '{{ str_starts_with( request()->route()->getName(),'marketing.docs.api.',) ? 'true' : 'false' }}' ===
+              'true',
+            organizationsDocumentation:
+              '{{ str_starts_with( request()->route()->getName(),'marketing.docs.api.organizations.',) ? 'true' : 'false' }}' ===
+              'true',
+            officeTypesDocumentation:
+              '{{ request()->routeIs('marketing.docs.api.organizations.officetypes.*') ? 'true' : 'false' }}' ===
+              'true',
+            officesDocumentation:
+              '{{ request()->routeIs('marketing.docs.api.organizations.offices.*') ? 'true' : 'false' }}' ===
+              'true',
+            membersDocumentation:
+              '{{ request()->routeIs('marketing.docs.api.organizations.members.*') ? 'true' : 'false' }}' ===
+              'true',
+          }"
+          class="bg-light dark:bg-dark z-10 pt-16">
           <!-- api documentation -->
           <div @click="openApiDocumentation = !openApiDocumentation" class="mb-2 flex cursor-pointer items-center justify-between rounded-md border border-transparent px-2 py-1 hover:border-gray-200 hover:bg-blue-50 dark:hover:border-gray-700 dark:hover:bg-gray-800">
             <h3>API documentation</h3>
@@ -46,16 +51,19 @@
               </div>
 
               <!-- adminland -->
-              <div @click.stop="officeTypesDocumentation = !officeTypesDocumentation; officesDocumentation = !officesDocumentation" class="flex cursor-pointer items-center justify-between rounded-md border border-transparent px-2 py-1 pl-3 text-xs text-gray-500 uppercase hover:border-gray-200 hover:bg-blue-50 dark:text-gray-400 dark:hover:border-gray-700 dark:hover:bg-gray-800">
+              <div @click.stop="officeTypesDocumentation = !officeTypesDocumentation; officesDocumentation = !officesDocumentation; membersDocumentation = !membersDocumentation" class="flex cursor-pointer items-center justify-between rounded-md border border-transparent px-2 py-1 pl-3 text-xs text-gray-500 uppercase hover:border-gray-200 hover:bg-blue-50 dark:text-gray-400 dark:hover:border-gray-700 dark:hover:bg-gray-800">
                 <h3>Adminland</h3>
-                <x-phosphor-caret-right x-bind:class="officeTypesDocumentation || officesDocumentation ? 'rotate-90' : ''" class="h-4 w-4 text-gray-500 transition-transform duration-300" />
+                <x-phosphor-caret-right x-bind:class="officeTypesDocumentation || officesDocumentation || membersDocumentation ? 'rotate-90' : ''" class="h-4 w-4 text-gray-500 transition-transform duration-300" />
               </div>
-              <div x-show="officeTypesDocumentation || officesDocumentation" class="flex flex-col gap-y-2">
+              <div x-show="officeTypesDocumentation || officesDocumentation || membersDocumentation" class="flex flex-col gap-y-2">
                 <div>
                   <a href="{{ route('marketing.docs.api.organizations.officetypes.index') }}" class="{{ request()->routeIs('marketing.docs.api.organizations.officetypes.index') ? 'border-l-blue-400' : 'border-l-transparent' }} block border-l-3 pl-6 hover:border-l-blue-400 hover:underline">Office Types</a>
                 </div>
                 <div>
                   <a href="{{ route('marketing.docs.api.organizations.offices.index') }}" class="{{ request()->routeIs('marketing.docs.api.organizations.offices.index') ? 'border-l-blue-400' : 'border-l-transparent' }} block border-l-3 pl-6 hover:border-l-blue-400 hover:underline">Offices</a>
+                </div>
+                <div>
+                  <a href="{{ route('marketing.docs.api.organizations.members.index') }}" class="{{ request()->routeIs('marketing.docs.api.organizations.members.index') ? 'border-l-blue-400' : 'border-l-transparent' }} block border-l-3 pl-6 hover:border-l-blue-400 hover:underline">Members</a>
                 </div>
               </div>
             </div>

@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Http\Controllers\Marketing\Docs\ApiIntroductionController;
+use App\Http\Controllers\Marketing\Docs\ApiMemberController;
 use App\Http\Controllers\Marketing\Docs\ApiOfficeController;
 use App\Http\Controllers\Marketing\Docs\ApiOfficeTypeController;
 use App\Http\Controllers\Marketing\Docs\ApiOrganizationController;
@@ -17,4 +18,5 @@ Route::middleware(['marketing'])->group(function (): void {
     Route::get('/docs/api/organizations', [ApiOrganizationController::class, 'index'])->name('marketing.docs.api.organizations.index');
     Route::get('/docs/api/organizations/officetypes', [ApiOfficeTypeController::class, 'index'])->name('marketing.docs.api.organizations.officetypes.index');
     Route::get('/docs/api/organizations/offices', [ApiOfficeController::class, 'index'])->name('marketing.docs.api.organizations.offices.index');
+    Route::get('/docs/api/organizations/members', [ApiMemberController::class, 'index'])->name('marketing.docs.api.organizations.members.index');
 });

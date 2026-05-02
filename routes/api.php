@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Http\Controllers\Api\HealthController;
+use App\Http\Controllers\Api\Adminland\MemberController;
 use App\Http\Controllers\Api\Adminland\OfficeController;
 use App\Http\Controllers\Api\Adminland\OfficeTypeController;
 use App\Http\Controllers\Api\OrganizationController;
@@ -33,6 +34,10 @@ Route::name('api.')->group(function (): void {
             Route::get('organizations/{id}/adminland/offices/{officeId}', [OfficeController::class, 'show'])->name('organization.adminland.office.show');
             Route::put('organizations/{id}/adminland/offices/{officeId}', [OfficeController::class, 'update'])->name('organization.adminland.office.update');
             Route::delete('organizations/{id}/adminland/offices/{officeId}', [OfficeController::class, 'destroy'])->name('organization.adminland.office.destroy');
+
+            // adminland - members
+            Route::get('organizations/{id}/adminland/members', [MemberController::class, 'index'])->name('organization.adminland.member.index');
+            Route::get('organizations/{id}/adminland/members/{memberId}', [MemberController::class, 'show'])->name('organization.adminland.member.show');
         });
     });
 });
