@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use App\Enums\Permission;
 use App\Http\Controllers\App\Organization\Adminland\AdminlandController;
+use App\Http\Controllers\App\Organization\Adminland\DepartmentController;
 use App\Http\Controllers\App\Organization\Adminland\MemberController;
 use App\Http\Controllers\App\Organization\Adminland\MemberTypeController;
 use App\Http\Controllers\App\Organization\Adminland\OfficeController;
@@ -53,6 +54,14 @@ Route::middleware(['auth', 'verified', 'throttle:60,1', 'set.locale'])->group(fu
             Route::get('organizations/{slug}/adminland/member-types/{memberType}', [MemberTypeController::class, 'edit'])->name('organization.adminland.member_type.edit');
             Route::put('organizations/{slug}/adminland/member-types/{memberType}', [MemberTypeController::class, 'update'])->name('organization.adminland.member_type.update');
             Route::delete('organizations/{slug}/adminland/member-types/{memberType}', [MemberTypeController::class, 'destroy'])->name('organization.adminland.member_type.destroy');
+
+            // departments
+            Route::get('organizations/{slug}/adminland/departments', [DepartmentController::class, 'index'])->name('organization.adminland.department.index');
+            Route::get('organizations/{slug}/adminland/departments/create', [DepartmentController::class, 'create'])->name('organization.adminland.department.create');
+            Route::post('organizations/{slug}/adminland/departments', [DepartmentController::class, 'store'])->name('organization.adminland.department.store');
+            Route::get('organizations/{slug}/adminland/departments/{department}', [DepartmentController::class, 'edit'])->name('organization.adminland.department.edit');
+            Route::put('organizations/{slug}/adminland/departments/{department}', [DepartmentController::class, 'update'])->name('organization.adminland.department.update');
+            Route::delete('organizations/{slug}/adminland/departments/{department}', [DepartmentController::class, 'destroy'])->name('organization.adminland.department.destroy');
 
             // offices
             Route::get('organizations/{slug}/adminland/offices', [OfficeController::class, 'index'])->name('organization.adminland.office.index');
