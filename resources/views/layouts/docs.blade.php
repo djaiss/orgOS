@@ -27,6 +27,9 @@
             memberTypesDocumentation:
               '{{ request()->routeIs('marketing.docs.api.organizations.membertypes.*') ? 'true' : 'false' }}' ===
               'true',
+            departmentsDocumentation:
+              '{{ request()->routeIs('marketing.docs.api.organizations.departments.*') ? 'true' : 'false' }}' ===
+              'true',
           }"
           class="bg-light dark:bg-dark z-10 pt-16">
           <!-- api documentation -->
@@ -54,11 +57,11 @@
               </div>
 
               <!-- adminland -->
-              <div @click.stop="officeTypesDocumentation = !officeTypesDocumentation; officesDocumentation = !officesDocumentation; membersDocumentation = !membersDocumentation; memberTypesDocumentation = !memberTypesDocumentation" class="flex cursor-pointer items-center justify-between rounded-md border border-transparent px-2 py-1 pl-3 text-xs text-gray-500 uppercase hover:border-gray-200 hover:bg-blue-50 dark:text-gray-400 dark:hover:border-gray-700 dark:hover:bg-gray-800">
+              <div @click.stop="officeTypesDocumentation = !officeTypesDocumentation; officesDocumentation = !officesDocumentation; membersDocumentation = !membersDocumentation; memberTypesDocumentation = !memberTypesDocumentation; departmentsDocumentation = !departmentsDocumentation" class="flex cursor-pointer items-center justify-between rounded-md border border-transparent px-2 py-1 pl-3 text-xs text-gray-500 uppercase hover:border-gray-200 hover:bg-blue-50 dark:text-gray-400 dark:hover:border-gray-700 dark:hover:bg-gray-800">
                 <h3>Adminland</h3>
-                <x-phosphor-caret-right x-bind:class="officeTypesDocumentation || officesDocumentation || membersDocumentation || memberTypesDocumentation ? 'rotate-90' : ''" class="h-4 w-4 text-gray-500 transition-transform duration-300" />
+                <x-phosphor-caret-right x-bind:class="officeTypesDocumentation || officesDocumentation || membersDocumentation || memberTypesDocumentation || departmentsDocumentation ? 'rotate-90' : ''" class="h-4 w-4 text-gray-500 transition-transform duration-300" />
               </div>
-              <div x-show="officeTypesDocumentation || officesDocumentation || membersDocumentation || memberTypesDocumentation" class="flex flex-col gap-y-2">
+              <div x-show="officeTypesDocumentation || officesDocumentation || membersDocumentation || memberTypesDocumentation || departmentsDocumentation" class="flex flex-col gap-y-2">
                 <div>
                   <a href="{{ route('marketing.docs.api.organizations.officetypes.index') }}" class="{{ request()->routeIs('marketing.docs.api.organizations.officetypes.index') ? 'border-l-blue-400' : 'border-l-transparent' }} block border-l-3 pl-6 hover:border-l-blue-400 hover:underline">Office Types</a>
                 </div>
@@ -70,6 +73,9 @@
                 </div>
                 <div>
                   <a href="{{ route('marketing.docs.api.organizations.membertypes.index') }}" class="{{ request()->routeIs('marketing.docs.api.organizations.membertypes.index') ? 'border-l-blue-400' : 'border-l-transparent' }} block border-l-3 pl-6 hover:border-l-blue-400 hover:underline">Member Types</a>
+                </div>
+                <div>
+                  <a href="{{ route('marketing.docs.api.organizations.departments.index') }}" class="{{ request()->routeIs('marketing.docs.api.organizations.departments.index') ? 'border-l-blue-400' : 'border-l-transparent' }} block border-l-3 pl-6 hover:border-l-blue-400 hover:underline">Departments</a>
                 </div>
               </div>
             </div>
