@@ -44,7 +44,6 @@
               'true',
           }"
           class="bg-light dark:bg-dark z-10 pt-16">
-
           <!-- product documentation -->
           <div @click="productDocumentation = !productDocumentation" class="mb-2 flex cursor-pointer items-center justify-between rounded-md border border-transparent px-2 py-1 hover:border-gray-200 hover:bg-blue-50 dark:hover:border-gray-700 dark:hover:bg-gray-800">
             <h3>Product documentation</h3>
@@ -64,7 +63,6 @@
               <x-phosphor-caret-right x-bind:class="manageYourOrganizationDocumentation ? 'rotate-90' : ''" class="h-4 w-4 text-gray-500 transition-transform duration-300" />
             </div>
             <div x-show="manageYourOrganizationDocumentation" class="mb-3 flex flex-col gap-y-2">
-
               {{-- getting started --}}
               <div>
                 <a href="{{ route('marketing.docs.organizations.index') }}" class="{{ request()->routeIs('marketing.docs.organizations.index') ? 'border-l-blue-400' : 'border-l-transparent' }} block border-l-3 pl-6 hover:border-l-blue-400 hover:underline">Getting started</a>
@@ -137,7 +135,6 @@
               </div>
             </div>
           </div>
-
         </div>
       </div>
 
@@ -148,9 +145,9 @@
 
       <!-- Sidebar -->
       @if ($rightSidebar ?? false)
-      <div class="hidden w-full shrink-0 flex-col justify-self-end py-16 sm:border-l sm:border-gray-200 sm:pl-6 lg:flex">
-        {{ $rightSidebar ?? '' }}
-      </div>
+        <div class="hidden w-full shrink-0 flex-col justify-self-end py-16 sm:border-l sm:border-gray-200 sm:pl-6 lg:flex">
+          {{ $rightSidebar ?? '' }}
+        </div>
       @endif
     </div>
   </div>

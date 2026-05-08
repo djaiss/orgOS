@@ -15,33 +15,33 @@
 
   <div id="new-member-type-form"></div>
 
-  <div id="member-type-list"
-    x-data="{
-      draggedId: null,
-      dragOverId: null,
-      start(id) {
-        this.draggedId = id;
-      },
-      over(id) {
-        this.dragOverId = id;
-      },
-      drop(id) {
-        if (!this.draggedId || this.draggedId === id) {
-          this.draggedId = null;
-          this.dragOverId = null;
-          return;
-        }
-        const rows = [...$el.querySelectorAll('[data-member-type-id]')];
-        const newPosition = rows.findIndex(r => r.dataset.memberTypeId == id);
-        const form = document.getElementById('sort-form-' + this.draggedId);
-        form.querySelector('[name=position]').value = newPosition;
-        form.requestSubmit();
-        this.draggedId = null;
-        this.dragOverId = null;
-      },
-    }">
+  <div id="member-type-list" x-data="{
+    draggedId: null,
+    dragOverId: null,
+    start(id) {
+      this.draggedId = id
+    },
+    over(id) {
+      this.dragOverId = id
+    },
+    drop(id) {
+      if (! this.draggedId || this.draggedId === id) {
+        this.draggedId = null
+        this.dragOverId = null
+        return
+      }
+      const rows = [...$el.querySelectorAll('[data-member-type-id]')]
+      const newPosition = rows.findIndex((r) => r.dataset.memberTypeId == id)
+      const form = document.getElementById('sort-form-' + this.draggedId)
+      form.querySelector('[name=position]').value = newPosition
+      form.requestSubmit()
+      this.draggedId = null
+      this.dragOverId = null
+    },
+  }">
     @foreach ($memberTypes as $memberType)
-      <div id="member-type-{{ $memberType->id }}"
+      <div
+        id="member-type-{{ $memberType->id }}"
         data-member-type-id="{{ $memberType->id }}"
         draggable="true"
         @dragstart="start({{ $memberType->id }})"
@@ -88,7 +88,7 @@
         <form id="sort-form-{{ $memberType->id }}" x-target="member-type-list" action="{{ $memberType->update_link }}" method="POST" class="hidden">
           @csrf
           @method('PUT')
-          <input type="hidden" name="position" value="{{ $memberType->position }}">
+          <input type="hidden" name="position" value="{{ $memberType->position }}" />
         </form>
       </div>
     @endforeach
