@@ -28,7 +28,7 @@ class OrganizationFactory extends Factory
         ];
     }
 
-    public function configure(): static
+    public function configure(): self
     {
         return $this->afterCreating(function (Organization $organization): void {
             $organization->slug = $organization->id . '-' . Str::lower($organization->name);
