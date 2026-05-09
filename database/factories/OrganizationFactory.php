@@ -28,8 +28,9 @@ class OrganizationFactory extends Factory
         ];
     }
 
-    public function configure(): self
+    public function configure(): static
     {
+        // @phpstan-ignore-next-line return.type
         return $this->afterCreating(function (Organization $organization): void {
             $organization->slug = $organization->id . '-' . Str::lower($organization->name);
             $organization->save();
