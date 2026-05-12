@@ -2,7 +2,7 @@
   ['label' => 'Home', 'route' => route('marketing.index')],
   ['label' => 'Documentation', 'route' => route('marketing.docs.api.index')],
   ['label' => 'Organizations'],
-]">
+]" >
   <div class="py-16">
     <x-marketing.docs.h1 title="Organizations" />
 
