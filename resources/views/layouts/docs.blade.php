@@ -4,7 +4,7 @@
   @endif
 
   <div class="relative mx-auto max-w-7xl px-6 lg:px-8 xl:px-0">
-    <div class="grid grid-cols-1 gap-x-16 lg:grid-cols-[300px_1fr_250px]">
+    <div class="grid grid-cols-1 gap-x-16 {{ isset($rightSidebar) ? 'lg:grid-cols-[300px_1fr_250px]' : 'lg:grid-cols-[300px_1fr]' }}">
       <!-- Sidebar -->
       <div class="hidden w-full shrink-0 flex-col justify-self-end sm:border-r sm:border-gray-200 sm:pr-3 lg:flex dark:sm:border-gray-700">
         <div
@@ -144,11 +144,11 @@
       </div>
 
       <!-- Sidebar -->
-      @if ($rightSidebar ?? false)
-        <div class="hidden w-full shrink-0 flex-col justify-self-end py-16 sm:border-l sm:border-gray-200 sm:pl-6 lg:flex">
-          {{ $rightSidebar ?? '' }}
-        </div>
-      @endif
+        @if ($rightSidebar ?? false)
+          <div class="hidden w-full shrink-0 flex-col justify-self-end py-16 sm:border-l sm:border-gray-200 sm:pl-6 lg:flex">
+            {{ $rightSidebar ?? '' }}
+          </div>
+        @endif
     </div>
   </div>
 </x-marketing-layout>
